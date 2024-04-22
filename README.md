@@ -11,7 +11,7 @@
 
 ## Summary
 
-Repository showcasing ML Ops practices with kubeflow and illustrates deploying and managing machine learning workloads in an AKS cluster
+Repository showcasing ML Ops practices with kubeflow
 
 ## References
 
