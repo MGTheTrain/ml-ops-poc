@@ -25,7 +25,7 @@ TBD
 - [ ] Dockerized Python application for ML training purposes
 - [ ] Helm charts with K8s manifests for ML jobs (with and without kubeflow)
 - [ ] Demonstration of model training and model deployment trough automation workfflows
-- [ ] (**OPTIONAL**:) mlflow experiments for the machine learning lifecycle
+- [ ] (**OPTIONAL**) mlflow experiments for the machine learning lifecycle
 
 ## Getting started
 
