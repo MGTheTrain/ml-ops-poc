@@ -23,8 +23,3 @@ project_root/
 ├── README.md               # Project README file
 └── main.py                 # Main entry point script for running the application
 ```
-
-### Model Training
-
-- CNN architecture training considering pre-trained models for image classification AI applications
-- Transformer architecture training considering pre-trained models for chatbot AI applications
