@@ -1,6 +1,6 @@
 # python
 
-Folder structure:
+### Folder structure
 
 ```sh
 project_root/
@@ -23,3 +23,8 @@ project_root/
 ├── README.md               # Project README file
 └── main.py                 # Main entry point script for running the application
 ```
+
+### Model Training
+
+- CNN architecture training for image classification AI applications
+- Transformer architecture training for chatbot AI applications
