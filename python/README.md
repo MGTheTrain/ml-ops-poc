@@ -26,5 +26,5 @@ project_root/
 
 ### Model Training
 
-- CNN architecture training for image classification AI applications considering pre-trained models
-- Transformer architecture training for chatbot AI applications considering pre-trained models
+- CNN architecture training considering pre-trained models for image classification AI applications
+- Transformer architecture training considering pre-trained models for chatbot AI applications
