@@ -13,6 +13,8 @@
 
 Repository showcasing ML Ops practices with kubeflow and mlflow
 
+TBD - UML component and/or activity diagram to illustrate relevant steps 
+
 ## References
 
 TBD
