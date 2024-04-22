@@ -14,7 +14,7 @@ project_root/
 │       └── ...
 │
 ├── src/                    # Source code directory
-│   ├── data_loader.py      # Data loading utilities
+│   ├── data_loader.py      # Data loading utilities. Load the dataset from the specified directory (data/ in this case) or from external sources like databases or APIs
 │   ├── model.py            # Model architecture definition
 │   ├── train.py            # Training script
 │   └── utils.py            # Utility functions
