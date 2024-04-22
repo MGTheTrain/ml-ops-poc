@@ -23,7 +23,7 @@ TBD
 - [ ] kubeflow helm chart installation in deployed AKS clusters
 - [ ] CD workflow for on-demand AKS deployments and kubeflow helm chart installations
 - [ ] Dockerized Python application for ML training purposes
-- [ ] K8s manifests defining ML jobs and/or K8s manifests for scheduling jobs with kubeflow
+- [ ] Helm charts with K8s manifests defining ML jobs (with and without kubeflow)
 - [ ] Demonstration of model training and model deployment trough automation workfflows
 - [ ] (**OPTIONAL**:) mlflow experiments for the machine learning lifecycle
 
