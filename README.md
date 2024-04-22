@@ -22,7 +22,7 @@ TBD
 - [ ] Deployment of Azure Kubernetes Service (AKS) clusters (**OPTIONAL:** with nodes utilizing GPUs)
 - [ ] kubeflow helm chart installation in deployed AKS clusters
 - [ ] CD workflow for on-demand AKS deployments and kubeflow helm chart installations
-- [ ] Dockerized Python application for ML training purposes
+- [ ] Dockerized Python (pytorch or tensorflow) application for ML training purposes
 - [ ] Helm charts with K8s manifests for ML jobs (with and without kubeflow)
 - [ ] Demonstration of model training and model deployment trough automation workfflows
 - [ ] (**OPTIONAL**) mlflow experiments for the machine learning lifecycle
