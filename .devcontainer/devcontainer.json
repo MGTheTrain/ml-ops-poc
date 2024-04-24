@@ -1,0 +1,13 @@
+{
+    // Docker images officially provided by Microsoft that can utilized as base images
+    // https://hub.docker.com/_/microsoft-vscode-devcontainers
+    "name": "Tools for HCL repos",
+    "image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu-20.04",
+    // Features to add to the dev container. More info: https://containers.dev/features
+    "features": {
+        "ghcr.io/devcontainers/features/terraform:1": {},
+        "ghcr.io/devcontainers-contrib/features/terraform-docs:1": {}
+    },
+    "postCreateCommand": "bash .devcontainer/scripts/install-dependencies.sh",
+    "remoteUser": "root"
+}
