@@ -1,0 +1,17 @@
+name: Auto-formatting HCL files
+
+on:
+  push:
+
+jobs:
+  auto_formatting:
+    name: Auto-formatting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+      - name: Auto-formatting HCL files
+        uses: MGTheTrain/public-github-actions/.github/actions/auto-formatting-for-hcl@main
+        with:
+          WORKING_DIRECTORY: ./
+          GH_TOKEN: ${{ inputs.GH_TOKEN }}
