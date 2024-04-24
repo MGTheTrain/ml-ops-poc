@@ -66,7 +66,7 @@ variable "aks_max_node_count" {
 
 variable "aks_vm_size" {
   type        = string
-  default     = "Standard_B2s"
+  default     = "Standard_B8ms" # See: https://learn.microsoft.com/en-us/azure/virtual-machines/sizes-b-series-burstable
   description = "The AKS vm size. Other option is Standard_B2s. See https://learn.microsoft.com/en-us/azure/virtual-machines/sizes, https://azureprice.net/"
 }
 
