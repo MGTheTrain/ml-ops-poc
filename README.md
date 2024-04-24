@@ -18,6 +18,7 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 - [MLOps Workflow: Recognizing Digits with Kubeflow](https://github.com/flopach/digits-recognizer-kubeflow/tree/master)
 - [Installing Kubeflow Operator](https://v1-5-branch.kubeflow.org/docs/distributions/operator/install-operator/) 
   ![kubeflow-installation](./images/kubeflow-installation.PNG)
+- [kubeflow - Minimum system requirements](https://deploy-preview-1319--competent-brattain-de2d6d.netlify.app/docs/started/k8s/overview/#minimum-system-requirements)
 
 ## Features
 
