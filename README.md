@@ -16,6 +16,8 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 ## References
 
 - [MLOps Workflow: Recognizing Digits with Kubeflow](https://github.com/flopach/digits-recognizer-kubeflow/tree/master)
+- [Installing Kubeflow Operator](https://v1-5-branch.kubeflow.org/docs/distributions/operator/install-operator/) 
+  ![kubeflow-installation](./images/kubeflow-installation.PNG)
 
 ## Features
 
