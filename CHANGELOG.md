@@ -11,4 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-TBD
+- [Feature] Deployment of Azure Kubernetes Service (AKS) clusters
+- [Feature] kubeflow operator or mlflow helm chart installations in deployed AKS clusters
+- [Feature] CD workflow for on-demand AKS deployments and kubeflow operator or mlflow helm chart installations
+- [Feature] CD wofklow for on demand deployments of an Azure Storage Account Container **(For storing terraform state files)**
