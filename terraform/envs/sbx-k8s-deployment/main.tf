@@ -1,4 +1,4 @@
-module "main" {
+module "az" {
   source                        = "https://github.com/MGTheTrain/gitops-ftw.git//terraform/modules/az?ref=main"
   digital_product_affix         = var.digital_product_affix
   environment                   = var.environment
