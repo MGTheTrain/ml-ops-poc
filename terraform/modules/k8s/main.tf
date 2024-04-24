@@ -33,7 +33,7 @@ resource "null_resource" "install_olm" {
   provisioner "local-exec" {
     command = "curl -sL https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.27.0/install.sh | bash -s v0.27.0"
   }
-  count      = var.ml_ops_tool == "kubeflow" ? 1 : 0
+  count = var.ml_ops_tool == "kubeflow" ? 1 : 0
 }
 
 # Install the Kubeflow operator
@@ -56,7 +56,7 @@ resource "kubernetes_manifest" "install_kubeflow_operator" {
       }
     }
   }
-  count      = var.ml_ops_tool == "kubeflow" ? 1 : 0
+  count = var.ml_ops_tool == "kubeflow" ? 1 : 0
 }
 
 # mlflow helm chart
