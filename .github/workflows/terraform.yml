@@ -94,15 +94,6 @@ jobs:
           head -n -3 ./config > ~/.kube/config
           cat ~/.kube/config
         working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-deployment
-      - name: Terraform Init # requires a Storage Account backend deployed trough storage-account-backend-deploy workflow step
-        run: |
-          terraform init \
-          -backend-config="subscription_id=${{ env.ARM_SUBSCRIPTION_ID }}" \
-          -backend-config="storage_account_name=gftfbesbxsa001" \
-          -backend-config="resource_group_name=gftfbe-sbx-rg001" \
-          -backend-config="container_name=gftfbesbxsac001" \
-          -backend-config="key=sbx-k8s-service-configuration/terraform.tfstate"
-        working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-configuration
       - name: Install Operator Lifecycle Manager (OLM) in the Kubernetes cluster
         run: |
           kubectl get pods -A # Check k8s connection
@@ -115,6 +106,15 @@ jobs:
           fi
           kubectl get csv -n operators # Check if operator has been successfully created
         if: ${{ ((github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'helm-charts-install' || github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'k8s-service-deploy') && github.event.inputs.ML_OPS_TOOL == 'kubeflow') }}
+      - name: Terraform Init # requires a Storage Account backend deployed trough storage-account-backend-deploy workflow step
+        run: |
+          terraform init \
+          -backend-config="subscription_id=${{ env.ARM_SUBSCRIPTION_ID }}" \
+          -backend-config="storage_account_name=gftfbesbxsa001" \
+          -backend-config="resource_group_name=gftfbe-sbx-rg001" \
+          -backend-config="container_name=gftfbesbxsac001" \
+          -backend-config="key=sbx-k8s-service-configuration/terraform.tfstate"
+        working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-configuration
       - name: Install helm charts
         shell: bash
         run: terraform apply --auto-approve
