@@ -7,7 +7,7 @@ No requirements.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_az"></a> [az](#module\_az) | git@github.com:MGTheTrain/gitops-ftw.git//terraform/modules/az | main |
+| <a name="module_az"></a> [az](#module\_az) | git::https://github.com/MGTheTrain/gitops-ftw.git//terraform/modules/az | main |
 
 ## Resources
 
@@ -22,7 +22,7 @@ No resources.
 | <a name="input_aks_max_node_count"></a> [aks\_max\_node\_count](#input\_aks\_max\_node\_count) | The AKS max node count | `number` | `2` | no |
 | <a name="input_aks_node_count"></a> [aks\_node\_count](#input\_aks\_node\_count) | The AKS node count | `number` | `1` | no |
 | <a name="input_aks_os_disk_size_gb"></a> [aks\_os\_disk\_size\_gb](#input\_aks\_os\_disk\_size\_gb) | The AKS Agent Operating System disk size in GB | `string` | `"128"` | no |
-| <a name="input_aks_vm_size"></a> [aks\_vm\_size](#input\_aks\_vm\_size) | The AKS vm size. Other option is Standard\_B2s. See https://learn.microsoft.com/en-us/azure/virtual-machines/sizes, https://azureprice.net/ | `string` | `"Standard_B2s"` | no |
+| <a name="input_aks_vm_size"></a> [aks\_vm\_size](#input\_aks\_vm\_size) | The AKS vm size. Other option is Standard\_B2s. See https://learn.microsoft.com/en-us/azure/virtual-machines/sizes, https://azureprice.net/ | `string` | `"Standard_B8ms"` | no |
 | <a name="input_digital_product_affix"></a> [digital\_product\_affix](#input\_digital\_product\_affix) | The digital product affix. | `string` | `"mlopsftw"` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment. | `string` | `"sbx"` | no |
 | <a name="input_location"></a> [location](#input\_location) | The geographic location in which to deploy. | `string` | `"West Europe"` | no |
