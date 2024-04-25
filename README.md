@@ -40,7 +40,7 @@ TBD
 
 ### Port forwarding
 
-In order to access the mlflow dashboard after mlflow helm chart installation run:
+To access the MLflow dashboard following the installation of the MLflow Helm chart, execute the following command:
 
 ```sh
 kubectl get pods -A
