@@ -51,3 +51,5 @@ kubectl port-forward -n ml-ops-ftw <mlflow pod name> 5000:5000
 and visit in a browser of choice localhost:5000. 
 
 ![mlflow-dashboard](./images/mlflow-dashboard.PNG)
+
+TBD - [access kubeflow central dashboard](https://www.kubeflow.org/docs/components/central-dash/access/)
