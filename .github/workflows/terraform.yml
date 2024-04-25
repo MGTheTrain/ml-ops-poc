@@ -103,11 +103,21 @@ jobs:
           -backend-config="container_name=gftfbesbxsac001" \
           -backend-config="key=sbx-k8s-service-configuration/terraform.tfstate"
         working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-configuration
+      - name: Operator Lifecycle Manager (OLM) in the Kubernetes cluster
+        run: |
+          kubectl get pods -A # check k8s connection
+          curl -sL https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.27.0/install.sh | bash -s v0.27.0
+          # Verify OLM Installation
+          kubectl get crd | grep 'operators.coreos.com'
+          kubectl create -f https://operatorhub.io/install/kubeflow.yaml
+          kubectl get csv -n operators # check if operator has been successfully created
+        if: ${{ ((github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'helm-charts-install' || github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'k8s-service-deploy') && github.event.inputs.ML_OPS_TOOL == 'kubeflow') }}
       - name: Install helm charts
         shell: bash
         run: terraform apply --auto-approve
         continue-on-error: false
-        working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-configuration
+        working-directory: |
+          ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-configuration
         env:
           TF_VAR_acr_username: "${{ secrets.ACR_USERNAME }}"
           TF_VAR_acr_password: "${{ secrets.ACR_PASSWORD }}"

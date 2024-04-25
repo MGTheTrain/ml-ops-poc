@@ -27,37 +27,7 @@ resource "kubernetes_secret" "acr_secret" {
   }
 }
 
-
-# Install Operator Lifecycle Manager (OLM). Required for the Kubeflow operator
-resource "null_resource" "install_olm" {
-  provisioner "local-exec" {
-    command = "curl -sL https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.27.0/install.sh | bash -s v0.27.0"
-  }
-  count = var.ml_ops_tool == "kubeflow" ? 1 : 0
-}
-
-# Install the Kubeflow operator
-resource "kubernetes_manifest" "install_kubeflow_operator" {
-  manifest = {
-    metadata = {
-      name      = "kubeflow-operator"
-      namespace = kubernetes_namespace.ml_ops_ftw_namespace.metadata.0.name
-    }
-
-    spec = {
-      api_version = "operators.coreos.com/v1alpha1"
-      kind        = "Subscription"
-
-      spec = {
-        name             = "kubeflow"
-        channel          = "alpha"
-        source           = "operatorhubio-catalog"
-        source_namespace = "olm"
-      }
-    }
-  }
-  count = var.ml_ops_tool == "kubeflow" ? 1 : 0
-}
+# The installation of Kubeflow will be managed externally through the continuous delivery (CD) workflow, as Terraform modules and kubernetes provider are either outdated or difficult to setup
 
 # mlflow helm chart
 resource "helm_release" "mlflow" {

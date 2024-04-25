@@ -29,12 +29,12 @@ variable "acr_password" {
 }
 
 variable "ml_ops_tool" {
-  description = "String determining whether to install kubeflow or mlflow. Viable options: [ kubeflow, mlflow ]"
+  description = "String determining whether to install mlflow or none. Viable options: [ mlflow, none ]. The installation of Kubeflow will be managed externally through the continuous delivery (CD) workflow, as Terraform modules and kubernetes provider are either outdated or difficult to setup"
   type        = string
-  default     = "argocd"
+  default     = "none"
 
   validation {
-    condition     = var.ml_ops_tool == "none" || var.ml_ops_tool == "kubeflow" || var.ml_ops_tool == "mlflow"
-    error_message = "ml_ops_tool must be either 'none', 'kubeflow' or 'mlflow'"
+    condition     = var.ml_ops_tool == "none" || var.ml_ops_tool == "mlflow"
+    error_message = "ml_ops_tool must be either 'none' or 'mlflow'"
   }
 }
