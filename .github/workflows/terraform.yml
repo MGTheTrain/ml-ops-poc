@@ -119,8 +119,7 @@ jobs:
         shell: bash
         run: terraform apply --auto-approve
         continue-on-error: false
-        working-directory: |
-          ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-configuration
+        working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-configuration
         env:
           TF_VAR_acr_username: "${{ secrets.ACR_USERNAME }}"
           TF_VAR_acr_password: "${{ secrets.ACR_PASSWORD }}"
