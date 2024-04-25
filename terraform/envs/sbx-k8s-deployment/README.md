@@ -7,7 +7,7 @@ No requirements.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_az"></a> [az](#module\_az) | https://github.com/MGTheTrain/gitops-ftw.git//terraform/modules/az | main |
+| <a name="module_az"></a> [az](#module\_az) | git@github.com:MGTheTrain/gitops-ftw.git//terraform/modules/az | main |
 
 ## Resources
 

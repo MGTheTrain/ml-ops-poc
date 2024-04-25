@@ -9,7 +9,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_main"></a> [main](#module\_main) | https://github.com/MGTheTrain/gitops-ftw.git//devops/terraform | main |
+| <a name="module_main"></a> [main](#module\_main) | git@github.com:MGTheTrain/gitops-ftw.git//devops/terraform | main |
 
 ## Resources
 
