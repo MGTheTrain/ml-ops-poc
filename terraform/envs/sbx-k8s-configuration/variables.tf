@@ -24,7 +24,7 @@ variable "acr_password" {
 }
 
 variable "ml_ops_tool" {
-  description = "String determining whether to install Argo CD or FluxCD. Viable options: [ argocd, fluxcd ]"
+  description = "String determining whether to install Argo CD or FluxCD. Viable options: [ kubeflow, fluxcd ]"
   type        = string
-  default     = "argocd"
+  default     = "kubeflow"
 }
