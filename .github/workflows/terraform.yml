@@ -106,8 +106,12 @@ jobs:
       - name: Operator Lifecycle Manager (OLM) in the Kubernetes cluster
         run: |
           kubectl get pods -A # Check k8s connection
-          curl -sL https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.27.0/install.sh | bash -s v0.27.0
-          kubectl get crd | grep 'operators.coreos.com' # Verify OLM Installation
+          if [[ -z $(kubectl get crd | grep 'operators.coreos.com') ]]; then
+              echo "No OLM CRDs found. Proceeding with installation."
+              curl -sL https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.27.0/install.sh | bash -s v0.27.0
+          else
+              echo "OLM CRDs already exist. Installation aborted to prevent conflicts."
+          fi
           kubectl create -f https://operatorhub.io/install/kubeflow.yaml
           kubectl get csv -n operators # Check if operator has been successfully created
         if: ${{ ((github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'helm-charts-install' || github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'k8s-service-deploy') && github.event.inputs.ML_OPS_TOOL == 'kubeflow') }}
