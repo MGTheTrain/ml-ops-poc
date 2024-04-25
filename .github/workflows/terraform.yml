@@ -105,12 +105,11 @@ jobs:
         working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-configuration
       - name: Operator Lifecycle Manager (OLM) in the Kubernetes cluster
         run: |
-          kubectl get pods -A # check k8s connection
+          kubectl get pods -A # Check k8s connection
           curl -sL https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.27.0/install.sh | bash -s v0.27.0
-          # Verify OLM Installation
-          kubectl get crd | grep 'operators.coreos.com'
+          kubectl get crd | grep 'operators.coreos.com' # Verify OLM Installation
           kubectl create -f https://operatorhub.io/install/kubeflow.yaml
-          kubectl get csv -n operators # check if operator has been successfully created
+          kubectl get csv -n operators # Check if operator has been successfully created
         if: ${{ ((github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'helm-charts-install' || github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'k8s-service-deploy') && github.event.inputs.ML_OPS_TOOL == 'kubeflow') }}
       - name: Install helm charts
         shell: bash
