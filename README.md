@@ -31,7 +31,7 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
     - [ ] CNN architecture training considering pre-trained models for image classification AI applications
     - [ ] (**OPTIONAL**) Transformer architecture training considering pre-trained models for chatbot AI applications
 - [ ] Helm charts with K8s manifests for ML jobs (with and without kubeflow)
-- [ ] Demonstration of model training and model deployment trough automation workfflows
+- [ ] Demonstration of model training and model deployment trough automation workflows
 - [ ] (**OPTIONAL**) mlflow experiments for the machine learning lifecycle
 
 ## Getting started
