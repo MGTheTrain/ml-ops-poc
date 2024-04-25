@@ -37,3 +37,17 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 ## Getting started
 
 TBD
+
+### Port forwarding
+
+In order to access the mlflow dashboard after mlflow helm chart installation run:
+
+```sh
+kubectl get pods -A
+kubectl port-forward -n <namespace>  <pod-name> <local-port>:<server-port>
+kubectl port-forward -n ml-ops-ftw <mlflow pod name> 5000:5000
+```
+
+and visit in a browser of choice localhost:5000. 
+
+![mlflow-dashboard](./images/mlflow-dashboard.PNG)
