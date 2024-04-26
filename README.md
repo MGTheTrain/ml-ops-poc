@@ -51,7 +51,7 @@ TBD - image
 **NOTE:** Set all the required Github secrets for aboves workflows
 
 
-#### Port forwarding
+#### kubeflow
 
 To access the kubeflow dashboard following the installation of kustomize and kubeflow components, execute the following command:
 
@@ -67,7 +67,11 @@ and visit in a browser of choice `localhost:8080`.
 
 ![kubeflow-dashboard](./images/kubeflow-dashboard.PNG)
 
----
+#### Jupyter notebooks, model training and model inference
+
+Proceed with steps 3 to 7 to establish a basic configuration designed to demonstrate both model training and model inference, focusing on the [Recognizing Digits with Kubeflow scenario](https://github.com/flopach/digits-recognizer-kubeflow/tree/master?tab=readme-ov-file).
+
+### mlflow
 
 To access the MLflow dashboard following the installation of the MLflow Helm chart, execute the following command:
 
@@ -79,17 +83,6 @@ and visit in a browser of choice localhost:5000.
 
 ![mlflow-dashboard](./images/mlflow-dashboard.PNG)
 
-### Jupyter notebooks
-
-Once a Jupyter notebook instance has been successfully created:
-
-![Jupyter Notebook instance in kubeflow dashboard](./images/kubeflow-jupyter-notebook-instance.PNG)
-
-`CONNECT` and select a launcher:
-
-![Select launcher in Jupyter Notebook](./images/kubeflow-jn-select-launcher.PNG)
-
-TBD - https://github.com/flopach/digits-recognizer-kubeflow/tree/master 
 
 ### Destroy the AKS cluster or uninstall ml tools
 
