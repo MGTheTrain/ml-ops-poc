@@ -97,16 +97,16 @@ jobs:
       - name: Install Kustomize and Kubeflow
         run: |
           apt-get install -y git
+
+          # Install kustomize
           curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
 
           # Install Kubeflow on Azure Kubernetes Service - https://github.com/Azure/kubeflow-aks
           cd /tmp/
           git clone --recurse-submodules https://github.com/Azure/kubeflow-aks.git
-          cd kubeflow-aks/manifests/
-          git checkout v1.7-branch
-          cd ..
+          cd kubeflow-aks
           cp -a deployments/vanilla vanilla
-          cd manifests/  
+          cd manifests  
           while ! kustomize build vanilla | kubectl apply -f -; do echo "Retrying to apply resources"; sleep 10; done
         
           kubectl get pods -A # Check k8s connection
