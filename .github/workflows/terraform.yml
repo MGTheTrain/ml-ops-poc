@@ -96,7 +96,7 @@ jobs:
         working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-deployment
       - name: Install Kustomize and Kubeflow
         run: |
-          apt-get install -y git
+          sudo apt-get install -y git
 
           # Install kustomize
           curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
