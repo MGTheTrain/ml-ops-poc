@@ -39,23 +39,11 @@ TBD
 
 ### Port forwarding
 
-To access the MLflow dashboard following the installation of the MLflow Helm chart, execute the following command:
+To access the kubeflow dashboard following the installation of kustomize and kubeflow components, execute the following command:
 
 ```sh
 kubectl get pods -A
 kubectl port-forward -n <namespace>  <pod-name> <local-port>:<server-port>
-kubectl port-forward -n ml-ops-ftw <mlflow pod name> 5000:5000
-```
-
-and visit in a browser of choice localhost:5000. 
-
-![mlflow-dashboard](./images/mlflow-dashboard.PNG)
-
----
-
-To access the kubeflow dashboard following the installation of kustomize and kubeflow components, execute the following command:
-
-```sh
 kubectl port-forward svc/istio-ingressgateway -n istio-system 8080:80
 ```
 
@@ -65,3 +53,14 @@ and visit in a browser of choice `localhost:8080`.
 
 ![kubeflow-dashboard](./images/kubeflow-dashboard.PNG)
 
+---
+
+To access the MLflow dashboard following the installation of the MLflow Helm chart, execute the following command:
+
+```sh
+kubectl port-forward -n ml-ops-ftw <mlflow pod name> 5000:5000
+```
+
+and visit in a browser of choice localhost:5000. 
+
+![mlflow-dashboard](./images/mlflow-dashboard.PNG)
