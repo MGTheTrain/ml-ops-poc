@@ -5,9 +5,9 @@ on:
     inputs:
       INFRASTRUCTURE_OPERATIONS:
         type: choice
-        options: [ 'storage-account-backend-deploy', 'k8s-service-deploy', 'k8s-service-destroy', 'helm-charts-install', 'helm-charts-uninstall' ]
+        options: [ 'storage-account-backend-deploy', 'k8s-service-deploy', 'k8s-service-destroy', 'ml-ops-tools-install', 'ml-ops-tools-uninstall' ]
         default: k8s-service-deploy
-        description: 'Infrastructure operations: [ storage-account-backend-deploy, k8s-service-deploy, k8s-service-destroy, helm-charts-install, helm-charts-uninstall ]'
+        description: 'Infrastructure operations: [ storage-account-backend-deploy, k8s-service-deploy, k8s-service-destroy, ml-ops-tools-install, ml-ops-tools-uninstall ]'
       ML_OPS_TOOL:
         type: choice
         options: [ 'kubeflow', 'mlflow' ]
@@ -70,10 +70,10 @@ jobs:
         continue-on-error: false
         working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-deployment
         if: ${{ github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'k8s-service-destroy' }}
-  tf-helm-charts-operations:
+  tf-ml-ops-tools-operations:
     runs-on: ubuntu-latest
     needs: tf-k8s-service-operations
-    if: ${{ github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'k8s-service-deploy' || github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'helm-charts-install' || github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'helm-charts-uninstall' }}
+    if: ${{ github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'k8s-service-deploy' || github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'ml-ops-tools-install' || github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'ml-ops-tools-uninstall' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@master
@@ -118,7 +118,7 @@ jobs:
           kubectl get pods -n knative-serving
           kubectl get pods -n kubeflow
           kubectl get pods -n kubeflow-user-example-com
-        if: ${{ ((github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'helm-charts-install' || github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'k8s-service-deploy') && github.event.inputs.ML_OPS_TOOL == 'kubeflow') }}
+        if: ${{ ((github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'ml-ops-tools-install' || github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'k8s-service-deploy') && github.event.inputs.ML_OPS_TOOL == 'kubeflow') }}
       - name: Terraform Init # requires a Storage Account backend deployed trough storage-account-backend-deploy workflow step
         run: |
           terraform init \
@@ -138,9 +138,9 @@ jobs:
           TF_VAR_acr_password: "${{ secrets.ACR_PASSWORD }}"
           TF_VAR_acr_login_server_name: "${{ secrets.ACR_LOGIN_SERVER_NAME }}"
           TF_VAR_ml_ops_tool: "${{ github.event.inputs.ML_OPS_TOOL }}"
-        if: ${{ github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'helm-charts-install' || github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'k8s-service-deploy' }}
+        if: ${{ github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'ml-ops-tools-install' || github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'k8s-service-deploy' }}
       - name: Uninstall helm charts
         run: terraform destroy --auto-approve
         continue-on-error: false
         working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-configuration
-        if: ${{ github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'helm-charts-uninstall' }}
+        if: ${{ github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'ml-ops-tools-uninstall' }}

@@ -35,9 +35,21 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 
 ## Getting started
 
-TBD
+Github workflows will be utilized in [this](./.github/workflows/) Github repository. Once the workflows described in the **Preconditions** and **Deploy an AKS cluster and install the kubeflow or mlflow components** sections have been successfully executed, all resource groups listed should be visible in the Azure Portal UI:
 
-### Port forwarding
+### Preconditions
+
+2. Deploy an Azure Storage Account Service including container for terraform backends trough the [terraform.yml workflow](https://github.com/MGTheTrain/ml-flow-ftw/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option storage-account-backend-deploy`
+
+### Deploy an AKS cluster and install the kubeflow or mlflow components
+
+0. Deploy an AKS trough the [terraform.yml workflow](https://github.com/MGTheTrain/ml-flow-ftw/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option k8s-service-deploy`. 
+1. **Optional:** Install ml-ops tools to an existing kubernetes cluster trough [terraform.yml workflow](https://github.com/MGTheTrain/ml-ops-ftw/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option ml-ops-install`
+
+**NOTE:** Set all the required Github secrets for aboves workflows
+
+
+#### Port forwarding
 
 To access the kubeflow dashboard following the installation of kustomize and kubeflow components, execute the following command:
 
@@ -76,3 +88,8 @@ Once a Jupyter notebook instance has been successfully created:
 ![Select launcher in Jupyter Notebook](./images/kubeflow-jn-select-launcher.PNG)
 
 TBD - https://github.com/flopach/digits-recognizer-kubeflow/tree/master 
+
+### Destroy the AKS cluster or uninstall ml tools
+
+0. **Optional:** Uninstall only helm charts of an existing kubernetes cluster trough [terraform.yml workflow](https://github.com/MGTheTrain/ml-ops-ftw/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option ml-tools-uninstall`
+1. Destroy an AKS trough the [terraform.yml workflow](https://github.com/MGTheTrain/ml-ops-ftw/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option k8s-service-destroy`
