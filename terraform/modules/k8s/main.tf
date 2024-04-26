@@ -27,7 +27,7 @@ resource "kubernetes_secret" "acr_secret" {
   }
 }
 
-# The installation of Kubeflow will be managed externally through the continuous delivery (CD) workflow, as Terraform modules and kubernetes provider are either outdated or difficult to setup
+# The installation of Kubeflow will be managed externally through the continuous deployment (CD) workflow, as Terraform modules and kubernetes provider are either outdated or difficult to setup
 
 # mlflow helm chart
 resource "helm_release" "mlflow" {
