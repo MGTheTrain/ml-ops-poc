@@ -105,7 +105,7 @@ jobs:
           cd /tmp/
           git clone --recurse-submodules https://github.com/Azure/kubeflow-aks.git
           cd kubeflow-aks
-          cp -a deployments/vanilla vanilla
+          cp -a deployments/vanilla manifests/vanilla
           cd manifests  
           while ! kustomize build vanilla | kubectl apply -f -; do echo "Retrying to apply resources"; sleep 10; done
         
