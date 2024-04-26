@@ -51,4 +51,17 @@ and visit in a browser of choice localhost:5000.
 
 ![mlflow-dashboard](./images/mlflow-dashboard.PNG)
 
-TBD - [access kubeflow central dashboard](https://www.kubeflow.org/docs/components/central-dash/access/)
+---
+
+To access the kubeflow dashboard following the installation of kustomize and kubeflow components, execute the following command:
+
+```sh
+kubectl port-forward svc/istio-ingressgateway -n istio-system 8080:80
+```
+
+and visit in a browser of choice `localhost:8080`. 
+
+[Finally, open `http://localhost:8080` and login with the default user’s credentials. The default email address is `user@example.com` and the default password is `12341234`.](https://azure.github.io/kubeflow-aks/main/docs/deployment-options/vanilla-installation/)
+
+![kubeflow-dashboard](./images/kubeflow-dashboard.PNG)
+
