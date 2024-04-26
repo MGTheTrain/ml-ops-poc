@@ -64,3 +64,15 @@ kubectl port-forward -n ml-ops-ftw <mlflow pod name> 5000:5000
 and visit in a browser of choice localhost:5000. 
 
 ![mlflow-dashboard](./images/mlflow-dashboard.PNG)
+
+### Jupyter notebooks
+
+Once a Jupyter notebook instance has been successfully created:
+
+![Jupyter Notebook instance in kubeflow dashboard](./images/kubeflow-jupyter-notebook-instance.PNG)
+
+`CONNECT` and select a launcher:
+
+![Select launcher in Jupyter Notebook](./images/kubeflow-jn-select-launcher.PNG)
+
+TBD - https://github.com/flopach/digits-recognizer-kubeflow/tree/master 
