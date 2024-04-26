@@ -104,7 +104,9 @@ jobs:
           # Install Kubeflow on Azure Kubernetes Service - https://github.com/Azure/kubeflow-aks
           cd /tmp/
           git clone --recurse-submodules https://github.com/Azure/kubeflow-aks.git
-          cd kubeflow-aks
+          cd kubeflow-aks/manifests/
+          git checkout v1.7-branch
+          cd ..
           cp -a deployments/vanilla manifests/vanilla
           cd manifests  
           while ! kustomize build vanilla | kubectl apply -f -; do echo "Retrying to apply resources"; sleep 10; done
