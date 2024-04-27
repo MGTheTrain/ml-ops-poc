@@ -67,6 +67,8 @@ and visit in a browser of choice `localhost:8080`.
 
 ![kubeflow-dashboard](./images/kubeflow-dashboard.PNG)
 
+---
+
 #### Jupyter notebooks, model training and model inference - Recognizing Digits with Kubeflow scenario
 
 Proceed with steps 3 to 7 in the [README.md of the digits-recognizer-kubeflow submodule](https://github.com/flopach/digits-recognizer-kubeflow/tree/90c62557ceb8a808b855df8aeb88d26ccbbff97a) to establish a basic configuration designed to demonstrate both model training and model inference, focusing on the **Recognizing Digits with Kubeflow scenario**.
