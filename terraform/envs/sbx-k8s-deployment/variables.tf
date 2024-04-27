@@ -1,6 +1,12 @@
-variable "digital_product_affix" {
-  default     = "mlopsftw"
-  description = "The digital product affix."
+variable "digital_product_affix_az_module" {
+  default     = "mlopsftwaz"
+  description = "The digital product affix of the az module."
+  type        = string
+}
+
+variable "digital_product_affix_acr_module" {
+  default     = "mlopsftwacr"
+  description = "The digital product affix of the acr module."
   type        = string
 }
 
@@ -74,4 +80,23 @@ variable "aks_os_disk_size_gb" {
   type        = string
   default     = "128"
   description = "The AKS Agent Operating System disk size in GB"
+}
+
+# Azure Container Registry
+variable "number_of_container_registries" {
+  default     = 1
+  description = "The total number of Azure Container registries to deploy."
+  type        = number
+}
+
+variable "acr_sku" {
+  description = "SKU for the Azure Container Registry"
+  type        = string
+  default     = "Basic"
+}
+
+variable "acr_admin_enabled" {
+  description = "Flag to enable admin user for the Azure Container Registry"
+  type        = bool
+  default     = true
 }
