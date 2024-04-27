@@ -17,3 +17,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Feature] CD wofklow for on demand deployments of an Azure Storage Account Container **(For storing terraform state files)**
 - [Feature] Added `devcontainer.json` with necessary tooling for local development
 - [Feature] Simple feedforward neural network with MNIST dataset to map input images to their corresponding digit classes 
+- [Feature] CNN architecture training considering COCO dataset and pre-trained models for image classification AI applications (**NOTE:** Compute and storage intensive. Read `Download the COCO dataset images` comments on preferred hardware specs)
