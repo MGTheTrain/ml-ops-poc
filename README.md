@@ -71,11 +71,11 @@ and visit in a browser of choice `localhost:8080`.
 
 Proceed with steps 3 to 7 in the [README.md of the digits-recognizer-kubeflow submodule](https://github.com/flopach/digits-recognizer-kubeflow/tree/90c62557ceb8a808b855df8aeb88d26ccbbff97a) to establish a basic configuration designed to demonstrate both model training and model inference, focusing on the **Recognizing Digits with Kubeflow scenario**.
 
-**NOTE:** Consider following data volume when creating the Jupyter notebook instance:
+**NOTE:** When creating the Jupyter notebook instance, please consider the following data volume:
 
 ![Jupyter instance data volume](./images/jupyter-instance-data-volume.PNG)
 
-Created volumes look the following:
+The volumes that were created appear as follows:
 
 ![Jupyter instance created volumes](./images/jupyter-instance-created-volumes.PNG)
 
