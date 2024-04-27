@@ -16,3 +16,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Feature] CD workflow for on-demand AKS deployments and kubeflow operator or mlflow helm chart installations
 - [Feature] CD wofklow for on demand deployments of an Azure Storage Account Container **(For storing terraform state files)**
 - [Feature] Added `devcontainer.json` with necessary tooling for local development
+- [Feature] Simple feedforward neural network with MNIST dataset to map input images to their corresponding digit classes 

@@ -24,10 +24,11 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 - [x] CD workflow for on-demand AKS deployments and kubeflow operator or mlflow helm chart installations
 - [x] CD wofklow for on demand deployments of an Azure Storage Account Container **(For storing terraform state files)**
 - [x] Added `devcontainer.json` with necessary tooling for local development
-- [ ] Dockerized Python (pytorch or tensorflow) application for ML training purposes or Jupyter notebooks
-    - [ ] CNN architecture training considering pre-trained models for image classification AI applications
+- [ ] Dockerized Python (pytorch or tensorflow) application for ML training purposes and Jupyter notebooks
+    - [x] Simple feedforward neural network with MNIST dataset to map input images to their corresponding digit classes 
+    - [ ] CNN architecture training considering COCO dataset and pre-trained models for image classification AI applications
     - [ ] (**OPTIONAL**) Transformer architecture training considering pre-trained models for chatbot AI applications
-- [ ] Helm charts with K8s manifests for ML jobs (with and without kubeflow)
+- [ ] Helm charts with K8s manifests for ML jobs (with and without kubeflow) considering the [Training Operator for CRDs](https://github.com/kubeflow/training-operator)
 - [ ] Demonstration of model training and model deployment trough automation workflows
 - [ ] (**OPTIONAL**) mlflow experiments for the machine learning lifecycle
 
@@ -76,6 +77,14 @@ and visit in a browser of choice `localhost:8080`.
 The volumes that were created appear as follows:
 
 ![Jupyter instance created volumes](./images/jupyter-instance-created-volumes.PNG)
+
+The Jypter instace that was created appear as follows:
+
+![Created Jupyter instance](./images/created-jupyter-instance.PNG)
+
+Once `CONNECTED` to a Jupyter instance ensure to clone this Git repository (HTTPS URL: `https://github.com/MGTheTrain/ml-ops-ftw.git`):
+
+![Clone git repository](./images/clone-git-repository.PNG)
 
 TBD
 

@@ -1,4 +1,4 @@
-# python
+# Keras training app with mnist dataset
 
 ### Folder structure
 
