@@ -29,7 +29,7 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
     - [x] Simple feedforward neural network with MNIST dataset to map input images to their corresponding digit classes 
     - [x] CNN architecture training and inference considering COCO dataset for image classification AI applications (**NOTE:** Compute and storage intensive. Read `Download the COCO dataset images` comments on preferred hardware specs)
     - [ ] ~~(**OPTIONAL**) Transformer architecture training considering pre-trained models for chatbot AI applications~~
-- [ ] Dockerizing Python (pytorch or tensorflow) applications for ML training and inference
+- [x] Dockerizing Python (pytorch or tensorflow) applications for ML training and inference
 - [ ] Helm charts with K8s manifests for ML jobs considering the [Training Operator for CRDs](https://github.com/kubeflow/training-operator)
 - [ ] Demonstration of model training and model deployment trough automation workflows
 - [ ] (**OPTIONAL**) mlflow experiments for the machine learning lifecycle
