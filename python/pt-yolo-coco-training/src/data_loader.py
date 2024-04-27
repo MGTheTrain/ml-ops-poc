@@ -13,7 +13,7 @@ def download_coco_data(data_dir):
 
     # Download the COCO dataset annotations
     coco_annotations_url = "http://images.cocodataset.org/annotations/annotations_trainval2017.zip"
-    annotations_zip_file = os.path.join(data_dir, "annotations_trainval2017.zip")
+    annotations_zip_file = os.path.join(data_dir, "data/annotations_trainval2017.zip")
     if not os.path.exists(annotations_zip_file):
         print("Downloading COCO annotations...")
         response = requests.get(coco_annotations_url)
