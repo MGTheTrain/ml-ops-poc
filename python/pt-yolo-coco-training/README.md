@@ -1,3 +1,5 @@
+# Pytorch YOLOV4-tiny training with COCO dataset
+
 ### Folder structure
 
 ```sh
@@ -38,5 +40,5 @@ Run:
 Run:
 
  ```sh
- python main.py --mode inference
+ python main.py --mode inference --image_path <some image with objects listed in here https://github.com/pjreddie/darknet/blob/master/data/coco.names>
  ```

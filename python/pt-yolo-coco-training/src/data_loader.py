@@ -53,7 +53,11 @@ def download_coco_images(data_dir):
         print("COCO images already exist.")
         return
 
-    # Download the COCO dataset images
+    # Download the COCO dataset images. NOTE: Tens of thousands of images ->  
+    # - Storage: The COCO dataset, along with model checkpoints and training logs, can occupy a substantial amount of disk space. Fast storage, such as SSDs, is preferred for quick access to data during training.
+    # - GPU: Deep learning models, especially large ones like YOLOv4, benefit greatly from parallel processing units like GPUs. High-end GPUs from NVIDIA such as the GeForce RTX series or Tesla GPUs are commonly used for training deep learning models due to their high computational power and support for frameworks like TensorFlow and PyTorch.
+    # - Memory: Large datasets like COCO may require a significant amount of memory (both GPU memory and system memory) to load and process efficiently during training. Having ample GPU memory ensures that the entire dataset and model can be loaded into memory, reducing the need for frequent data transfers between the GPU and system memory.
+    # - CPU: While most of the computation is offloaded to the GPU during training, a powerful CPU is still important for tasks like data preprocessing, model initialization, and managing the training process.
     coco_images_url_train = "http://images.cocodataset.org/zips/train2017.zip"
     coco_images_url_val = "http://images.cocodataset.org/zips/val2017.zip"
     img_zip_file_train = os.path.join(data_dir, "train2017.zip")
