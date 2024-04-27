@@ -3,7 +3,9 @@ from tensorflow.keras import layers, models
 
 def build_model():
     model = models.Sequential([
-        layers.Dense(64, activation='relu', input_shape=(28, 28)),
+        layers.Flatten(input_shape=(28,28)),
+        layers.Dense(128, activation='relu'),
         layers.Dense(10, activation='softmax')
     ])
+    model.summary()
     return model

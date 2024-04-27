@@ -86,6 +86,10 @@ Once `CONNECTED` to a Jupyter instance ensure to clone this Git repository (HTTP
 
 ![Clone git repository](./images/clone-git-repository.PNG)
 
+You then should have the repository cloned in your workspace:
+
+![Cloned git repository in jupyter instance](./images/cloned-git-repository-in-jupyter-instance.PNG)
+
 TBD
 
 
