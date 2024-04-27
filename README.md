@@ -67,19 +67,15 @@ and visit in a browser of choice `localhost:8080`.
 
 ![kubeflow-dashboard](./images/kubeflow-dashboard.PNG)
 
-#### Recognizing Digits with Kubeflow scenario
+#### CNN architecture training considering pre-trained models for image classification AI applications
 
-Proceed with steps 3 to 7 in the [README.md of the digits-recognizer-kubeflow submodule](https://github.com/flopach/digits-recognizer-kubeflow/tree/90c62557ceb8a808b855df8aeb88d26ccbbff97a) to establish a basic configuration designed to demonstrate both model training and model inference, focusing on the **Recognizing Digits with Kubeflow scenario**.
-
-**NOTE:** When creating the Jupyter notebook instance, please consider the following data volume:
+**NOTE:** When creating the Jupyter notebook instance consider the following data volume:
 
 ![Jupyter instance data volume](./images/jupyter-instance-data-volume.PNG)
 
 The volumes that were created appear as follows:
 
 ![Jupyter instance created volumes](./images/jupyter-instance-created-volumes.PNG)
-
-#### CNN architecture training considering pre-trained models for image classification AI applications
 
 TBD
 
