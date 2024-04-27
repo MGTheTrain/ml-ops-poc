@@ -24,11 +24,12 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 - [x] CD workflow for on-demand AKS deployments and kubeflow operator or mlflow helm chart installations
 - [x] CD wofklow for on demand deployments of an Azure Storage Account Container **(For storing terraform state files)**
 - [x] Added `devcontainer.json` with necessary tooling for local development
-- [x] Dockerized Python (pytorch or tensorflow) application for ML training purposes and Jupyter notebooks
+- [x] Python (pytorch or tensorflow) application for ML training and inference purposes and Jupyter notebooks
     - [x] Simple feedforward neural network with MNIST dataset to map input images to their corresponding digit classes 
-    - [x] CNN architecture training considering COCO dataset for image classification AI applications (**NOTE:** Compute and storage intensive. Read `Download the COCO dataset images` comments on preferred hardware specs)
+    - [x] CNN architecture training and inference considering COCO dataset for image classification AI applications (**NOTE:** Compute and storage intensive. Read `Download the COCO dataset images` comments on preferred hardware specs)
     - [ ] ~~(**OPTIONAL**) Transformer architecture training considering pre-trained models for chatbot AI applications~~
-- [ ] Helm charts with K8s manifests for ML jobs (with and without kubeflow) considering the [Training Operator for CRDs](https://github.com/kubeflow/training-operator)
+- [ ] Dockerized Python (pytorch or tensorflow) application for ML training and inference
+- [ ] Helm charts with K8s manifests for ML jobs considering the [Training Operator for CRDs](https://github.com/kubeflow/training-operator)
 - [ ] Demonstration of model training and model deployment trough automation workflows
 - [ ] (**OPTIONAL**) mlflow experiments for the machine learning lifecycle
 
