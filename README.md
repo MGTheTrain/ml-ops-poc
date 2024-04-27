@@ -79,6 +79,8 @@ Proceed with steps 3 to 7 in the [README.md of the digits-recognizer-kubeflow su
 
 TBD
 
+---
+
 ### mlflow
 
 To access the MLflow dashboard following the installation of the MLflow Helm chart, execute the following command:
