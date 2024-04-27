@@ -23,6 +23,7 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 - [x] kubeflow operator or mlflow helm chart installations in deployed AKS clusters
 - [x] CD workflow for on-demand AKS deployments and kubeflow operator or mlflow helm chart installations
 - [x] CD wofklow for on demand deployments of an Azure Storage Account Container **(For storing terraform state files)**
+- [x] CD workflow for on-demand Azure Container Registry deployments in order to store internal Docker images.
 - [x] Added `devcontainer.json` with necessary tooling for local development
 - [x] Python (pytorch or tensorflow) application for ML training and inference purposes and Jupyter notebooks
     - [x] Simple feedforward neural network with MNIST dataset to map input images to their corresponding digit classes 
@@ -45,7 +46,7 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 
 ### Deploy an AKS cluster and install the kubeflow or mlflow components
 
-0. Deploy an AKS trough the [terraform.yml workflow](https://github.com/MGTheTrain/ml-ops-ftw/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option k8s-service-deploy`. 
+0. Deploy an AKS trough the [terraform.yml workflow](https://github.com/MGTheTrain/ml-ops-ftw/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option k8s-service-deploy`. An Azure Container Registry will be part of the deployment in order to store internal Docker images
 1. **Optional:** Install ml-ops tools to an existing kubernetes cluster trough [terraform.yml workflow](https://github.com/MGTheTrain/ml-ops-ftw/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option ml-ops-tools-install`
 
 **NOTE:** 

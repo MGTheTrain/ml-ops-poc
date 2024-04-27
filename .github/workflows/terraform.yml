@@ -1,4 +1,4 @@
-name: Workflow for deploying and destroying an ACR or AKS, as well as installing or uninstalling Helm charts on those Kubernetes clusters
+name: Workflow for deploying and destroying an ACR or AKS with ACR, as well as installing or uninstalling Helm charts on those Kubernetes clusters
 
 on:
   workflow_dispatch:
