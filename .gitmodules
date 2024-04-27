@@ -1,0 +1,3 @@
+[submodule "digits-recognizer-kubeflow"]
+	path = digits-recognizer-kubeflow
+	url = https://github.com/flopach/digits-recognizer-kubeflow.git
