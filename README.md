@@ -74,7 +74,7 @@ and visit in a browser of choice `localhost:8080`.
 
 #### CNN architecture training considering pre-trained models for image classification AI applications
 
-**NOTE:** When creating the Jupyter notebook instance consider the following data volume:
+When creating the Jupyter notebook instance consider the following data volume:
 
 ![Jupyter instance data volume](./images/jupyter-instance-data-volume.PNG)
 
@@ -85,6 +85,10 @@ The volumes that were created appear as follows:
 The Jypter instace that was created appear as follows:
 
 ![Created Jupyter instance](./images/created-jupyter-instance.PNG)
+
+**NOTE:** You can check the status of the Jupyter instance pods:
+
+![Check jupyter instance pods](./images/check-jupyter-instance-pods.PNG)
 
 Once `CONNECTED` to a Jupyter instance ensure to clone this Git repository (HTTPS URL: `https://github.com/MGTheTrain/ml-ops-ftw.git`):
 
