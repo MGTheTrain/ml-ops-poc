@@ -107,6 +107,13 @@ Execute a [Jupyter notebook](./notebooks/) to either train the model or perform 
 
 After successful installation of the Kubeflow Training Operator, apply some sample k8s ML training jobs, e.g. [for PyTorch](https://www.kubeflow.org/docs/components/training/user-guides/pytorch/) and [for Tensorflow](https://www.kubeflow.org/docs/components/training/user-guides/tensorflow/).
 
+```sh
+# Pytorch 
+kubectl create -f https://raw.githubusercontent.com/kubeflow/training-operator/master/examples/pytorch/simple.yaml
+# Tensorflow
+kubectl create -f https://raw.githubusercontent.com/kubeflow/training-operator/master/examples/tensorflow/simple.yaml
+```
+
 ### mlflow
 
 To access the MLflow dashboard following the installation of the MLflow Helm chart, execute the following command:
