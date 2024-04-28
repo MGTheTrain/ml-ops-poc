@@ -88,7 +88,7 @@ The Jypter instace that was created appear as follows:
 
 **NOTE:** You can check the status of the Jupyter instance pods:
 
-![Check jupyter instance pods](./images/check-jupyter-instance-pods.PNG)
+![Check jupyter instance pods](./images/check-jupyter-instance-pod.PNG)
 
 Once `CONNECTED` to a Jupyter instance ensure to clone this Git repository (HTTPS URL: `https://github.com/MGTheTrain/ml-ops-ftw.git`):
 
