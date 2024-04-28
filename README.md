@@ -98,7 +98,7 @@ You then should have the repository cloned in your workspace:
 
 ![Cloned git repository in jupyter instance](./images/cloned-git-repository-in-jupyter-instance.PNG)
 
-Execute a [Jupyter notebook](./notebooks/) to either train the model or perform inference:
+Execute a [Jupyter notebook](./notebooks/) to either train the model or perform inference (P.S. It's preferable to begin with the [mnist-trainnig.ipynb](./notebooks/mnist-trainnig.ipynb). Others are either resource intensive or not yet implemented):
 
 ![Run jupyter notebook example](./images/run-jupyter-notebook-example.PNG)
 
