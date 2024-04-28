@@ -2,6 +2,7 @@ output "resource_group_name" {
   value = module.az.resource_group_name
 }
 
+# AKS
 output "aks_tls_private_key" {
   value     = module.az.aks_tls_private_key
   sensitive = true

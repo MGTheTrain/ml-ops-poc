@@ -23,15 +23,19 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 - [x] kubeflow operator or mlflow helm chart installations in deployed AKS clusters
 - [x] CD workflow for on-demand AKS deployments and kubeflow operator or mlflow helm chart installations
 - [x] CD wofklow for on demand deployments of an Azure Storage Account Container **(For storing terraform state files)**
+- [x] CD workflow for on-demand Azure Container Registry deployments in order to store internal Docker images.
+- [ ] ~~CI workflow for building internal docker images and uploading those to an Azure Container Resgitry~~
+- [ ] ~~CD workflows for internal helm chart installations in deployed AKS clusters~~
 - [x] Added `devcontainer.json` with necessary tooling for local development
 - [x] Python (pytorch or tensorflow) application for ML training and inference purposes and Jupyter notebooks
     - [x] Simple feedforward neural network with MNIST dataset to map input images to their corresponding digit classes 
     - [x] CNN architecture training and inference considering COCO dataset for image classification AI applications (**NOTE:** Compute and storage intensive. Read `Download the COCO dataset images` comments on preferred hardware specs)
     - [ ] ~~(**OPTIONAL**) Transformer architecture training considering pre-trained models for chatbot AI applications~~
-- [ ] Dockerizing Python (pytorch or tensorflow) applications for ML training and inference
-- [ ] Helm charts with K8s manifests for ML jobs considering the [Training Operator for CRDs](https://github.com/kubeflow/training-operator)
-- [ ] Demonstration of model training and model deployment trough automation workflows
-- [ ] (**OPTIONAL**) mlflow experiments for the machine learning lifecycle
+- [x] Dockerizing Python (pytorch or tensorflow) applications for ML training and inference
+- [ ] ~~Helm charts with K8s manifests for ML jobs considering the [Training Operator for CRDs](https://github.com/kubeflow/training-operator)~~
+- [x] Installation of the [Training Operator for CRDs](https://github.com/kubeflow/training-operator) and applying sample [TFJob and PyTorchJob](https://www.kubeflow.org/docs/components/training/overview/) k8s manifest
+- [x] Demonstration of model training and model deployment trough automation workflows~~
+- [ ] ~~(**OPTIONAL**) mlflow experiments for the machine learning lifecycle
 
 ## Getting started
 
@@ -45,7 +49,7 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 
 ### Deploy an AKS cluster and install the kubeflow or mlflow components
 
-0. Deploy an AKS trough the [terraform.yml workflow](https://github.com/MGTheTrain/ml-ops-ftw/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option k8s-service-deploy`. 
+0. Deploy an AKS trough the [terraform.yml workflow](https://github.com/MGTheTrain/ml-ops-ftw/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option k8s-service-deploy`. An Azure Container Registry will be part of the deployment in order to store internal Docker images
 1. **Optional:** Install ml-ops tools to an existing kubernetes cluster trough [terraform.yml workflow](https://github.com/MGTheTrain/ml-ops-ftw/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option ml-ops-tools-install`
 
 **NOTE:** 
@@ -69,9 +73,9 @@ and visit in a browser of choice `localhost:8080`.
 
 ![kubeflow-dashboard](./images/kubeflow-dashboard.PNG)
 
-#### CNN architecture training considering pre-trained models for image classification AI applications
+#### Jupyter notebooks
 
-**NOTE:** When creating the Jupyter notebook instance consider the following data volume:
+When creating the Jupyter notebook instance consider the following data volume:
 
 ![Jupyter instance data volume](./images/jupyter-instance-data-volume.PNG)
 
@@ -83,6 +87,10 @@ The Jypter instace that was created appear as follows:
 
 ![Created Jupyter instance](./images/created-jupyter-instance.PNG)
 
+**NOTE:** You can check the status of the Jupyter instance pods:
+
+![Check jupyter instance pods](./images/check-jupyter-instance-pod.PNG)
+
 Once `CONNECTED` to a Jupyter instance ensure to clone this Git repository (HTTPS URL: `https://github.com/MGTheTrain/ml-ops-ftw.git`):
 
 ![Clone git repository](./images/clone-git-repository.PNG)
@@ -91,8 +99,20 @@ You then should have the repository cloned in your workspace:
 
 ![Cloned git repository in jupyter instance](./images/cloned-git-repository-in-jupyter-instance.PNG)
 
-TBD
+Execute a [Jupyter notebook](./notebooks/) to either train the model or perform inference (P.S. It's preferable to begin with the [mnist-trainnig.ipynb](./notebooks/mnist-trainnig.ipynb). Others are either resource intensive or not yet implemented):
 
+![Run jupyter notebook example](./images/run-jupyter-notebook-example.PNG)
+
+#### Applying TFJob or PyTorchJob k8s manifests 
+
+After successful installation of the Kubeflow Training Operator, apply some sample k8s ML training jobs, e.g. [for PyTorch](https://www.kubeflow.org/docs/components/training/user-guides/pytorch/) and [for Tensorflow](https://www.kubeflow.org/docs/components/training/user-guides/tensorflow/).
+
+```sh
+# Pytorch 
+kubectl create -f https://raw.githubusercontent.com/kubeflow/training-operator/master/examples/pytorch/simple.yaml
+# Tensorflow
+kubectl create -f https://raw.githubusercontent.com/kubeflow/training-operator/master/examples/tensorflow/simple.yaml
+```
 
 ### mlflow
 

@@ -1,6 +1,6 @@
 variable "digital_product_affix" {
-  default     = "mlopsftw"
-  description = "The digital product affix."
+  default     = "mlopsftwaz"
+  description = "The digital product affix of the az module."
   type        = string
 }
 
@@ -17,7 +17,7 @@ variable "resource_instance_number" {
 }
 
 variable "location" {
-  default     = "West Europe"
+  default     = "Switzerland North"
   description = "The geographic location in which to deploy."
   type        = string
 }
