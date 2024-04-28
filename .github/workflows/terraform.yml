@@ -120,7 +120,7 @@ jobs:
           kubectl get pods -n kubeflow-user-example-com
 
           # Install Kubeflow Training Operator
-          kubectl apply -k "github.com/kubeflow/training-operator/manifests/overlays/standalone"
+          kubectl apply -k "github.com/kubeflow/training-operator/manifests/overlays/standalone?ref=v1.7.0"
         if: ${{ ((github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'ml-ops-tools-install' || github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'k8s-service-deploy') && github.event.inputs.ML_OPS_TOOL == 'kubeflow') }}
       - name: Terraform Init # requires a Storage Account backend deployed trough storage-backends-deploy workflow step
         run: |
