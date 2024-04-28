@@ -37,7 +37,7 @@ jobs:
       - name: Terraform Init
         run: terraform init # should be only deployed once. Ensure to manually destroy the ACR in the Azure Portal Web UI
         working-directory: ./devops/terraform
-      - name: Deploy Storage Account backend
+      - name: Deploy Storage backends
         run: terraform apply --auto-approve
         continue-on-error: false
         working-directory: ./devops/terraform
