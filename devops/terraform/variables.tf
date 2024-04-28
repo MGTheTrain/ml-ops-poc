@@ -1,6 +1,6 @@
 # Azure Rg
 variable "digital_product_affix_sa" {
-  default     = "gftfbe"
+  default     = "mlopsftwsa"
   description = "The digital product affix of the Storage Account module."
   type        = string
 }
