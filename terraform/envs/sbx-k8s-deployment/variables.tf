@@ -5,7 +5,7 @@ variable "digital_product_affix_az_module" {
 }
 
 variable "digital_product_affix_acr_module" {
-  default     = "mlopsftwacr"
+  default     = "mlopsftwcr"
   description = "The digital product affix of the acr module."
   type        = string
 }

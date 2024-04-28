@@ -26,7 +26,7 @@ No resources.
 | <a name="input_aks_node_count"></a> [aks\_node\_count](#input\_aks\_node\_count) | The AKS node count | `number` | `1` | no |
 | <a name="input_aks_os_disk_size_gb"></a> [aks\_os\_disk\_size\_gb](#input\_aks\_os\_disk\_size\_gb) | The AKS Agent Operating System disk size in GB | `string` | `"128"` | no |
 | <a name="input_aks_vm_size"></a> [aks\_vm\_size](#input\_aks\_vm\_size) | The AKS vm size. Other option is Standard\_B2s. See https://learn.microsoft.com/en-us/azure/virtual-machines/sizes, https://azureprice.net/ | `string` | `"Standard_B8ms"` | no |
-| <a name="input_digital_product_affix_acr_module"></a> [digital\_product\_affix\_acr\_module](#input\_digital\_product\_affix\_acr\_module) | The digital product affix of the acr module. | `string` | `"mlopsftwacr"` | no |
+| <a name="input_digital_product_affix_acr_module"></a> [digital\_product\_affix\_acr\_module](#input\_digital\_product\_affix\_acr\_module) | The digital product affix of the acr module. | `string` | `"mlopsftwcr"` | no |
 | <a name="input_digital_product_affix_az_module"></a> [digital\_product\_affix\_az\_module](#input\_digital\_product\_affix\_az\_module) | The digital product affix of the az module. | `string` | `"mlopsftwaz"` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment. | `string` | `"sbx"` | no |
 | <a name="input_location"></a> [location](#input\_location) | The geographic location in which to deploy. | `string` | `"West Europe"` | no |
