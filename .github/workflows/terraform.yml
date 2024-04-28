@@ -94,7 +94,7 @@ jobs:
           head -n -3 ./config > ~/.kube/config
           cat ~/.kube/config
         working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-deployment
-      - name: Install Kustomize and Kubeflow
+      - name: Install Kustomize, Kubeflow and Kubeflow Training Operator
         run: |
           sudo apt-get install -y git
 
@@ -118,6 +118,9 @@ jobs:
           kubectl get pods -n knative-serving
           kubectl get pods -n kubeflow
           kubectl get pods -n kubeflow-user-example-com
+
+          # Install Kubeflow Training Operator
+          kubectl apply -k "github.com/kubeflow/training-operator/manifests/overlays/standalone"
         if: ${{ ((github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'ml-ops-tools-install' || github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'k8s-service-deploy') && github.event.inputs.ML_OPS_TOOL == 'kubeflow') }}
       - name: Terraform Init # requires a Storage Account backend deployed trough storage-backends-deploy workflow step
         run: |
