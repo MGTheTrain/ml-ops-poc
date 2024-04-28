@@ -98,8 +98,9 @@ You then should have the repository cloned in your workspace:
 
 ![Cloned git repository in jupyter instance](./images/cloned-git-repository-in-jupyter-instance.PNG)
 
-TBD
+Execute a [Jupyter notebook](./notebooks/) to either train the model or perform inference:
 
+![Run jupyter notebook example](./images/run-jupyter-notebook-example.PNG)
 
 ### mlflow
 
