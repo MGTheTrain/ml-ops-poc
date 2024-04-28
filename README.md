@@ -34,8 +34,8 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 - [x] Dockerizing Python (pytorch or tensorflow) applications for ML training and inference
 - [ ] ~~Helm charts with K8s manifests for ML jobs considering the [Training Operator for CRDs](https://github.com/kubeflow/training-operator)~~
 - [x] Installation of the [Training Operator for CRDs](https://github.com/kubeflow/training-operator) and applying sample [TFJob and PyTorchJob](https://www.kubeflow.org/docs/components/training/overview/) k8s manifest
-- [x] Demonstration of model training and model deployment trough automation workflows~~
-- [ ] ~~(**OPTIONAL**) mlflow experiments for the machine learning lifecycle
+- [x] Demonstration of model training and model deployment trough automation workflows
+- [ ] ~~(**OPTIONAL**) mlflow experiments for the machine learning lifecycle~~
 
 ## Getting started
 
