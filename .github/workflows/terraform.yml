@@ -5,9 +5,9 @@ on:
     inputs:
       INFRASTRUCTURE_OPERATIONS:
         type: choice
-        options: [ 'storage-account-backend-deploy', 'k8s-service-deploy', 'k8s-service-destroy', 'ml-ops-tools-install', 'ml-ops-tools-uninstall' ]
+        options: [ 'storage-backends-deploy', 'k8s-service-deploy', 'k8s-service-destroy', 'ml-ops-tools-install', 'ml-ops-tools-uninstall' ]
         default: k8s-service-deploy
-        description: 'Infrastructure operations: [ storage-account-backend-deploy, k8s-service-deploy, k8s-service-destroy, ml-ops-tools-install, ml-ops-tools-uninstall ]'
+        description: 'Infrastructure operations: [ storage-backends-deploy, k8s-service-deploy, k8s-service-destroy, ml-ops-tools-install, ml-ops-tools-uninstall ]'
       ML_OPS_TOOL:
         type: choice
         options: [ 'kubeflow', 'mlflow' ]
@@ -26,9 +26,9 @@ env:
   ARM_CLIENT_SECRET: '${{ secrets.ARM_CLIENT_SECRET }}'
   
 jobs:
-  deploy-tf-backend:
+  deploy-storage-backends:
     runs-on: ubuntu-latest
-    if: ${{ github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'storage-account-backend-deploy' }}
+    if: ${{ github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'storage-backends-deploy' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@master
@@ -50,7 +50,7 @@ jobs:
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3  
         if: ${{ github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'k8s-service-deploy' || github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'k8s-service-destroy' }}
-      - name: Terraform Init # requires a Storage Account backend deployed trough storage-account-backend-deploy workflow step
+      - name: Terraform Init # requires a Storage Account backend deployed trough storage-backends-deploy workflow step
         run: |
           terraform init \
           -backend-config="subscription_id=${{ env.ARM_SUBSCRIPTION_ID }}" \
@@ -119,7 +119,7 @@ jobs:
           kubectl get pods -n kubeflow
           kubectl get pods -n kubeflow-user-example-com
         if: ${{ ((github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'ml-ops-tools-install' || github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'k8s-service-deploy') && github.event.inputs.ML_OPS_TOOL == 'kubeflow') }}
-      - name: Terraform Init # requires a Storage Account backend deployed trough storage-account-backend-deploy workflow step
+      - name: Terraform Init # requires a Storage Account backend deployed trough storage-backends-deploy workflow step
         run: |
           terraform init \
           -backend-config="subscription_id=${{ env.ARM_SUBSCRIPTION_ID }}" \
