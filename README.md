@@ -25,6 +25,7 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 - [x] CD wofklow for on demand deployments of an Azure Storage Account Container **(For storing terraform state files)**
 - [x] CD workflow for on-demand Azure Container Registry deployments in order to store internal Docker images.
 - [ ] CI workflow for building internal docker images and uploading those to an Azure Container Resgitry
+- [ ] CD workflows for internal helm chart installations in deployed AKS clusters
 - [x] Added `devcontainer.json` with necessary tooling for local development
 - [x] Python (pytorch or tensorflow) application for ML training and inference purposes and Jupyter notebooks
     - [x] Simple feedforward neural network with MNIST dataset to map input images to their corresponding digit classes 
