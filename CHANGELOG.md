@@ -20,3 +20,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Feature] CNN architecture training considering COCO dataset for image classification AI applications (**NOTE:** Compute and storage intensive. Read `Download the COCO dataset images` comments on preferred hardware specs)
 - [Feature] CD workflow for on-demand Azure Container Registry deployments in order to store internal Docker images.
 - [Feature] Dockerizing Python (pytorch or tensorflow) applications for ML training and inference
+- [Feature] Installation of the [Training Operator for CRDs](https://github.com/kubeflow/training-operator) and applying sample [TFJob and PyTorchJob](https://www.kubeflow.org/docs/components/training/overview/) k8s manifest
