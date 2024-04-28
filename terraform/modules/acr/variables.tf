@@ -33,7 +33,7 @@ variable "resource_instance_number" {
 }
 
 variable "location" {
-  default     =  "Germany Central"
+  default     = "Germany Central"
   description = "The geographic location in which to deploy."
   type        = string
 }
