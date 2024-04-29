@@ -34,7 +34,7 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 - [x] Dockerizing Python (pytorch or tensorflow) applications for ML training and inference
 - [ ] ~~Helm charts with K8s manifests for ML jobs considering the [Training Operator for CRDs](https://github.com/kubeflow/training-operator)~~
 - [x] Installation of the [Training Operator for CRDs](https://github.com/kubeflow/training-operator) and applying sample [TFJob and PyTorchJob](https://www.kubeflow.org/docs/components/training/overview/) k8s manifest
-- [x] Demonstration of model training and model deployment trough automation workflows
+- [ ] ~~Demonstration of model training and model deployment trough automation workflows~~
 - [ ] ~~(**OPTIONAL**) mlflow experiments for the machine learning lifecycle~~
 
 **NOTE:** [Steps 4 to 7 in the digits-recognizer-kubeflow GH repository](https://github.com/flopach/digits-recognizer-kubeflow) are not showcased here. These sections focus on constructing, training, and storing the ML model in MinIO as well as serving the trained model through KServe's inference HTTP service. The relevant files are:
