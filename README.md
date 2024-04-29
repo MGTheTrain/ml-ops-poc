@@ -37,7 +37,7 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 - [ ] ~~Demonstration of model training and model deployment trough automation workflows~~
 - [ ] ~~(**OPTIONAL**) mlflow experiments for the machine learning lifecycle~~
 
-**NOTE:** [Steps 4 to 7 in the digits-recognizer-kubeflow GH repository](https://github.com/flopach/digits-recognizer-kubeflow) are not showcased here. These sections focus on constructing, training, and storing the ML model in MinIO as well as serving the trained model through KServe's inference HTTP service. The relevant files are:
+**NOTE:** [Steps 4 to 7 in the digits-recognizer-kubeflow GH repository](https://github.com/flopach/digits-recognizer-kubeflow) are not showcased here. These sections focus on saving the ML model in MinIO once the model is successfully built and trained. Furthermore, the trained model is served through KServe's inference HTTP service. The relevant files are:
 
 - [The digits_recognizer_notebook.ipynb for model development and training, which also covers uploading the trained model to MiniO](https://github.com/flopach/digits-recognizer-kubeflow/blob/master/digits_recognizer_notebook.ipynb)
 - [create_kserve_inference.yaml for spinning up the KServe inference HTTP service](https://github.com/flopach/digits-recognizer-kubeflow/blob/master/kubeflow_configs/create_kserve_inference.yaml)
