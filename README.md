@@ -1,4 +1,4 @@
-# ml-ops-ftw
+# ml-ops-poc
 
 ## Table of Contents
 
