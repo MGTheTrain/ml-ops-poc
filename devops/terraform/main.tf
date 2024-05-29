@@ -1,5 +1,5 @@
 module "main" {
-  source                      = "git::https://github.com/MGTheTrain/gitops-ftw.git//devops/terraform?ref=main"
+  source                      = "git::https://github.com/MGTheTrain/gitops-poc.git//devops/terraform?ref=main"
   digital_product_affix       = var.digital_product_affix_sa
   environment                 = var.environment
   resource_instance_number    = var.resource_instance_number
