@@ -25,7 +25,7 @@ No resources.
 | <a name="input_aks_vm_size"></a> [aks\_vm\_size](#input\_aks\_vm\_size) | The AKS vm size. Other option is Standard\_B2s. See https://learn.microsoft.com/en-us/azure/virtual-machines/sizes, https://azureprice.net/ | `string` | `"Standard_B8ms"` | no |
 | <a name="input_digital_product_affix"></a> [digital\_product\_affix](#input\_digital\_product\_affix) | The digital product affix of the az module. | `string` | `"mopocci"` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment. | `string` | `"sbx"` | no |
-| <a name="input_location"></a> [location](#input\_location) | The geographic location in which to deploy. | `string` | `"Switzerland North"` | no |
+| <a name="input_location"></a> [location](#input\_location) | The geographic location in which to deploy. | `string` | `"West Europe"` | no |
 | <a name="input_number_of_aks"></a> [number\_of\_aks](#input\_number\_of\_aks) | The total number of AKses to deploy. | `number` | `1` | no |
 | <a name="input_resource_instance_number"></a> [resource\_instance\_number](#input\_resource\_instance\_number) | The resource instance number. | `string` | `"001"` | no |
 | <a name="input_team"></a> [team](#input\_team) | The team used for tagging resource groups and resources. | `string` | `"MG Innovators"` | no |
