@@ -1,0 +1,49 @@
+name: Format and validate
+on:
+  push:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Setup terraform-docs
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y curl
+          curl -Lo ./terraform-docs.tar.gz https://github.com/terraform-docs/terraform-docs/releases/download/v0.19.0/terraform-docs-v0.19.0-Linux-amd64.tar.gz
+          tar -xzf terraform-docs.tar.gz
+          rm terraform-docs.tar.gz
+          chmod +x terraform-docs
+          mv terraform-docs /usr/local/bin/terraform-docs
+
+      - name: Grant execute permissions
+        run: chmod +x *
+        working-directory: ./devops/scripts
+
+      - name: Format and generate terraform-docs
+        run: ./format.sh
+        working-directory: ./devops/scripts
+    
+      - name: Remove execute permissions
+        run: chmod -x *
+        working-directory: ./devops/scripts
+
+      - name: Check git diffs
+        run: |
+          # Post-process to Revert Unwanted Changes
+          git checkout -- LICENSE README.md 
+          
+          status=$(git status --porcelain=v1)
+          echo "Git status output: $status"
+          if [[ -n "$status" ]]; then
+            git diff
+            exit 1
+          fi
+        working-directory: ./

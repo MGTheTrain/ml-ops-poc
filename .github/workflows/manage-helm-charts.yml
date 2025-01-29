@@ -1,0 +1,149 @@
+name: Manage helm charts
+
+on:
+  workflow_dispatch:
+    inputs:
+      INFRASTRUCTURE_OPERATION:
+        type: choice
+        options: [ 'install-helm-charts', 'uninstall-helm-charts' ]
+        default: install-helm-charts
+        description: 'Infrastructure operation'
+      MLOPS_TOOL:
+        type: choice
+        options: [ 'kubeflow', 'mlflow' ]
+        default: 
+        description: 'Select GitOps tool'
+      ENVIRONMENT:
+        type: choice
+        options: [ 'sbx' ]
+        default: sbx
+        description: 'Environment on which to deploy. Dev, qas, staging, prod environments not considered'
+
+jobs:
+  install-helm-charts:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.ENVIRONMENT }}
+    env:
+      ARM_SUBSCRIPTION_ID: '${{ secrets.ARM_SUBSCRIPTION_ID }}'
+      ARM_TENANT_ID: '${{ secrets.ARM_TENANT_ID }}'
+      ARM_CLIENT_ID: '${{ secrets.ARM_CLIENT_ID }}'
+      ARM_CLIENT_SECRET: '${{ secrets.ARM_CLIENT_SECRET }}'
+    if: ${{ inputs.INFRASTRUCTURE_OPERATION == 'install-helm-charts' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3  
+
+      - name: Download the ~/.kube/config
+        shell: bash
+        run: |
+          terraform init \
+          -backend-config="subscription_id=${{ env.ARM_SUBSCRIPTION_ID }}" \
+          -backend-config="storage_account_name=mopoctbsbxsa001" \
+          -backend-config="resource_group_name=mopoctb-sbx-rg001" \
+          -backend-config="container_name=mopoctbsbxsac001" \
+          -backend-config="key=${{ inputs.ENVIRONMENT }}/cloud-infra/terraform.tfstate"
+
+          terraform output aks_kube_config_list | awk '/^  apiVersion:/,/^  EOT,$/' | sed 's/^  //' > ./config
+          mkdir -vp ~/.kube
+          head -n -3 ./config > ~/.kube/config
+          cat ~/.kube/config
+        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}/cloud-infra
+    
+      - name: Install Kustomize, Kubeflow and Kubeflow Training Operator
+        if: ${{ inputs.MLOPS_TOOL == 'kubeflow' }}
+        run: |
+          sudo apt-get install -y git
+
+          # Install kustomize
+          curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
+
+          # Install Kubeflow on Azure Kubernetes Service - https://github.com/Azure/kubeflow-aks
+          cd /tmp/
+          git clone --recurse-submodules https://github.com/Azure/kubeflow-aks.git
+          cd kubeflow-aks/manifests/
+          git checkout v1.8-branch
+          cd ..
+          cp -a deployments/vanilla manifests/vanilla
+          cd manifests  
+          while ! kustomize build vanilla | kubectl apply -f -; do echo "Retrying to apply resources"; sleep 10; done
+        
+          kubectl get pods -n cert-manager
+          kubectl get pods -n istio-system
+          kubectl get pods -n auth
+          kubectl get pods -n knative-eventing
+          kubectl get pods -n knative-serving
+          kubectl get pods -n kubeflow
+          kubectl get pods -n kubeflow-user-example-com
+
+          # Install Kubeflow Training Operator
+          kubectl apply -k "github.com/kubeflow/training-operator/manifests/overlays/standalone?ref=v1.7.0"
+
+      - name: Terraform Init # requires a Storage Account backend deployed trough storage-account-backend-deploy workflow step
+        run: |
+          terraform init \
+          -backend-config="subscription_id=${{ env.ARM_SUBSCRIPTION_ID }}" \
+          -backend-config="storage_account_name=mopoctbsbxsa001" \
+          -backend-config="resource_group_name=mopoctb-sbx-rg001" \
+          -backend-config="container_name=mopoctbsbxsac001" \
+          -backend-config="key=${{ inputs.ENVIRONMENT }}/helm-external/terraform.tfstate"
+        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}/helm-external
+
+      - name: Install helm charts
+        shell: bash
+        run: terraform apply --auto-approve
+        continue-on-error: false
+        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}/helm-external
+        env:
+          TF_VAR_ml_ops_tool: "${{ inputs.MLOPS_TOOL }}"
+
+  uninstall-helm-charts:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.ENVIRONMENT }}
+    env:
+      ARM_SUBSCRIPTION_ID: '${{ secrets.ARM_SUBSCRIPTION_ID }}'
+      ARM_TENANT_ID: '${{ secrets.ARM_TENANT_ID }}'
+      ARM_CLIENT_ID: '${{ secrets.ARM_CLIENT_ID }}'
+      ARM_CLIENT_SECRET: '${{ secrets.ARM_CLIENT_SECRET }}'
+    if: ${{ inputs.INFRASTRUCTURE_OPERATION == 'uninstall-helm-charts' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3  
+
+      - name: Download the ~/.kube/config
+        shell: bash
+        run: |
+          terraform init \
+          -backend-config="subscription_id=${{ env.ARM_SUBSCRIPTION_ID }}" \
+          -backend-config="storage_account_name=mopoctbsbxsa001" \
+          -backend-config="resource_group_name=mopoctb-sbx-rg001" \
+          -backend-config="container_name=mopoctbsbxsac001" \
+          -backend-config="key=${{ inputs.ENVIRONMENT }}/cloud-infra/terraform.tfstate"
+
+          terraform output aks_kube_config_list | awk '/^  apiVersion:/,/^  EOT,$/' | sed 's/^  //' > ./config
+          mkdir -vp ~/.kube
+          head -n -3 ./config > ~/.kube/config
+          cat ~/.kube/config
+        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}/cloud-infra
+
+      - name: Terraform Init # requires a Storage Account backend deployed trough storage-account-backend-deploy workflow step
+        run: |
+          terraform init \
+          -backend-config="subscription_id=${{ env.ARM_SUBSCRIPTION_ID }}" \
+          -backend-config="storage_account_name=mopoctbsbxsa001" \
+          -backend-config="resource_group_name=mopoctb-sbx-rg001" \
+          -backend-config="container_name=mopoctbsbxsac001" \
+          -backend-config="key=${{ inputs.ENVIRONMENT }}/helm-external/terraform.tfstate"
+        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}/helm-external
+
+      - name: Uninstall helm charts
+        run: terraform destroy --auto-approve
+        continue-on-error: false
+        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}/helm-external
+        env:
+          TF_VAR_ml_ops_tool: "${{ inputs.MLOPS_TOOL }}"
