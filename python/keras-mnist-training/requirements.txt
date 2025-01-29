@@ -1,2 +1,6 @@
 tensorflow
 numpy
+fastapi
+uvicorn
+requests
+langchain
