@@ -9,7 +9,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_main"></a> [main](#module\_main) | git::https://github.com/MGTheTrain/gitops-poc.git//devops/terraform | main |
+| <a name="module_tf_backend"></a> [tf\_backend](#module\_tf\_backend) | git::https://github.com/MGTheTrain/gitops-poc.git//devops/terraform/tf-backend | main |
 
 ## Resources
 
@@ -19,9 +19,9 @@ No resources.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_digital_product_affix"></a> [digital\_product\_affix](#input\_digital\_product\_affix) | The digital product affix. | `string` | `"gftfbe"` | no |
+| <a name="input_digital_product_affix"></a> [digital\_product\_affix](#input\_digital\_product\_affix) | The digital product affix of the Storage Account module. | `string` | `"mopoctb"` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment. | `string` | `"sbx"` | no |
-| <a name="input_location"></a> [location](#input\_location) | The geographic location in which to deploy. | `string` | `"West Europe"` | no |
+| <a name="input_location"></a> [location](#input\_location) | The geographic location in which to deploy. | `string` | `"Switzerland North"` | no |
 | <a name="input_number_of_storage_accounts"></a> [number\_of\_storage\_accounts](#input\_number\_of\_storage\_accounts) | The total number of Azure Storage Accounts to deploy. | `number` | `1` | no |
 | <a name="input_resource_instance_number"></a> [resource\_instance\_number](#input\_resource\_instance\_number) | The resource instance number. | `string` | `"001"` | no |
 | <a name="input_sa_account_replication_type"></a> [sa\_account\_replication\_type](#input\_sa\_account\_replication\_type) | Account replication type for the Azure Storage Account | `string` | `"LRS"` | no |

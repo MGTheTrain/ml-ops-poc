@@ -9,7 +9,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_k8s"></a> [k8s](#module\_k8s) | ../../modules/k8s | n/a |
+| <a name="module_k8s_external_helm"></a> [k8s\_external\_helm](#module\_k8s\_external\_helm) | ../../../modules/k8s-external-helm | n/a |
 
 ## Resources
 
@@ -19,15 +19,10 @@ No resources.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_acr_login_server_name"></a> [acr\_login\_server\_name](#input\_acr\_login\_server\_name) | Sets an ACR registry server name. | `string` | `"TBD"` | no |
-| <a name="input_acr_password"></a> [acr\_password](#input\_acr\_password) | Sets an ACR password. | `string` | `"TBD"` | no |
-| <a name="input_acr_username"></a> [acr\_username](#input\_acr\_username) | Sets an ACR user name. | `string` | `"TBD"` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment. | `string` | `"sbx"` | no |
 | <a name="input_ml_ops_tool"></a> [ml\_ops\_tool](#input\_ml\_ops\_tool) | String determining whether to install mlflow or none. Viable options: [ mlflow, kubeflow, none ]. The installation of Kubeflow will be managed externally through the continuous deployment (CD) workflow, as Terraform modules and kubernetes provider are either outdated or difficult to setup | `string` | `"none"` | no |
 
 ## Outputs
 
-| Name | Description |
-|------|-------------|
-| <a name="output_ml_ops_ftw_namespace"></a> [ml\_ops\_ftw\_namespace](#output\_ml\_ops\_ftw\_namespace) | n/a |
+No outputs.
 <!-- END_TF_DOCS -->
