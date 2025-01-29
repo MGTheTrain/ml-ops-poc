@@ -20,14 +20,6 @@ resource "helm_release" "mlflow" {
   count      = var.ml_ops_tool == "mlflow" ? 1 : 0
 }
 
-resource "helm_release" "argocd" {
-  name       = "argocd"
-  repository = "https://argoproj.github.io/argo-helm"
-  chart      = "argo-cd"
-  version    = "6.7.5"
-  namespace  = kubernetes_namespace.external_services.metadata.0.name
-}
-
 # Nginx controller and Ingress
 resource "helm_release" "nginx_ingress_controller" {
   name       = "nginx-ingress-controller"
