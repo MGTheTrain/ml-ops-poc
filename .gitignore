@@ -2,3 +2,4 @@ secrets.cfg
 .terraform**
 terraform.tfstate**
 config**
+*.tmp
