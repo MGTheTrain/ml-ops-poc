@@ -32,7 +32,7 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 - [x] Dockerizing Python (PyTorch or TensorFlow) applications for ML training and inference
 - [x] CI pipeline deploying an ACR
 - [x] CI pipeline containerizing and pushing Python TensorFlow or PyTorch applications for training to a deployed ACR
-- [ ] Helm charts with K8s manifests pulling containerized Python TensorFlow or PyTorch applications for ML jobs considering the [Training Operator for CRDs](https://github.com/kubeflow/training-operator)
+- [x] Helm charts with K8s manifests for containerized Python TensorFlow/PyTorch ML jobs using the [Training Operator for CRDs](https://github.com/kubeflow/training-operator) and GitOps via ArgoCD
 - [x] Installation of the [Training Operator for CRDs](https://github.com/kubeflow/training-operator) and applying sample [TFJob and PyTorchJob](https://www.kubeflow.org/docs/components/training/overview/) k8s manifest
 
 **NOTE:** [Steps 4 to 7 in the digits-recognizer-kubeflow GH repository](https://github.com/flopach/digits-recognizer-kubeflow) are not showcased here. These sections focus on saving the ML model in MinIO once the model is successfully built and trained. Furthermore, the trained model is served through KServe's inference HTTP service. The relevant files are:
@@ -128,6 +128,33 @@ kubectl create -f https://raw.githubusercontent.com/kubeflow/training-operator/m
 ```
 
 ![training operator simple tf job](./images/training-operator-simple-tf-job.jpg)
+
+You can also register and sync ArgoCD applications referencing Helm charts to enable GitOps. For more details check out `https://github.com/MGTheTrain/gitops-poc`.
+Essential commands are:
+
+```sh
+# Port forward in terminal process A
+kubectl port-forward -n external-services <argocd-server-pod> 8080:8080
+
+# In terminal process B - Login
+argocd login localhost:8080
+# Prompted to provide username and password
+
+# e.g. for keras-mnist-training chart
+argocd app create keras-mnist-training \
+  --repo https://github.com/MGTheTrain/ml-ops-poc.git \
+  --path gitops/argocd/keras-mnist-training \ 
+  --dest-server https://kubernetes.default.svc \
+  --dest-namespace internal-apps \
+  --revision main \
+  --server localhost:8080
+
+# In terminal process B - Sync Application
+argocd app sync keras-mnist-training
+# In terminal process B - Monitor Application Status
+argocd app get keras-mnist-training
+```
+
 
 ### mlflow
 
