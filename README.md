@@ -24,18 +24,14 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 - [x] CD workflow for on-demand AKS deployments and kubeflow operator or mlflow helm chart installations
 - [x] CD wofklow for on demand deployments of an Azure Storage Account Container **(For storing terraform state files)**
 - [x] CD workflow for on-demand Azure Container Registry deployments in order to store internal Docker images.
-- [ ] ~~CI workflow for building internal docker images and uploading those to an Azure Container Resgitry~~
-- [ ] ~~CD workflows for internal helm chart installations in deployed AKS clusters~~
 - [x] Added `devcontainer.json` with necessary tooling for local development
 - [x] Python (pytorch or tensorflow) application for ML training and inference purposes and Jupyter notebooks
     - [x] Simple feedforward neural network with MNIST dataset to map input images to their corresponding digit classes 
     - [x] CNN architecture training and inference considering COCO dataset for image classification AI applications (**NOTE:** Compute and storage intensive. Read `Download the COCO dataset images` comments on preferred hardware specs)
-    - [ ] ~~(**OPTIONAL**) Transformer architecture training considering pre-trained models for chatbot AI applications~~
+    - [ ] Transformer architecture training considering pre-trained models for chatbot AI applications
 - [x] Dockerizing Python (pytorch or tensorflow) applications for ML training and inference
-- [ ] ~~Helm charts with K8s manifests for ML jobs considering the [Training Operator for CRDs](https://github.com/kubeflow/training-operator)~~
+- [ ] Helm charts with K8s manifests for ML jobs considering the [Training Operator for CRDs](https://github.com/kubeflow/training-operator)
 - [x] Installation of the [Training Operator for CRDs](https://github.com/kubeflow/training-operator) and applying sample [TFJob and PyTorchJob](https://www.kubeflow.org/docs/components/training/overview/) k8s manifest
-- [ ] ~~Demonstration of model training and model deployment trough automation workflows~~
-- [ ] ~~(**OPTIONAL**) mlflow experiments for the machine learning lifecycle~~
 
 **NOTE:** [Steps 4 to 7 in the digits-recognizer-kubeflow GH repository](https://github.com/flopach/digits-recognizer-kubeflow) are not showcased here. These sections focus on saving the ML model in MinIO once the model is successfully built and trained. Furthermore, the trained model is served through KServe's inference HTTP service. The relevant files are:
 
@@ -48,20 +44,22 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 
 [Github workflows](./.github/workflows/) will be utilized in this Github repository. Once the workflows described in the **Preconditions** and **Deploy an AKS cluster and install the kubeflow or mlflow components** sections have been successfully executed, all resource groups listed should be visible in the Azure Portal UI:
 
-![Deployed resource groups](./images/resource-groups.PNG)
+![Deployed resource groups](./images/resource-groups.jpg)
+![Deployed cloud-infra resource group](./images/cloud-infra-rg.jpg)
 
 ### Preconditions
 
-0. Deploy an Azure Storage Account Service including container for terraform backends trough the [terraform.yml workflow](https://github.com/MGTheTrain/ml-ops-ftw/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option storage-account-backend-deploy`
+0. Deploy an Azure Storage Account Service including container for terraform backends trough the [deploy-tf-backend workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/deploy-tf-backend.yml)
 
-### Deploy an AKS cluster and install the kubeflow or mlflow components
+### Deploy an AKS cluster, install the kubeflow or mlflow components or setup kubernetes resources for applications
 
-0. Deploy an AKS trough the [terraform.yml workflow](https://github.com/MGTheTrain/ml-ops-ftw/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option k8s-service-deploy`. An Azure Container Registry will be part of the deployment in order to store internal Docker images
-1. **Optional:** Install ml-ops tools to an existing kubernetes cluster trough [terraform.yml workflow](https://github.com/MGTheTrain/ml-ops-ftw/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option ml-ops-tools-install`
+0. Deploy an AKS trough the [manage-k8s-cluster workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/manage-k8s-cluster.yml)
+1. **Optional:** Install external helm charts (e.g. ml-ops tools) into the deployed kubernetes cluster trough [manage-helm-charts workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/manage-helm-charts.yml)
+2. **Optional:** Deploy kubernetes resources for application (secrets or reverse-proxy ingress) trough [manage-internal-k8s-resources workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/manage-internal-k8s-resources.yml)
 
 **NOTE:** 
 - Set all the required Github secrets for aboves workflows
-- In order to locally access the deployed AKS cluster launch the [devcontainer](./.devcontainer/devcontainer.json) and retrieve the necessary kube config as displayed in the GitHub workflow step labeled with title [Download the ~/.kube/config](https://github.com/MGTheTrain/ml-ops-ftw/blob/3f5603fb986f0939be58b8f01b9e0121bde54e3b/.github/workflows/terraform.yml#L82)
+- In order to locally access the deployed AKS cluster launch the [devcontainer](./.devcontainer/devcontainer.json) and retrieve the necessary kube config as displayed in the GitHub workflow step labeled with title [Download the ~/.kube/config](https://github.com/MGTheTrain/ml-ops-poc/blob/3f5603fb986f0939be58b8f01b9e0121bde54e3b/.github/workflows/terraform.yml#L82)
 
 
 ### kubeflow
@@ -98,7 +96,7 @@ The Jypter instace that was created appear as follows:
 
 ![Check jupyter instance pods](./images/check-jupyter-instance-pod.PNG)
 
-Once `CONNECTED` to a Jupyter instance ensure to clone this Git repository (HTTPS URL: `https://github.com/MGTheTrain/ml-ops-ftw.git`):
+Once `CONNECTED` to a Jupyter instance ensure to clone this Git repository (HTTPS URL: `https://github.com/MGTheTrain/ml-ops-poc.git`):
 
 ![Clone git repository](./images/clone-git-repository.PNG)
 
@@ -126,15 +124,15 @@ kubectl create -f https://raw.githubusercontent.com/kubeflow/training-operator/m
 To access the MLflow dashboard following the installation of the MLflow Helm chart, execute the following command:
 
 ```sh
-kubectl port-forward -n ml-ops-ftw <mlflow pod name> 5000:5000
+kubectl port-forward -n ml-ops-poc <mlflow pod name> 5000:5000
 ```
 
 and visit in a browser of choice localhost:5000. 
 
 ![mlflow-dashboard](./images/mlflow-dashboard.PNG)
 
+### Destroy the AKS cluster, uninstall helm charts or remove kubernetes resources for applications
 
-### Destroy the AKS cluster or uninstall ml tools
-
-0. **Optional:** Uninstall only ml tools of an existing kubernetes cluster trough [terraform.yml workflow](https://github.com/MGTheTrain/ml-ops-ftw/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option ml-ops-tools-uninstall`
-1. Destroy an AKS trough the [terraform.yml workflow](https://github.com/MGTheTrain/ml-ops-ftw/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option k8s-service-destroy`
+0. **Optional:** Uninstall only ml tools of an existing kubernetes cluster trough [manage-helm-charts workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/manage-helm-charts.yml)
+1. **Optional:** Destroy kubernetes resources for application (secrets or reverse-proxy ingress) trough [manage-internal-k8s-resources workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/manage-internal-k8s-resources.yml)
+2. Destroy an AKS trough the [manage-k8s-cluster workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/manage-k8s-cluster.yml)
