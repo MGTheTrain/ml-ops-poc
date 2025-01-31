@@ -1,0 +1,23 @@
+apiVersion: "kubeflow.org/v1"
+kind: TFJob
+metadata:
+  name: {{ include "keras-mnist-training.fullname" . }}
+  labels:
+    {{- include "keras-mnist-training.labels" . | nindent 4 }}
+spec:
+  tfReplicaSpecs:
+    Worker:
+      replicas: {{ .Values.replicaCount }}
+      restartPolicy: OnFailure
+      template:
+        spec:
+          imagePullSecrets:
+            {{- with .Values.imagePullSecrets }}
+            - name: "{{ . }}"
+            {{- end }}
+          containers:
+            - name: tensorflow
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              command:
+                - "{{ .Values.command }}"

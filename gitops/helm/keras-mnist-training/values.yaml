@@ -1,0 +1,15 @@
+# Default values for keras-mnist-training.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: mopocacrsbxsa001.azurecr.io/keras-mnist
+  pullPolicy: IfNotPresent
+  tag: "0.1.0"
+
+imagePullSecrets:
+  - name: "acr-secret"
+
+command: "python main.py --mode train"

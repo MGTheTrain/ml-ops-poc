@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "keras-mnist-training.fullname" . }}-test-connection"
+  labels:
+    {{- include "keras-mnist-training.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "keras-mnist-training.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never
