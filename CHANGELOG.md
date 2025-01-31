@@ -7,9 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 31-01-2025
+
 ### Added
 
 - [x] CI pipeline containerizing and pushing Python TensorFlow or PyTorch applications for training to a deployed ACR
+- [x] Helm charts with K8s manifests for containerized Python TensorFlow/PyTorch ML jobs using the [Training Operator for CRDs](https://github.com/kubeflow/training-operator) and GitOps via ArgoCD
 
 ## [0.2.0] - 31-01-2025
 
