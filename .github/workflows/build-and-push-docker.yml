@@ -8,6 +8,10 @@ on:
           options: [ 'sbx' ]
           default: sbx
           description: 'Environment on which to deploy. Dev, qas, staging, prod environments not considered'
+      DOCKER_IMAGE_NAME:
+        required: true
+        default: "keras-mnist"
+        description: "The docker image name"
       DOCKER_IMAGE_TAG:
         required: true
         default: "0.1.0"
@@ -53,9 +57,9 @@ jobs:
       - name: Build docker image 🐳/📦
         shell: bash
         run: |
-          docker build -t ${{ inputs.ACR_LOGIN_SERVER }}/sample-service:${{ inputs.DOCKER_IMAGE_TAG }} .
+          docker build -t ${{ inputs.ACR_LOGIN_SERVER }}/${{ inputs.DOCKER_IMAGE_NAME }}:${{ inputs.DOCKER_IMAGE_TAG }} .
         working-directory: ${{ inputs.DOCKER_FILE_PATH }}
 
       - name: Push docker image 🐳/📦
         shell: bash
-        run: docker push ${{ inputs.ACR_LOGIN_SERVER }}/sample-service:${{ inputs.DOCKER_IMAGE_TAG }}
+        run: docker push ${{ inputs.ACR_LOGIN_SERVER }}/${{ inputs.DOCKER_IMAGE_NAME }}:${{ inputs.DOCKER_IMAGE_TAG }}
