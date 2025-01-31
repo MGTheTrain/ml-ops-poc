@@ -161,6 +161,13 @@ The ArgoCD applications that have been registered and synchronized should resemb
 
 ![mnist-keras-training-argocd-app.jpg](./images/mnist-keras-training-argocd-app.jpg)
 
+Training job logs resemble:
+![training-operator-keras-mnist-training-tf-job-logs](./images/training-operator-keras-mnist-training-tf-job-logs.jpg)
+
+Training job status resemble:
+![training-operator-keras-mnist-training-tf-job-status](./images/training-operator-keras-mnist-training-tf-job-status.jpg)
+
+
 ### mlflow
 
 To access the MLflow dashboard following the installation of the MLflow Helm chart, execute the following command:
