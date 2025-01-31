@@ -10,7 +10,7 @@ on:
           description: 'Environment on which to deploy. Dev, qas, staging, prod environments not considered'
       DOCKER_IMAGE_NAME:
         required: true
-        default: "keras-mnist"
+        default: "keras-mnist-training"
         description: "The docker image name"
       DOCKER_IMAGE_TAG:
         required: true
