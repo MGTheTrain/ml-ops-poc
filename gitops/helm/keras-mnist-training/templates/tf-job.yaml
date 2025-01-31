@@ -2,8 +2,6 @@ apiVersion: "kubeflow.org/v1"
 kind: TFJob
 metadata:
   name: {{ include "keras-mnist-training.fullname" . }}
-  labels:
-    {{- include "keras-mnist-training.labels" . | nindent 4 }}
 spec:
   tfReplicaSpecs:
     Worker:
