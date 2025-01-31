@@ -31,7 +31,7 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
     - [ ] Transformer architecture training considering pre-trained models for chatbot AI applications
 - [x] Dockerizing Python (PyTorch or TensorFlow) applications for ML training and inference
 - [x] CI pipeline deploying an ACR
-- [ ] CI pipeline containerizing and pushing Python TensorFlow or PyTorch applications for training to a deployed ACR
+- [x] CI pipeline containerizing and pushing Python TensorFlow or PyTorch applications for training to a deployed ACR
 - [ ] Helm charts with K8s manifests pulling containerized Python TensorFlow or PyTorch applications for ML jobs considering the [Training Operator for CRDs](https://github.com/kubeflow/training-operator)
 - [x] Installation of the [Training Operator for CRDs](https://github.com/kubeflow/training-operator) and applying sample [TFJob and PyTorchJob](https://www.kubeflow.org/docs/components/training/overview/) k8s manifest
 
