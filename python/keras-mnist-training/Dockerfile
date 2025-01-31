@@ -7,4 +7,4 @@ COPY src /app/src
 COPY requirements.txt /app/
 
 RUN pip install -r requirements.txt
-ENTRYPOINT ["python", "main.py", "--mode train"]
+ENTRYPOINT ["python", "/app/main.py", "--mode train"]
