@@ -9,10 +9,10 @@ spec:
       restartPolicy: OnFailure
       template:
         spec:
+          {{- if .Values.imagePullSecrets }}
           imagePullSecrets:
-            {{- with .Values.imagePullSecrets }}
-            - name: "{{ . }}"
-            {{- end }}
+            {{- toYaml .Values.imagePullSecrets | nindent 12 }}
+          {{- end }}
           containers:
             - name: tensorflow
               image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
