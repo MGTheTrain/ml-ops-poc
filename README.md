@@ -130,7 +130,7 @@ kubectl create -f https://raw.githubusercontent.com/kubeflow/training-operator/m
 ![training operator simple tf job](./images/training-operator-simple-tf-job.jpg)
 
 You can also register and sync ArgoCD applications referencing Helm charts to enable GitOps. For more details check out `https://github.com/MGTheTrain/gitops-poc`.
-Essential commands are:
+Essential commands for the [Keras MNIST training example](./python/keras-mnist-training/) are:
 
 ```sh
 # Port forward in terminal process A
