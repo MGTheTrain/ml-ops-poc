@@ -1,0 +1,61 @@
+name: Build and push docker images to an ACR
+
+on:
+  workflow_dispatch:
+    inputs:
+      ENVIRONMENT:
+          type: choice
+          options: [ 'sbx' ]
+          default: sbx
+          description: 'Environment on which to deploy. Dev, qas, staging, prod environments not considered'
+      DOCKER_IMAGE_TAG:
+        required: true
+        default: "0.1.0"
+        description: "The docker image tag"
+      DOCKER_FILE_PATH:
+        required: true
+        default: "./python/keras-mnist-training"
+        description: "Path to the docker file"
+      ACR_LOGIN_SERVER:
+        description: 'Azure Container Registry login server'
+        required: true
+        type: string
+      ACR_USERNAME:
+        description: 'Azure Container Registry username'
+        required: true
+        type: string
+      ACR_PASSWORD:
+        description: 'Azure Container Registry password'
+        required: true
+        type: string
+
+jobs:
+  build-and-push-docker-image:
+    environment: ${{ inputs.ENVIRONMENT }}
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@master
+
+      - name: Set up QEMU 
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx 🐳
+        uses: docker/setup-buildx-action@v3
+
+      - uses: azure/docker-login@v1
+        with:
+          login-server: ${{ inputs.ACR_LOGIN_SERVER }}
+          username: ${{ inputs.ACR_USERNAME }}
+          password: ${{ inputs.ACR_PASSWORD }}
+
+      - name: Build docker image 🐳/📦
+        shell: bash
+        run: |
+          docker build -t ${{ inputs.ACR_LOGIN_SERVER }}/sample-service:${{ inputs.DOCKER_IMAGE_TAG }} .
+        working-directory: ${{ inputs.DOCKER_FILE_PATH }}
+
+      - name: Push docker image 🐳/📦
+        shell: bash
+        run: docker push ${{ inputs.ACR_LOGIN_SERVER }}/sample-service:${{ inputs.DOCKER_IMAGE_TAG }}
