@@ -25,12 +25,14 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 - [x] CD wofklow for on demand deployments of an Azure Storage Account Container **(For storing terraform state files)**
 - [x] CD workflow for on-demand Azure Container Registry deployments in order to store internal Docker images.
 - [x] Added `devcontainer.json` with necessary tooling for local development
-- [x] Python (pytorch or tensorflow) application for ML training and inference purposes and Jupyter notebooks
+- [x] Python (PyTorch or TensorFlow) application for ML training and inference purposes and Jupyter notebooks
     - [x] Simple feedforward neural network with MNIST dataset to map input images to their corresponding digit classes 
     - [x] CNN architecture training and inference considering COCO dataset for image classification AI applications (**NOTE:** Compute and storage intensive. Read `Download the COCO dataset images` comments on preferred hardware specs)
     - [ ] Transformer architecture training considering pre-trained models for chatbot AI applications
-- [x] Dockerizing Python (pytorch or tensorflow) applications for ML training and inference
-- [ ] Helm charts with K8s manifests for ML jobs considering the [Training Operator for CRDs](https://github.com/kubeflow/training-operator)
+- [x] Dockerizing Python (PyTorch or TensorFlow) applications for ML training and inference
+- [x] CI pipeline deploying an ACR
+- [ ] CI pipeline containerizing and pushing Python TensorFlow or PyTorch applications for training to a deployed ACR
+- [ ] Helm charts with K8s manifests pulling containerized Python TensorFlow or PyTorch applications for ML jobs considering the [Training Operator for CRDs](https://github.com/kubeflow/training-operator)
 - [x] Installation of the [Training Operator for CRDs](https://github.com/kubeflow/training-operator) and applying sample [TFJob and PyTorchJob](https://www.kubeflow.org/docs/components/training/overview/) k8s manifest
 
 **NOTE:** [Steps 4 to 7 in the digits-recognizer-kubeflow GH repository](https://github.com/flopach/digits-recognizer-kubeflow) are not showcased here. These sections focus on saving the ML model in MinIO once the model is successfully built and trained. Furthermore, the trained model is served through KServe's inference HTTP service. The relevant files are:
