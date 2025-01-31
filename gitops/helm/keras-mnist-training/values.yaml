@@ -12,4 +12,8 @@ image:
 imagePullSecrets:
   - name: "acr-secret"
 
-command: "python /app/main.py --mode train"
+command:
+  - "python"
+  - "/app/main.py"
+  - "--mode"
+  - "train"

@@ -17,5 +17,4 @@ spec:
             - name: tensorflow
               image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
               imagePullPolicy: {{ .Values.image.pullPolicy }}
-              command:
-                - "{{ .Values.command }}"
+              command: {{ .Values.command | toYaml | nindent 16 }}
