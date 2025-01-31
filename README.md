@@ -155,6 +155,11 @@ argocd app sync keras-mnist-training
 argocd app get keras-mnist-training
 ```
 
+The ArgoCD applications that have been registered and synchronized should resemble the following:
+
+![argocd-applications.jpg](./images/argocd-applications.jpg)
+
+![mnist-keras-training-argocd-app.jpg](./images/mnist-keras-training-argocd-app.jpg)
 
 ### mlflow
 
