@@ -6,7 +6,7 @@ def preprocess_data(data):
 
 class AzureBlobConnector:
     def __init__(self, connection_string: str):
-        self.connection_string = connection_string
+        self.connection_string = connection_string.strip("'")
         self.blob_service_client = BlobServiceClient.from_connection_string(connection_string)
     
     def upload(self, model_file: str, container_name: str, blob_name: str) -> None:
