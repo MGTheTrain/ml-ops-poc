@@ -22,6 +22,15 @@ on:
       ACR_PASSWORD:
         description: 'Azure Container Registry password'
         type: string
+      AZURE_SA_CONNECTION_STRING:
+        description: 'Azure Storage Account connection string'
+        type: string
+      AZURE_SA_CONTAINER_NAME:
+        description: 'Azure Storage Account container name'
+        type: string
+      AZURE_SA_BLOB_NAME:
+        description: 'Azure Storage Account container blob name'
+        type: string
 
 jobs:
   deploy-k8s-resources:
@@ -75,6 +84,9 @@ jobs:
           TF_VAR_acr_username: "${{ inputs.ACR_USERNAME }}"
           TF_VAR_acr_password: "${{ inputs.ACR_PASSWORD }}"
           TF_VAR_acr_login_server_name: "${{ inputs.ACR_LOGIN_SERVER }}"
+          TF_VAR_azure_sa_connection_string: "${{ inputs.AZURE_SA_CONNECTION_STRING }}"
+          TF_VAR_azure_sa_container_name: "${{ inputs.AZURE_SA_CONTAINER_NAME }}"
+          TF_VAR_azure_sa_blob_name: "${{ inputs.AZURE_SA_BLOB_NAME }}"
 
   destroy-k8s-resources:
     runs-on: ubuntu-latest
