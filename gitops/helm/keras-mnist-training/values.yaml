@@ -27,19 +27,19 @@ command:
   - "-c"
   - |
       # train
-      export MODEL_FILE='/tmp/mnist_model.h5'
-      export MODE='train'
+      export MODEL_FILE="/tmp/mnist_model.h5"
+      export MODE="train"
       
       ls
       
       python /app/model_operations_env.py
 
       # upload model
-      export MODE='upload-model'
+      export MODE="upload-model"
       export BLOB_NAME="mnist_model-$(date +'%Y%m%d%H%M%S').h5"
 
       ls $MODEL_FILE
-      echo "Generated BLOB NAME: $BLOB_NAME"
+      echo "Generated blob name: $BLOB_NAME"
       echo "Azure Storage Connection string: $AZ_SA_CONNECTION_STRING"
       echo "Azure Storage Container name: $AZ_SA_CONTAINER_NAME"
       
