@@ -13,7 +13,9 @@ imagePullSecrets:
   - name: "acr-secret"
 
 command:
+  - "export MODE='train'"
   - "python"
-  - "/app/main.py"
-  - "--mode"
-  - "train"
+  - "/app/model_operations_env.py"
+  - "export MODE='upload-model'"
+  - "python"
+  - "/app/model_operations_env.py"

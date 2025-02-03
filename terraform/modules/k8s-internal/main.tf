@@ -27,6 +27,23 @@ resource "kubernetes_secret" "acr_secret" {
   }
 }
 
+resource "kubernetes_secret" "storage_account_secret" {
+  metadata {
+    name        = "storage-account-secret"
+    namespace   = kubernetes_namespace.internal_apps.metadata.0.name  # Replace with your namespace
+    annotations = local.tags
+    labels      = local.tags
+  }
+  
+  type = "Opaque"
+
+  data = {
+    "connection_string" = base64encode(var.az_sa_connection_string)
+    "container_name"    = base64encode(var.az_sa_container_name)
+    "blob_name"         = base64encode(var.az_sa_blob_name)
+  }
+}
+
 resource "kubernetes_ingress_v1" "nginx_controller_ingress" {
   wait_for_load_balancer = true
   metadata {
