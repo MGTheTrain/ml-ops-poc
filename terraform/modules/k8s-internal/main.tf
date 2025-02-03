@@ -30,11 +30,11 @@ resource "kubernetes_secret" "acr_secret" {
 resource "kubernetes_secret" "storage_account_secret" {
   metadata {
     name        = "storage-account-secret"
-    namespace   = kubernetes_namespace.internal_apps.metadata.0.name  # Replace with your namespace
+    namespace   = kubernetes_namespace.internal_apps.metadata.0.name # Replace with your namespace
     annotations = local.tags
     labels      = local.tags
   }
-  
+
   type = "Opaque"
 
   data = {

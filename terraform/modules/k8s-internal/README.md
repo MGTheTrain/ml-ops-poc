@@ -14,6 +14,7 @@ No modules.
 | [kubernetes_ingress_v1.nginx_controller_ingress](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/ingress_v1) | resource |
 | [kubernetes_namespace.internal_apps](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace) | resource |
 | [kubernetes_secret.acr_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
+| [kubernetes_secret.storage_account_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
 
 ## Inputs
 
@@ -22,6 +23,9 @@ No modules.
 | <a name="input_acr_login_server_name"></a> [acr\_login\_server\_name](#input\_acr\_login\_server\_name) | Sets an ACR registry server name. | `string` | `"TBD"` | no |
 | <a name="input_acr_password"></a> [acr\_password](#input\_acr\_password) | Sets an ACR password. | `string` | `"TBD"` | no |
 | <a name="input_acr_username"></a> [acr\_username](#input\_acr\_username) | Sets an ACR user name. | `string` | `"TBD"` | no |
+| <a name="input_az_sa_blob_name"></a> [az\_sa\_blob\_name](#input\_az\_sa\_blob\_name) | The Azure Storage Account container blob name | `string` | `"TBD"` | no |
+| <a name="input_az_sa_connection_string"></a> [az\_sa\_connection\_string](#input\_az\_sa\_connection\_string) | The Azure Storage Account connection string | `string` | `"TBD"` | no |
+| <a name="input_az_sa_container_name"></a> [az\_sa\_container\_name](#input\_az\_sa\_container\_name) | The Azure Storage Account container name | `string` | `"TBD"` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment. | `string` | `"sbx"` | no |
 
 ## Outputs
