@@ -2,7 +2,8 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-COPY main.py /app/
+COPY cli.py /app/
+COPY model_operations_env.py /app/
 COPY src /app/src
 COPY requirements.txt /app/
 
