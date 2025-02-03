@@ -12,10 +12,23 @@ image:
 imagePullSecrets:
   - name: "acr-secret"
 
+env:
+  - name: AZURE_CONNECTION_STRING
+    secretKeyRef:
+      secretName: "storage-account-secret"
+      key: "connection_string"
+  - name: AZURE_CONTAINER_NAME
+    secretKeyRef:
+      secretName: "storage-account-secret"
+      key: "container_name"
+
 command:
-  - "export MODE='train'"
-  - "python"
-  - "/app/model_operations_env.py"
-  - "export MODE='upload-model'"
-  - "python"
-  - "/app/model_operations_env.py"
+  - "sh"
+  - "-c"
+  - |
+      export MODEL_FILE='/tmp/mnist_model.h5'
+      export MODE='train'
+      export BLOB_NAME="mnist_model-$(date +'%Y%m%d%H%M%S').h5"
+      python /app/model_operations_env.py
+      export MODE='upload-model'
+      python /app/model_operations_env.py

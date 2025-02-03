@@ -40,7 +40,6 @@ resource "kubernetes_secret" "storage_account_secret" {
   data = {
     "connection_string" = base64encode(var.az_sa_connection_string)
     "container_name"    = base64encode(var.az_sa_container_name)
-    "blob_name"         = base64encode(var.az_sa_blob_name)
   }
 }
 
