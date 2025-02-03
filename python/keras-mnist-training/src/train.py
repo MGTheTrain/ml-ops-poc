@@ -2,7 +2,7 @@ import os
 from .data_loader import load_data
 from .model import build_model
 
-def main():
+def main(model_file: str) -> None:
     # Load data
     (x_train, y_train), (x_test, y_test) = load_data()
     
