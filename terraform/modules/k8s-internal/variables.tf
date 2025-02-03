@@ -27,3 +27,15 @@ variable "acr_password" {
   sensitive   = true
   description = "Sets an ACR password."
 }
+
+variable "az_sa_connection_string" {
+  default     = "TBD"
+  type        = string
+  description = "The Azure Storage Account connection string"
+}
+
+variable "az_sa_container_name" {
+  default     = "TBD"
+  type        = string
+  description = "The Azure Storage Account container name"
+}

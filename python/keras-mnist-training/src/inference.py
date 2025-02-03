@@ -1,12 +1,10 @@
 import os
 import numpy as np
 from tensorflow.keras.models import load_model
-from .data_loader import load_data  # Import the data loading function if needed
+from .data_loader import load_data
 
-def main():
-    # Load saved model
-    model_path = os.path.join("models", "mnist_model.h5")
-    model = load_model(model_path)
+def main(model_file: str) -> None:
+    model = load_model(model_file)
 
     # Load data for inference
     (x_train, y_train), (x_test, y_test) = load_data()

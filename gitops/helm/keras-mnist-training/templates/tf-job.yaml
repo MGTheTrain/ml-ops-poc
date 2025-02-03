@@ -18,3 +18,11 @@ spec:
               image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
               imagePullPolicy: {{ .Values.image.pullPolicy }}
               command: {{ .Values.command | toYaml | nindent 16 }}
+              env:
+                {{- range .Values.env }}
+                - name: {{ .name }}
+                  valueFrom:
+                    secretKeyRef:
+                      name: {{ .secretKeyRef.secretName }}
+                      key: {{ .secretKeyRef.key }}
+                {{- end }}
