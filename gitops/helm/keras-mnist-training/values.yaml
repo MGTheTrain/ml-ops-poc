@@ -26,10 +26,15 @@ command:
   - "sh"
   - "-c"
   - |
+      # train
       export MODEL_FILE='/tmp/mnist_model.h5'
       export MODE='train'
+      
       ls
+      
       python /app/model_operations_env.py
+
+      # upload model
       export MODE='upload-model'
       export BLOB_NAME="mnist_model-$(date +'%Y%m%d%H%M%S').h5"
 
