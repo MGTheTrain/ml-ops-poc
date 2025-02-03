@@ -38,8 +38,8 @@ resource "kubernetes_secret" "storage_account_secret" {
   type = "Opaque"
 
   data = {
-    "connection_string" = base64encode(var.az_sa_connection_string)
-    "container_name"    = base64encode(var.az_sa_container_name)
+    "connection_string" = var.az_sa_connection_string
+    "container_name"    = var.az_sa_container_name
   }
 }
 
