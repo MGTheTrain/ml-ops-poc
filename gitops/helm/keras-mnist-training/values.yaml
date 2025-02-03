@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: mopocacrsbxsa001.azurecr.io/keras-mnist-training
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   tag: "0.1.0"
 
 imagePullSecrets:
