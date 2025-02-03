@@ -29,6 +29,8 @@ command:
       export MODEL_FILE='/tmp/mnist_model.h5'
       export MODE='train'
       export BLOB_NAME="mnist_model-$(date +'%Y%m%d%H%M%S').h5"
+      echo $BLOB_NAME
+      ls
       python /app/model_operations_env.py
       export MODE='upload-model'
       python /app/model_operations_env.py
