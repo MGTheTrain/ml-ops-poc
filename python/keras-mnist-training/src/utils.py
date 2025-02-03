@@ -24,18 +24,18 @@ class AzureBlobConnector:
         
         print(f"Model uploaded to Azure Blob Storage: {container_name}/{blob_name}")
 
-    def download(self, container_name: str, blob_name: str, download_file_path: str) -> None:
+    def download(self, container_name: str, blob_name: str, model_file: str) -> None:
         """
         Download a binary large obect from Azure Blob Storage.
 
         :param container_name: The name of the Azure container.
         :param blob_name: The name of the blob to download.
-        :param download_file_path: The local file path to save the downloaded model.
+        :param model_file: The local file path to save the downloaded model.
         """
         blob_client = self.blob_service_client.get_blob_client(container=container_name, blob=blob_name)
 
-        with open(download_file_path, "wb") as download_file:
+        with open(model_file, "wb") as download_file:
             download_file.write(blob_client.download_blob().readall())
 
-        print(f"Model downloaded from Azure Blob Storage: {container_name}/{blob_name} to {download_file_path}")
+        print(f"Model downloaded from Azure Blob Storage: {container_name}/{blob_name} to {model_file}")
 

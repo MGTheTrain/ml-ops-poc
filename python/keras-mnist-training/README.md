@@ -32,13 +32,67 @@ project_root/
 Run:
 
 ```sh
- python main.py --mode train
- ```
+python cli.py --mode train --model_file <model file path, e.g. models/mnist_model.h5>
+```
 
- #### Model inference
+or use env vars and run on Unix:
+
+```sh
+export MODE="train"
+export MODEL_FILE="models/mnist_model.h5"
+python model_operations_env.py
+```
+
+#### Model inference
 
 Run:
 
- ```sh
- python main.py --mode inference
- ```
+```sh
+python cli.py --mode inference --model_file <model file path, e.g. models/mnist_model.h5>
+```
+
+or use env vars and run on Unix:
+
+```sh
+export MODE="inference"
+export MODEL_FILE="models/mnist_model.h5"
+python model_operations_env.py
+```
+
+#### Upload model to Azure Storage Account
+
+Run:
+
+```sh
+python cli.py --mode upload-model --model_file <model file path, e.g. models/mnist_model.h5> --connection_string <your connection_string> --container_name <your container_name> --blob_name <your blob_name>
+```
+
+or use env vars and run on Unix:
+
+```sh
+export MODE="upload-model"
+export MODEL_FILE="models/mnist_model.h5"
+export AZURE_CONNECTION_STRING="<your AZURE_CONNECTION_STRING>"
+export AZURE_CONTAINER_NAME="<your AZURE_CONTAINER_NAME>"
+export AZURE_BLOB_NAME="<your AZURE_BLOB_NAME>"
+python model_operations_env.py
+```
+
+#### Download model from Azure Storage Account
+
+Run:
+
+```sh
+python cli.py --mode download-model --model_file <model file path, e.g. models/mnist_model.h5> --connection_string <your connection_string> --container_name <your container_name> --blob_name <your blob_name>
+```
+
+or use env vars and run on Unix:
+
+```sh
+export MODE="download-model"
+export MODEL_FILE="models/mnist_model.h5"
+export AZURE_CONNECTION_STRING="<your AZURE_CONNECTION_STRING>"
+export AZURE_CONTAINER_NAME="<your AZURE_CONTAINER_NAME>"
+export AZURE_BLOB_NAME="<your AZURE_BLOB_NAME>"
+python model_operations_env.py
+```
