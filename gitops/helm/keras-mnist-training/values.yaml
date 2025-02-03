@@ -32,5 +32,9 @@ command:
       python /app/model_operations_env.py
       export MODE='upload-model'
       export BLOB_NAME="mnist_model-$(date +'%Y%m%d%H%M%S').h5"
-      echo $BLOB_NAME
+      
+      echo "Generated BLOB_NAME: $BLOB_NAME"
+      echo "Azure Storage Connection String (masked): $AZ_SA_CONNECTION_STRING"
+      echo "Azure Storage Container Name: $AZ_SA_CONTAINER_NAME"
+      
       python /app/model_operations_env.py
