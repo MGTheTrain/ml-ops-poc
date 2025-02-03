@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Updated
+
+- Considered cli tool for local development and tool expecting env variables for GitOps purposes in [keras-mnist-training](./python/keras-mnist-training/) as entrypoints. Ensured uniquely named trained model (based on date) is uploadable to a Storage Account container trough mentioned tools
+- Added Opaque type secret to store Storage Account credentials in Kubernetes secrets passed as environment variables to the TFJob running the tool expecting env variables for GitOps purposes in [keras-mnist-training](./python/keras-mnist-training/). Modified CD workflow deploying k8s resources for internal apps (secrets, ingress) accordingly
+
 ## [0.3.0] - 31-01-2025
 
 ### Added
