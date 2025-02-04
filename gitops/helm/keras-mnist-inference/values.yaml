@@ -1,0 +1,12 @@
+# Default values for keras-mnist-inference.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+serviceAccount:
+  name: "sa"
+
+modelPullSecret: "azcreds"
+
+inferenceService:
+  name: "keras-mnist-inference"
+  storageUri: "https://mopoctbsbxsa001.blob.core.windows.net/mopoctbsbxsac001/mnist_model-20250204203854.h5"
