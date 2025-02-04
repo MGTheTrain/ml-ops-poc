@@ -16,6 +16,7 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 - [MLOps Workflow: Recognizing Digits with Kubeflow](https://github.com/flopach/digits-recognizer-kubeflow/tree/master)
 - [Deploy kubeflow into an AKS cluster using default settings](https://azure.github.io/kubeflow-aks/main/docs/deployment-options/vanilla-installation/) 
 - [kubeflow - Minimum system requirements](https://deploy-preview-1319--competent-brattain-de2d6d.netlify.app/docs/started/k8s/overview/#minimum-system-requirements)
+- [CoreDNS nslookup issues](https://jbn1233.medium.com/kubernetes-kube-dns-fix-nslookup-error-got-recursion-not-available-from-ff9ee86d1823)
 
 ## Features
 
@@ -167,6 +168,30 @@ Training job logs resemble:
 Training job status resemble:
 ![training-operator-keras-mnist-training-tf-job-status](./images/training-operator-keras-mnist-training-tf-job-status.jpg)
 
+#### CoreDNS nslookup error
+
+If the following error occurs in custom training jobs with apps that use components to communicate with external systems for uploading blobs, such as the [mnist keras training app](./python/keras-mnist-training/), refer to the details below:
+
+```sh
+;; Got recursion not available from 10.0.0.10
+;; Got recursion not available from 10.0.0.10
+;; Got recursion not available from 10.0.0.10
+;; Got recursion not available from 10.0.0.10
+Server:         10.0.0.10
+Address:        10.0.0.10#53
+
+** server can't find mopoctbsbxsac001.blob.core.windows.net: NXDOMAIN
+```
+
+the CoreDNS ConfigMap needs to be edited to enable recursion trough `kubectl edit cm coredns -n kube-system` and adding following entry
+
+```sh
+header {
+  response set ra
+}
+```
+
+Additionally, you may want to check the CoreDNS ConfigMap in the AKS Web UI. You can also refer to this link for further guidance: https://jbn1233.medium.com/kubernetes-kube-dns-fix-nslookup-error-got-recursion-not-available-from-ff9ee86d1823. You can optionally review the outbound ports in the network security group associated with your VNet and consider adding a rule to allow outbound traffic on port 443.
 
 ### mlflow
 
