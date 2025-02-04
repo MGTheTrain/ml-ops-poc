@@ -6,18 +6,18 @@ replicaCount: 1
 
 image:
   repository: mopocacrsbxsa001.azurecr.io/keras-mnist-training
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   tag: "0.1.0"
 
 imagePullSecrets:
   - name: "acr-secret"
 
 env:
-  - name: AZURE_CONNECTION_STRING
+  - name: AZ_SA_CONNECTION_STRING
     secretKeyRef:
       secretName: "storage-account-secret"
       key: "connection_string"
-  - name: AZURE_CONTAINER_NAME
+  - name: AZ_SA_CONTAINER_NAME
     secretKeyRef:
       secretName: "storage-account-secret"
       key: "container_name"
@@ -26,9 +26,23 @@ command:
   - "sh"
   - "-c"
   - |
-      export MODEL_FILE='/tmp/mnist_model.h5'
-      export MODE='train'
-      export BLOB_NAME="mnist_model-$(date +'%Y%m%d%H%M%S').h5"
+      # train
+      export MODEL_FILE="/tmp/mnist_model.h5"
+      export MODE="train"
+      
+      ls
+      
       python /app/model_operations_env.py
-      export MODE='upload-model'
+
+      # upload model
+      export MODE="upload-model"
+      export BLOB_NAME="mnist_model-$(date +'%Y%m%d%H%M%S').h5"
+
+      ls $MODEL_FILE
+      echo "Generated blob name: $BLOB_NAME"
+      echo "Azure Storage Connection string: $AZ_SA_CONNECTION_STRING"
+      echo "Azure Storage Container name: $AZ_SA_CONTAINER_NAME"
+
+      nslookup "$AZ_SA_CONTAINER_NAME.blob.core.windows.net"
+      
       python /app/model_operations_env.py
