@@ -19,6 +19,8 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 - [kubeflow - Minimum system requirements](https://deploy-preview-1319--competent-brattain-de2d6d.netlify.app/docs/started/k8s/overview/#minimum-system-requirements)
 - [CoreDNS nslookup issues](https://jbn1233.medium.com/kubernetes-kube-dns-fix-nslookup-error-got-recursion-not-available-from-ff9ee86d1823)
 - [Deploy InferenceService with saved model on Azure](https://kserve.github.io/website/0.7/modelserving/storage/azure/azure/)
+- [Kubeflow components and external add-ons. Note that KServe is an external add-on and needs to be installed](https://www.kubeflow.org/docs/)
+- [Install KServe](https://kserve.github.io/website/0.7/admin/kubernetes_deployment/#3-install-kserve)
 
 ## Features
 
@@ -37,13 +39,6 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 - [x] CI pipeline containerizing and pushing Python TensorFlow or PyTorch applications for training to a deployed ACR
 - [x] Helm charts with K8s manifests for containerized Python TensorFlow/PyTorch ML jobs using the [Training Operator for CRDs](https://github.com/kubeflow/training-operator) and GitOps via ArgoCD
 - [x] Installation of the [Training Operator for CRDs](https://github.com/kubeflow/training-operator) and applying sample [TFJob and PyTorchJob](https://www.kubeflow.org/docs/components/training/overview/) k8s manifest
-
-**NOTE:** [Steps 4 to 7 in the digits-recognizer-kubeflow GH repository](https://github.com/flopach/digits-recognizer-kubeflow) are not showcased here. These sections focus on saving the ML model in MinIO once the model is successfully built and trained. Furthermore, the trained model is served through KServe's inference HTTP service. The relevant files are:
-
-- [The digits_recognizer_notebook.ipynb for model development and training, which also covers uploading the trained model to MiniO](https://github.com/flopach/digits-recognizer-kubeflow/blob/master/digits_recognizer_notebook.ipynb)
-- [create_kserve_inference.yaml for spinning up the KServe inference HTTP service](https://github.com/flopach/digits-recognizer-kubeflow/blob/master/kubeflow_configs/create_kserve_inference.yaml)
-- [kserve_python_test.ipynb for testing the Inference KServe HTTP service](https://github.com/flopach/digits-recognizer-kubeflow/blob/master/kserve_python_test.ipynb)
-- [digits_recognizer_pipeline.ipynb to setup the ML pipeline](https://github.com/flopach/digits-recognizer-kubeflow/blob/master/digits_recognizer_pipeline.ipynb)
 
 ## Getting started
 
@@ -173,6 +168,60 @@ The training job considers the upload of the trained model to an Azure Storage A
 
 Training job status resemble:
 ![Training Operator Keras MNIST Training tf job status](./images/training-operator-keras-mnist-training-tf-job-status.jpg)
+
+#### KServe InferenceService
+
+Refer to the [following link for guidance](https://kserve.github.io/website/0.7/modelserving/storage/azure/azure/#deploy-the-model-on-azure-with-inferenceservice).
+
+Set up an authorized Azure Service Principal: 
+
+```sh
+az ad sp create-for-rbac --name model-store-sp --role "Storage Blob Data Owner" --scopes /subscriptions/<your subscription id>/resourceGroups/<your resource group name>/providers/Microsoft.Storage/storageAccounts/<your storage account name>
+```
+
+Edit the secrets `stringData` values file:
+
+```sh
+kubectl apply -n internal-apps -f - <<EOF
+apiVersion: v1
+kind: Secret
+metadata:
+  name: azcreds
+type: Opaque
+stringData:
+  AZ_CLIENT_ID: <your AZ_CLIENT_ID>
+  AZ_CLIENT_SECRET: <your AZ_CLIENT_SECRET>
+  AZ_SUBSCRIPTION_ID: <your AZ_SUBSCRIPTION_ID>
+  AZ_TENANT_ID: <your AZ_TENANT_ID>
+EOF
+```
+
+Register and synchronize the ArgoCD application:
+
+```sh
+# Port forward in terminal process A
+kubectl port-forward -n external-services <argocd-server-pod> 8080:8080
+
+# In terminal process B - Login
+argocd login localhost:8080
+# Prompted to provide username and password
+
+# e.g. for keras-mnist-inference chart
+argocd app create keras-mnist-inference \
+  --repo https://github.com/MGTheTrain/ml-ops-poc.git \
+  --path gitops/argocd/keras-mnist-inference \ 
+  --dest-server https://kubernetes.default.svc \
+  --dest-namespace internal-apps \
+  --revision main \
+  --server localhost:8080
+
+# In terminal process B - Sync Application
+argocd app sync keras-mnist-inference
+```
+
+Results should resemble:
+
+<!-- TODO images -->
 
 ### mlflow
 
