@@ -191,7 +191,7 @@ header {
 }
 ```
 
-Additionally, you may want to check the CoreDNS ConfigMap in the AKS Web UI. You can also refer to this link for further guidance: https://jbn1233.medium.com/kubernetes-kube-dns-fix-nslookup-error-got-recursion-not-available-from-ff9ee86d1823. You can optionally review the outbound ports in the network security group associated with your VNet and consider adding a rule to allow outbound traffic on port 443.
+You might also want to review the CoreDNS ConfigMap in the deployed AKS view within the Azure Portal Web UI. You can also refer to this link for further guidance: https://jbn1233.medium.com/kubernetes-kube-dns-fix-nslookup-error-got-recursion-not-available-from-ff9ee86d1823. You can optionally review the outbound ports in the network security group associated with your VNet and consider adding a rule to allow outbound traffic on port 443.
 
 ### mlflow
 
