@@ -159,15 +159,19 @@ argocd app get keras-mnist-training
 
 The ArgoCD applications that have been registered and synchronized should resemble the following:
 
-![argocd-applications.jpg](./images/argocd-applications.jpg)
+![ArgoCD applications](./images/argocd-applications.jpg)
 
-![mnist-keras-training-argocd-app.jpg](./images/mnist-keras-training-argocd-app.jpg)
+![MNIST keras training argocd app](./images/mnist-keras-training-argocd-app.jpg)
 
 Training job logs resemble:
-![training-operator-keras-mnist-training-tf-job-logs](./images/training-operator-keras-mnist-training-tf-job-logs.jpg)
+![Training Operator Keras MNIST Training tf job logs](./images/training-operator-keras-mnist-training-tf-job-logs.jpg)
+![Training Operator Keras MNIST Training tf job logs pt 2](./images/training-operator-keras-mnist-training-tf-job-logs-pt-2.jpg)
+
+The training job considers the upload of the trained model to an Azure Storage Account Container as the final step:
+![Training Operator Keras MNIST Training tf job uploaded model in Azure Storage Account](./images/training-operator-keras-mnist-training-tf-job-uploaded-model-in-azure-storage-account.jpg)
 
 Training job status resemble:
-![training-operator-keras-mnist-training-tf-job-status](./images/training-operator-keras-mnist-training-tf-job-status.jpg)
+![Training Operator Keras MNIST Training tf job status](./images/training-operator-keras-mnist-training-tf-job-status.jpg)
 
 ### mlflow
 
