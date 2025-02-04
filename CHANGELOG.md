@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 04-02-2025
+
 ### Updated
 
 - Considered cli tool for local development and tool expecting env variables for GitOps purposes in [keras-mnist-training](./python/keras-mnist-training/) as entrypoints. Ensured uniquely named trained model (based on date) is uploadable to a Storage Account container trough mentioned tools
