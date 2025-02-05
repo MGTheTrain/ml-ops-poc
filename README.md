@@ -15,7 +15,6 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 
 - [Deploy kubeflow into an AKS cluster using default settings](https://azure.github.io/kubeflow-aks/main/docs/deployment-options/vanilla-installation/) 
 - [kubeflow - Minimum system requirements](https://deploy-preview-1319--competent-brattain-de2d6d.netlify.app/docs/started/k8s/overview/#minimum-system-requirements)
-- [CoreDNS nslookup issues](https://jbn1233.medium.com/kubernetes-kube-dns-fix-nslookup-error-got-recursion-not-available-from-ff9ee86d1823)
 - [Deploy InferenceService with saved model on Azure](https://kserve.github.io/website/0.7/modelserving/storage/azure/azure/)
 - [Kubeflow components and external add-ons. Note that KServe is an external add-on and needs to be installed](https://www.kubeflow.org/docs/)
 - [Install KServe](https://kserve.github.io/website/0.7/admin/kubernetes_deployment/#3-install-kserve). **NOTE:** [KServe v0.7.0 leads to errors. v0.9.0 works](./KNWON_ISSUES.md)
