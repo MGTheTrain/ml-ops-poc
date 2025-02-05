@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Added Keras MNIST inference app helm chart and argocd application
 - Installed KServe
+- Permitted to change the `AKS_VM_SIZE`, `RESOURCE_INSTANCE_NUMBER`, and `LOCATION` inputs in CD workflows 
 
 ## [0.4.0] - 04-02-2025
 
