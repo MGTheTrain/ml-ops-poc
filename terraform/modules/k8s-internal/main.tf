@@ -58,7 +58,7 @@ resource "kubernetes_ingress_v1" "nginx_controller_ingress" {
         path {
           backend {
             service {
-              name = "langchain-sample-service"
+              name = "inference-service"
               port {
                 number = 80
               }
