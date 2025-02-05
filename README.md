@@ -220,9 +220,9 @@ argocd app create keras-mnist-inference \
 argocd app sync keras-mnist-inference
 ```
 
-Results should resemble:
+Due to AKS node resource constraints experiments related to InferenceServices trough KServe have been aborted:
 
-<!-- TODO images -->
+![aborted due to resurce constraints](./images/aborted-due-to-resurce-constraints.jpg)
 
 ### mlflow
 
