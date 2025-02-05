@@ -5,5 +5,5 @@ metadata:
 spec:
   predictor:
     serviceAccountName: {{ .Values.serviceAccount.name }}
-    sklearn:
+    tensorflow:
       storageUri: {{ .Values.inferenceService.storageUri }}
