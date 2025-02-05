@@ -3,6 +3,7 @@ FROM python:3.9-slim
 WORKDIR /app
 
 COPY cli.py /app/
+COPY inference_service.py /app/
 COPY model_operations_env.py /app/
 COPY src /app/src
 COPY requirements.txt /app/
