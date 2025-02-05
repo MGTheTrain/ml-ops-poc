@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0] - 05-02-2025
+
 ### Updated
 
 - Added Keras MNIST inference app helm chart and argocd application
