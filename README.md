@@ -20,7 +20,7 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 - [CoreDNS nslookup issues](https://jbn1233.medium.com/kubernetes-kube-dns-fix-nslookup-error-got-recursion-not-available-from-ff9ee86d1823)
 - [Deploy InferenceService with saved model on Azure](https://kserve.github.io/website/0.7/modelserving/storage/azure/azure/)
 - [Kubeflow components and external add-ons. Note that KServe is an external add-on and needs to be installed](https://www.kubeflow.org/docs/)
-- [Install KServe](https://kserve.github.io/website/0.7/admin/kubernetes_deployment/#3-install-kserve)
+- [Install KServe](https://kserve.github.io/website/0.7/admin/kubernetes_deployment/#3-install-kserve). **NOTE:** [KServe v0.7.0 leads to errors. v0.9.0 works](./KNWON_ISSUES.md)
 
 ## Features
 

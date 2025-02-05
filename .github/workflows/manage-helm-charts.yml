@@ -81,8 +81,8 @@ jobs:
           # Install Kubeflow Training Operator
           kubectl apply -k "github.com/kubeflow/training-operator/manifests/overlays/standalone?ref=v1.7.0"
 
-          # Install KServe serverless mode: https://kserve.github.io/website/0.7/admin/kubernetes_deployment/#3-install-kserve 
-          kubectl apply -f "https://github.com/kserve/kserve/releases/download/v0.7.0/kserve.yaml"
+          # Install KServe serverless mode
+          kubectl apply -f "https://github.com/kserve/kserve/releases/download/v0.9.0/kserve.yaml"
 
       - name: Terraform Init # requires a Storage Account backend deployed trough storage-account-backend-deploy workflow step
         run: |

@@ -34,3 +34,47 @@ You can optionally review the outbound ports in the network security group assoc
 
 ![NSG Outbound ports rule](./images/nsg-outbound-ports-rule.jpg)
 ![NSG Outbound ports rule results](./images/nsg-outbound-ports-rule-results.jpg)
+
+## KServe v0.7.0 installation error
+
+When running `kubectl apply -f https://github.com/kserve/kserve/releases/download/v0.7.0/kserve.yaml -n kserve` following error logs appears:
+
+```sh
+...
+resource mapping not found for name: "serving-cert" namespace: "kserve" from "https://github.com/kserve/kserve/releases/download/v0.7.0/kserve.yaml": no matches for kind "Certificate" in version "cert-manager.io/v1alpha2"
+ensure CRDs are installed first
+resource mapping not found for name: "selfsigned-issuer" namespace: "kserve" from "https://github.com/kserve/kserve/releases/download/v0.7.0/kserve.yaml": no matches for kind "Issuer" in version "cert-manager.io/v1alpha2"
+ensure CRDs are installed first
+```
+
+It works with v0.9.0 using the command `kubectl apply -f "https://github.com/kserve/kserve/releases/download/v0.9.0/kserve.yaml"`:
+
+```sh
+namespace/kserve unchanged
+customresourcedefinition.apiextensions.k8s.io/clusterservingruntimes.serving.kserve.io configured
+customresourcedefinition.apiextensions.k8s.io/inferencegraphs.serving.kserve.io configured
+customresourcedefinition.apiextensions.k8s.io/inferenceservices.serving.kserve.io configured
+customresourcedefinition.apiextensions.k8s.io/servingruntimes.serving.kserve.io configured
+customresourcedefinition.apiextensions.k8s.io/trainedmodels.serving.kserve.io configured
+serviceaccount/kserve-controller-manager created
+role.rbac.authorization.k8s.io/kserve-leader-election-role created
+clusterrole.rbac.authorization.k8s.io/kserve-manager-role configured
+clusterrole.rbac.authorization.k8s.io/kserve-proxy-role unchanged
+rolebinding.rbac.authorization.k8s.io/kserve-leader-election-rolebinding created
+clusterrolebinding.rbac.authorization.k8s.io/kserve-manager-rolebinding configured
+clusterrolebinding.rbac.authorization.k8s.io/kserve-proxy-rolebinding configured
+configmap/inferenceservice-config configured
+configmap/kserve-config unchanged
+secret/kserve-webhook-server-secret unchanged
+service/kserve-controller-manager-metrics-service unchanged
+service/kserve-controller-manager-service configured
+service/kserve-webhook-server-service unchanged
+deployment.apps/kserve-controller-manager created
+statefulset.apps/kserve-controller-manager configured
+certificate.cert-manager.io/serving-cert created
+issuer.cert-manager.io/selfsigned-issuer created
+mutatingwebhookconfiguration.admissionregistration.k8s.io/inferenceservice.serving.kserve.io configured
+validatingwebhookconfiguration.admissionregistration.k8s.io/inferencegraph.serving.kserve.io configured
+validatingwebhookconfiguration.admissionregistration.k8s.io/inferenceservice.serving.kserve.io configured
+validatingwebhookconfiguration.admissionregistration.k8s.io/trainedmodel.serving.kserve.io configured
+```
