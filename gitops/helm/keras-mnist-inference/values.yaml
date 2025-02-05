@@ -9,6 +9,6 @@ modelPullSecret: "azcreds"
 
 inferenceService:
   modelFormat:
-    name: "tensorflow"
+    name: "tensorflow" # The inference service using tensorflow model format will utilize tensorflow/serving docker image
   name: "keras-mnist-inference"
   storageUri: "https://mopoctbsbxsa001.blob.core.windows.net/mopoctbsbxsac001/mnist_model-20250205192848.h5"

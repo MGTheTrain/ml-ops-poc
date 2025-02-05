@@ -1,4 +1,5 @@
 # Refer to https://github.com/terrytangyuan/distributed-ml-patterns/blob/main/code/project/code/inference-service.yaml
+# The inference service using tensorflow model format will utilize tensorflow/serving docker image
 apiVersion: "serving.kserve.io/v1beta1"
 kind: "InferenceService"
 metadata:
