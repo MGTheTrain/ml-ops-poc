@@ -16,6 +16,9 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 - [Deploy kubeflow into an AKS cluster using default settings](https://azure.github.io/kubeflow-aks/main/docs/deployment-options/vanilla-installation/) 
 - [kubeflow - Minimum system requirements](https://deploy-preview-1319--competent-brattain-de2d6d.netlify.app/docs/started/k8s/overview/#minimum-system-requirements)
 - [CoreDNS nslookup issues](https://jbn1233.medium.com/kubernetes-kube-dns-fix-nslookup-error-got-recursion-not-available-from-ff9ee86d1823)
+- [Deploy InferenceService with saved model on Azure](https://kserve.github.io/website/0.7/modelserving/storage/azure/azure/)
+- [Kubeflow components and external add-ons. Note that KServe is an external add-on and needs to be installed](https://www.kubeflow.org/docs/)
+- [Install KServe](https://kserve.github.io/website/0.7/admin/kubernetes_deployment/#3-install-kserve). **NOTE:** [KServe v0.7.0 leads to errors. v0.9.0 works](./KNWON_ISSUES.md)
 
 ## Features
 
@@ -122,12 +125,14 @@ kubectl create -f https://raw.githubusercontent.com/kubeflow/training-operator/m
 
 ![training operator simple tf job](./images/training-operator-simple-tf-job.jpg)
 
-You can also register and sync ArgoCD applications referencing Helm charts to enable GitOps. For more details check out `https://github.com/MGTheTrain/gitops-poc`.
+You can also register and sync ArgoCD applications referencing Helm charts to enable GitOps. For more details check out the [gitops-poc repository](https://github.com/MGTheTrain/gitops-poc).
 Essential commands for the [Keras MNIST training example](./python/keras-mnist-training/) are:
 
 ```sh
 # Port forward in terminal process A
-kubectl port-forward -n external-services <argocd-server-pod> 8080:8080
+kubectl port-forward -n external-services svc/argocd-server 8080:443
+
+# The default username is admin. The default password can be obtained trough: kubectl -n argocd get secret argocd-initial-admin-secret -n external-services -o jsonpath="{.data.password}" | base64 -d
 
 # In terminal process B - Login
 argocd login localhost:8080
@@ -150,40 +155,75 @@ argocd app get keras-mnist-training
 
 The ArgoCD applications that have been registered and synchronized should resemble the following:
 
-![argocd-applications.jpg](./images/argocd-applications.jpg)
+![ArgoCD applications](./images/argocd-applications.jpg)
 
-![mnist-keras-training-argocd-app.jpg](./images/mnist-keras-training-argocd-app.jpg)
+![MNIST keras training argocd app](./images/mnist-keras-training-argocd-app.jpg)
 
 Training job logs resemble:
-![training-operator-keras-mnist-training-tf-job-logs](./images/training-operator-keras-mnist-training-tf-job-logs.jpg)
+![Training Operator Keras MNIST Training tf job logs](./images/training-operator-keras-mnist-training-tf-job-logs.jpg)
+![Training Operator Keras MNIST Training tf job logs pt 2](./images/training-operator-keras-mnist-training-tf-job-logs-pt-2.jpg)
+
+The training job considers the upload of the trained model to an Azure Storage Account Container as the final step:
+![Training Operator Keras MNIST Training tf job uploaded model in Azure Storage Account](./images/training-operator-keras-mnist-training-tf-job-uploaded-model-in-azure-storage-account.jpg)
 
 Training job status resemble:
-![training-operator-keras-mnist-training-tf-job-status](./images/training-operator-keras-mnist-training-tf-job-status.jpg)
+![Training Operator Keras MNIST Training tf job status](./images/training-operator-keras-mnist-training-tf-job-status.jpg)
 
-#### CoreDNS nslookup error
+#### KServe InferenceService
 
-If the following error occurs in custom training jobs with apps that use components to communicate with external systems for uploading blobs, such as the [mnist keras training app](./python/keras-mnist-training/), refer to the details below:
+Refer to the [following link for guidance](https://kserve.github.io/website/0.7/modelserving/storage/azure/azure/#deploy-the-model-on-azure-with-inferenceservice).
 
-```sh
-;; Got recursion not available from 10.0.0.10
-;; Got recursion not available from 10.0.0.10
-;; Got recursion not available from 10.0.0.10
-;; Got recursion not available from 10.0.0.10
-Server:         10.0.0.10
-Address:        10.0.0.10#53
-
-** server can't find mopoctbsbxsac001.blob.core.windows.net: NXDOMAIN
-```
-
-the CoreDNS ConfigMap needs to be edited to enable recursion trough `kubectl edit cm coredns -n kube-system` and adding following entry
+Set up an authorized Azure Service Principal: 
 
 ```sh
-header {
-  response set ra
-}
+az ad sp create-for-rbac --name model-store-sp --role "Storage Blob Data Owner" --scopes /subscriptions/<your subscription id>/resourceGroups/<your resource group name>/providers/Microsoft.Storage/storageAccounts/<your storage account name>
 ```
 
-Additionally, you may want to check the CoreDNS ConfigMap in the AKS Web UI. You can also refer to this link for further guidance: https://jbn1233.medium.com/kubernetes-kube-dns-fix-nslookup-error-got-recursion-not-available-from-ff9ee86d1823. You can optionally review the outbound ports in the network security group associated with your VNet and consider adding a rule to allow outbound traffic on port 443.
+Edit the secrets `stringData` values file:
+
+```sh
+kubectl apply -n internal-apps -f - <<EOF
+apiVersion: v1
+kind: Secret
+metadata:
+  name: azcreds
+type: Opaque
+stringData:
+  AZ_CLIENT_ID: <your AZ_CLIENT_ID>
+  AZ_CLIENT_SECRET: <your AZ_CLIENT_SECRET>
+  AZ_SUBSCRIPTION_ID: <your AZ_SUBSCRIPTION_ID>
+  AZ_TENANT_ID: <your AZ_TENANT_ID>
+EOF
+```
+
+Register and synchronize the ArgoCD application:
+
+```sh
+# Port forward in terminal process A
+kubectl port-forward -n external-services svc/argocd-server 8080:443
+
+# In terminal process B - Login
+argocd login localhost:8080
+# Prompted to provide username and password
+
+# e.g. for keras-mnist-inference chart
+argocd app create keras-mnist-inference \
+  --repo https://github.com/MGTheTrain/ml-ops-poc.git \
+  --path gitops/argocd/keras-mnist-inference \ 
+  --dest-server https://kubernetes.default.svc \
+  --dest-namespace internal-apps \
+  --revision main \
+  --server localhost:8080
+
+# In terminal process B - Sync Application
+argocd app sync keras-mnist-inference
+```
+
+Due to AKS node resource constraints experiments related to InferenceServices trough KServe have been aborted:
+
+![aborted due to resource constraints](./images/aborted-due-to-resource-constraints.jpg)
+
+![aborted due to vm size constraints](./images/aborted-due-to-vm-size-constraints.jpg)
 
 ### mlflow
 

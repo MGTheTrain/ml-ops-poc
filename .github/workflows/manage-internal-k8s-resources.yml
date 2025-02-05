@@ -28,6 +28,9 @@ on:
       AZ_SA_CONTAINER_NAME:
         description: 'Azure Storage Account container name'
         type: string
+      RESOURCE_INSTANCE_NUMBER:
+        default: '001'
+        description: '3-digit number considered when naming resources'
 
 jobs:
   deploy-k8s-resources:
@@ -54,7 +57,7 @@ jobs:
           -backend-config="storage_account_name=mopoctbsbxsa001" \
           -backend-config="resource_group_name=mopoctb-sbx-rg001" \
           -backend-config="container_name=mopoctbsbxsac001" \
-          -backend-config="key=${{ inputs.ENVIRONMENT }}/cloud-infra/terraform.tfstate"
+          -backend-config="key=${{ inputs.ENVIRONMENT }}/cloud-infra/${{ inputs.RESOURCE_INSTANCE_NUMBER }}/terraform.tfstate"
 
             terraform output aks_kube_config_list | awk '/^  apiVersion:/,/^  EOT,$/' | sed 's/^  //' > ./config
             mkdir -vp ~/.kube
@@ -108,7 +111,7 @@ jobs:
           -backend-config="storage_account_name=mopoctbsbxsa001" \
           -backend-config="resource_group_name=mopoctb-sbx-rg001" \
           -backend-config="container_name=mopoctbsbxsac001" \
-          -backend-config="key=${{ inputs.ENVIRONMENT }}/cloud-infra/terraform.tfstate"
+          -backend-config="key=${{ inputs.ENVIRONMENT }}/cloud-infra/${{ inputs.RESOURCE_INSTANCE_NUMBER }}/terraform.tfstate"
 
           terraform output aks_kube_config_list | awk '/^  apiVersion:/,/^  EOT,$/' | sed 's/^  //' > ./config
           mkdir -vp ~/.kube

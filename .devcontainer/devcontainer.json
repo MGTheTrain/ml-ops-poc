@@ -6,7 +6,8 @@
     // Features to add to the dev container. More info: https://containers.dev/features
     "features": {
         "ghcr.io/devcontainers/features/terraform:1": {},
-        "ghcr.io/dhoeric/features/terraform-docs:1": {}
+        "ghcr.io/dhoeric/features/terraform-docs:1": {},
+        "ghcr.io/devcontainers/features/azure-cli:1": {}
     },
     "postCreateCommand": "bash .devcontainer/scripts/install-dependencies.sh",
     "remoteUser": "root"

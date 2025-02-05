@@ -1,0 +1,19 @@
+# Refer to https://github.com/terrytangyuan/distributed-ml-patterns/blob/main/code/project/code/inference-service.yaml
+apiVersion: "serving.kserve.io/v1beta1"
+kind: "InferenceService"
+metadata:
+  name: {{ .Values.inferenceService.name }}
+spec:
+  predictor:
+    resources:
+      requests:
+        cpu: "500m"  
+        memory: "1Gi"
+      limits:
+        cpu: "1"      
+        memory: "2Gi"
+    model:
+      modelFormat:
+        name: {{ .Values.inferenceService.modelFormat.name }}
+      storageUri: {{ .Values.inferenceService.storageUri }}
+      serviceAccountName: {{ .Values.serviceAccount.name }}

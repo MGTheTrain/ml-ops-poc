@@ -18,6 +18,9 @@ on:
         options: [ 'sbx' ]
         default: sbx
         description: 'Environment on which to deploy. Dev, qas, staging, prod environments not considered'
+      RESOURCE_INSTANCE_NUMBER:
+        default: '001'
+        description: '3-digit number considered when naming resources'
 
 jobs:
   install-helm-charts:
@@ -44,7 +47,7 @@ jobs:
           -backend-config="storage_account_name=mopoctbsbxsa001" \
           -backend-config="resource_group_name=mopoctb-sbx-rg001" \
           -backend-config="container_name=mopoctbsbxsac001" \
-          -backend-config="key=${{ inputs.ENVIRONMENT }}/cloud-infra/terraform.tfstate"
+          -backend-config="key=${{ inputs.ENVIRONMENT }}/cloud-infra/${{ inputs.RESOURCE_INSTANCE_NUMBER }}/terraform.tfstate"
 
           terraform output aks_kube_config_list | awk '/^  apiVersion:/,/^  EOT,$/' | sed 's/^  //' > ./config
           mkdir -vp ~/.kube
@@ -81,6 +84,11 @@ jobs:
           # Install Kubeflow Training Operator
           kubectl apply -k "github.com/kubeflow/training-operator/manifests/overlays/standalone?ref=v1.7.0"
 
+          # Install KServe serverless mode
+          kubectl apply -f "https://github.com/kserve/kserve/releases/download/v0.9.0/kserve.yaml"
+
+           kubectl get pods -n kserve
+           kubectl get pods -n kubeflow | grep kserve
       - name: Terraform Init # requires a Storage Account backend deployed trough storage-account-backend-deploy workflow step
         run: |
           terraform init \
@@ -123,7 +131,7 @@ jobs:
           -backend-config="storage_account_name=mopoctbsbxsa001" \
           -backend-config="resource_group_name=mopoctb-sbx-rg001" \
           -backend-config="container_name=mopoctbsbxsac001" \
-          -backend-config="key=${{ inputs.ENVIRONMENT }}/cloud-infra/terraform.tfstate"
+          -backend-config="key=${{ inputs.ENVIRONMENT }}/cloud-infra/${{ inputs.RESOURCE_INSTANCE_NUMBER }}/terraform.tfstate"
 
           terraform output aks_kube_config_list | awk '/^  apiVersion:/,/^  EOT,$/' | sed 's/^  //' > ./config
           mkdir -vp ~/.kube
