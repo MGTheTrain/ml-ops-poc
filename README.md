@@ -132,7 +132,7 @@ Essential commands for the [Keras MNIST training example](./python/keras-mnist-t
 
 ```sh
 # Port forward in terminal process A
-kubectl port-forward -n external-services <argocd-server-pod> 8080:8080
+kubectl port-forward -n external-services svc/argocd-server 8080:443
 
 # In terminal process B - Login
 argocd login localhost:8080
@@ -200,7 +200,7 @@ Register and synchronize the ArgoCD application:
 
 ```sh
 # Port forward in terminal process A
-kubectl port-forward -n external-services <argocd-server-pod> 8080:8080
+kubectl port-forward -n external-services svc/argocd-server 8080:443
 
 # In terminal process B - Login
 argocd login localhost:8080
