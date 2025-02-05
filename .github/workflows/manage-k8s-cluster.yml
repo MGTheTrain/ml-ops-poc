@@ -13,6 +13,11 @@ on:
         options: [ 'sbx' ]
         default: sbx
         description: 'Environment on which to deploy. Dev, qas, staging, prod environments not considered'
+      AKS_VM_SIZE:
+        type: choice
+        options: [ 'Standard_B8ms', 'Standard_B12ms', 'Standard_B16ms', Standard_B20ms ]
+        default: Standard_B8ms
+        description: 'AKS VM size. Search for Azure Bv1 sizes series VMs in a browser of choice'
 
 jobs:
 
@@ -46,6 +51,8 @@ jobs:
         run: terraform apply --auto-approve
         continue-on-error: false
         working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}/cloud-infra
+        env:
+          TF_VAR_aks_vm_size: ${{ inputs.AKS_VM_SIZE }}
   
   destroy-k8s:
     environment: ${{ inputs.ENVIRONMENT }}
