@@ -1,9 +1,12 @@
+# Refer to https://github.com/terrytangyuan/distributed-ml-patterns/blob/main/code/project/code/inference-service.yaml
 apiVersion: "serving.kserve.io/v1beta1"
 kind: "InferenceService"
 metadata:
   name: {{ .Values.inferenceService.name }}
 spec:
   predictor:
-    serviceAccountName: {{ .Values.serviceAccount.name }}
-    tensorflow:
+    model:
+      modelFormat:
+        name: {{ .Values.inferenceService.modelFormat.name }}
       storageUri: {{ .Values.inferenceService.storageUri }}
+      serviceAccountName: {{ .Values.serviceAccount.name }}
