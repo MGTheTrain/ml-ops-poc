@@ -134,6 +134,8 @@ Essential commands for the [Keras MNIST training example](./python/keras-mnist-t
 # Port forward in terminal process A
 kubectl port-forward -n external-services svc/argocd-server 8080:443
 
+# The default username is admin. The default password can be obtained trough: kubectl -n argocd get secret argocd-initial-admin-secret -n external-services -o jsonpath="{.data.password}" | base64 -d
+
 # In terminal process B - Login
 argocd login localhost:8080
 # Prompted to provide username and password
