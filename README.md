@@ -35,8 +35,10 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 - [x] Dockerizing Python (PyTorch or TensorFlow) applications for ML training and inference
 - [x] CI pipeline deploying an ACR
 - [x] CI pipeline containerizing and pushing Python TensorFlow or PyTorch applications for training to a deployed ACR
-- [x] Helm charts with K8s manifests for containerized Python TensorFlow/PyTorch ML jobs using the [Training Operator for CRDs](https://github.com/kubeflow/training-operator) and GitOps via ArgoCD
+- [x] Helm charts with K8s manifests for containerized Python TensorFlow/PyTorch ML jobs using the [Training Operator for CRDs](https://github.com/kubeflow/training-operator) and GitOps trough ArgoCD
 - [x] Installation of the [Training Operator for CRDs](https://github.com/kubeflow/training-operator) and applying sample [TFJob and PyTorchJob](https://www.kubeflow.org/docs/components/training/overview/) k8s manifest
+- [ ] CI pipeline containerizing and pushing Python TensorFlow inference service to a deployed ACR
+- [ ] Helm charts with K8s manifests for containerized internal Python TensorFlow inference services considering GitOps trough ArgoCD
 
 ## Getting started
 
