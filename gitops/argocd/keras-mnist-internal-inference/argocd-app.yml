@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: keras-mnist-internal-inference-app
+  namespace: external-services # refers to the namespace where the ArgoCD resources itself are created
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/MGTheTrain/ml-ops-poc.git
+    path: ./gitops/helm/keras-mnist-internal-inference/
+    targetRevision: HEAD
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: internal-apps
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
