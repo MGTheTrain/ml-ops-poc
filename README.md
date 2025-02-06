@@ -66,8 +66,6 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 To access the kubeflow dashboard following the installation of kustomize and kubeflow components, execute the following command:
 
 ```sh
-kubectl get pods -A
-kubectl port-forward -n <namespace>  <pod-name> <local-port>:<server-port>
 kubectl port-forward svc/istio-ingressgateway -n istio-system 8080:80
 ```
 
