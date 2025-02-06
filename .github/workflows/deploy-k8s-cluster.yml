@@ -1,13 +1,8 @@
-name: Manage/deploy or destroy an k8s cluster to a cloud provider
+name: Deploy a k8s cluster
 
 on:
   workflow_dispatch:
     inputs:
-      INFRASTRUCTURE_OPERATION:
-        type: choice
-        options: [ 'deploy-k8s-service', 'destroy-k8s-service' ]
-        default: deploy-k8s-service
-        description: 'Infrastructure operation'
       ENVIRONMENT:
         type: choice
         options: [ 'sbx' ]
@@ -15,7 +10,7 @@ on:
         description: 'Environment on which to deploy. Dev, qas, staging, prod environments not considered'
       AKS_VM_SIZE:
         type: choice
-        options: [ 'Standard_B8ms', 'Standard_B12ms', 'Standard_B16ms', Standard_B20ms ]
+        options: [ 'Standard_B8ms', 'Standard_NC4as' ]
         default: Standard_B8ms
         description: 'AKS VM size. Search for Azure Bv1 sizes series VMs in a browser of choice'
       RESOURCE_INSTANCE_NUMBER:
@@ -36,7 +31,6 @@ jobs:
       ARM_TENANT_ID: '${{ secrets.ARM_TENANT_ID }}'
       ARM_CLIENT_ID: '${{ secrets.ARM_CLIENT_ID }}'
       ARM_CLIENT_SECRET: '${{ secrets.ARM_CLIENT_SECRET }}'
-    if: ${{ inputs.INFRASTRUCTURE_OPERATION == 'deploy-k8s-service' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -63,34 +57,3 @@ jobs:
           TF_VAR_aks_vm_size: ${{ inputs.AKS_VM_SIZE }}
           TF_VAR_resource_instance_number: ${{ inputs.RESOURCE_INSTANCE_NUMBER }}
           TF_VAR_location: ${{ inputs.LOCATION }}
-  
-  destroy-k8s:
-    environment: ${{ inputs.ENVIRONMENT }}
-    env:
-      ARM_SUBSCRIPTION_ID: '${{ secrets.ARM_SUBSCRIPTION_ID }}'
-      ARM_TENANT_ID: '${{ secrets.ARM_TENANT_ID }}'
-      ARM_CLIENT_ID: '${{ secrets.ARM_CLIENT_ID }}'
-      ARM_CLIENT_SECRET: '${{ secrets.ARM_CLIENT_SECRET }}'
-    if: ${{ inputs.INFRASTRUCTURE_OPERATION == 'destroy-k8s-service' }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@master
-
-      - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v3  
-
-      - name: Terraform Init # requires a Storage Account backend deployed trough storage-account-backend-deploy workflow step
-        run: |
-          terraform init \
-          -backend-config="subscription_id=${{ env.ARM_SUBSCRIPTION_ID }}" \
-          -backend-config="storage_account_name=mopoctbsbxsa001" \
-          -backend-config="resource_group_name=mopoctb-sbx-rg001" \
-          -backend-config="container_name=mopoctbsbxsac001" \
-          -backend-config="key=${{ inputs.ENVIRONMENT }}/cloud-infra/${{ inputs.RESOURCE_INSTANCE_NUMBER }}/terraform.tfstate"
-        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}/cloud-infra
-
-      - name: Destroy Kubernetes service and related resources
-        run: terraform destroy --auto-approve
-        continue-on-error: false
-        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}/cloud-infra
