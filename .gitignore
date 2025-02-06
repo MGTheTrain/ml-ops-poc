@@ -3,3 +3,4 @@ secrets.cfg
 terraform.tfstate**
 config**
 *.tmp
+launch.json
