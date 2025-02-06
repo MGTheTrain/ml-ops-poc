@@ -37,7 +37,7 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 - [x] CI pipeline containerizing and pushing Python TensorFlow or PyTorch applications for training to a deployed ACR
 - [x] Helm charts with K8s manifests for containerized Python TensorFlow/PyTorch ML jobs using the [Training Operator for CRDs](https://github.com/kubeflow/training-operator) and GitOps via ArgoCD
 - [x] Installation of the [Training Operator for CRDs](https://github.com/kubeflow/training-operator) and applying sample [TFJob and PyTorchJob](https://www.kubeflow.org/docs/components/training/overview/) k8s manifest
-- [x] Enable GPU accelerated ML trainning and inference k8s pods. Add corresponding helm charts
+- [x] Enable GPU accelerated ML trainning and inference k8s pods. Add corresponding helm charts. Checkout [Use GPUs for compute-intensive workloads on Azure Kubernetes Service (AKS)](https://learn.microsoft.com/en-us/azure/aks/gpu-cluster?tabs=add-ubuntu-gpu-node-pool). "For AKS node pools, we recommend a minimum size of `Standard_NC6s_v3`"
 
 ## Getting started
 
