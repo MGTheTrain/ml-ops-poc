@@ -1,4 +1,4 @@
-name: Destroy a deployed k8s cluster
+name: Destroy k8s cluster
 
 on:
   workflow_dispatch:

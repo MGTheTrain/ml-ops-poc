@@ -1,4 +1,4 @@
-name: Deploy a k8s cluster
+name: Deploy k8s cluster
 
 on:
   workflow_dispatch:
