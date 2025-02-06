@@ -18,13 +18,13 @@ spec:
               image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
               imagePullPolicy: {{ .Values.image.pullPolicy }}
               command: {{ .Values.command | toYaml | nindent 16 }} 
-              resources:
-                requests:
-                  cpu: {{ .Values.resources.requests.cpu }}
-                  memory: {{ .Values.resources.requests.memory }}
-                limits:
-                  cpu: {{ .Values.resources.limits.cpu }}
-                  memory: {{ .Values.resources.limits.memory }}
+              # resources:
+              #   requests:
+              #     cpu: {{ .Values.resources.requests.cpu }}
+              #     memory: {{ .Values.resources.requests.memory }}
+              #   limits:
+              #     cpu: {{ .Values.resources.limits.cpu }}
+              #     memory: {{ .Values.resources.limits.memory }}
               env:
                 {{- range .Values.env }}
                 - name: {{ .name }}

@@ -6,13 +6,13 @@ metadata:
   name: {{ .Values.inferenceService.name }}
 spec:
   predictor:
-    resources:
-      requests:
-        cpu: {{ .Values.resources.requests.cpu }}
-        memory: {{ .Values.resources.requests.memory }}
-      limits:
-        cpu: {{ .Values.resources.limits.cpu }}
-        memory: {{ .Values.resources.limits.memory }}
+    # resources:
+    #   requests:
+    #     cpu: {{ .Values.resources.requests.cpu }}
+    #     memory: {{ .Values.resources.requests.memory }}
+    #   limits:
+    #     cpu: {{ .Values.resources.limits.cpu }}
+    #     memory: {{ .Values.resources.limits.memory }}
     model:
       modelFormat:
         name: {{ .Values.inferenceService.modelFormat.name }}
