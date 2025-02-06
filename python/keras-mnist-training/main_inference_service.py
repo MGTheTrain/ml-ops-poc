@@ -14,7 +14,6 @@ port = os.getenv("PORT", 8080)
 if not all([model_file, az_sa_connection_string, az_sa_container_name, blob_name, port]):
     print("Missing required arguments for downloading model. Please ensure the following environment variables are set:")
     print("MODEL_FILE, AZ_SA_CONNECTION_STRING, AZ_SA_CONTAINER_NAME, BLOB_NAME, PORT")
-    return
 
 az_blob_connector = utils.AzureBlobConnector(az_sa_connection_string)
 az_blob_connector.download(
