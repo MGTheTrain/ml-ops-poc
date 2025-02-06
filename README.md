@@ -51,9 +51,9 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 
 ### Deploy an AKS cluster, install the kubeflow or mlflow components or setup kubernetes resources for applications
 
-0. Deploy an AKS trough the [manage-k8s-cluster workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/manage-k8s-cluster.yml)
-1. **Optional:** Install external helm charts (e.g. ml-ops tools) into the deployed kubernetes cluster trough [manage-helm-charts workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/manage-helm-charts.yml)
-2. **Optional:** Deploy kubernetes resources for application (secrets or reverse-proxy ingress) trough [manage-internal-k8s-resources workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/manage-internal-k8s-resources.yml)
+0. Deploy an AKS trough the [deploy-k8s-cluster workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/deploy-k8s-cluster.yml)
+1. **Optional:** Install external helm charts (e.g. ml-ops tools) into the deployed kubernetes cluster trough [install-helm-charts workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/install-helm-charts.yml)
+2. **Optional:** Deploy kubernetes resources for application (secrets or reverse-proxy ingress) trough [create-internal-k8s-resources workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/create-internal-k8s-resources.yml)
 
 **NOTE:** 
 - Set all the required Github secrets for aboves workflows
@@ -239,6 +239,6 @@ and visit in a browser of choice localhost:5000.
 
 ### Destroy the AKS cluster, uninstall helm charts or remove kubernetes resources for applications
 
-0. **Optional:** Uninstall only ml tools of an existing kubernetes cluster trough [manage-helm-charts workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/manage-helm-charts.yml)
-1. **Optional:** Destroy kubernetes resources for application (secrets or reverse-proxy ingress) trough [manage-internal-k8s-resources workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/manage-internal-k8s-resources.yml)
-2. Destroy an AKS trough the [manage-k8s-cluster workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/manage-k8s-cluster.yml)
+0. **Optional:** Uninstall only ml tools of an existing kubernetes cluster trough [uninstall-helm-charts workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/uninstall-helm-charts.yml)
+1. **Optional:** Destroy kubernetes resources for application (secrets or reverse-proxy ingress) trough [delete-internal-k8s-resources workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/delete-internal-k8s-resources.yml)
+2. Destroy an AKS trough the [destroy-k8s-cluster workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/destroy-k8s-cluster.yml)
