@@ -7,12 +7,8 @@ metadata:
 spec:
   predictor:
     resources:
-      requests:
-        cpu: {{ .Values.resources.requests.cpu }}
-        memory: {{ .Values.resources.requests.memory }}
       limits:
-        cpu: {{ .Values.resources.limits.cpu }}
-        memory: {{ .Values.resources.limits.memory }}
+        nvidia.com/gpu: {{ .Values.resources.limits.gpu }}
     model:
       modelFormat:
         name: {{ .Values.inferenceService.modelFormat.name }}

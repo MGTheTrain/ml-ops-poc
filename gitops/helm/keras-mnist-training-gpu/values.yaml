@@ -1,0 +1,52 @@
+# Default values for keras-mnist-training.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: mopocacrsbxsa001.azurecr.io/keras-mnist-training
+  pullPolicy: Always
+  tag: "0.1.0"
+
+imagePullSecrets:
+  - name: "acr-secret"
+
+env:
+  - name: AZ_SA_CONNECTION_STRING
+    secretKeyRef:
+      secretName: "storage-account-secret"
+      key: "connection_string"
+  - name: AZ_SA_CONTAINER_NAME
+    secretKeyRef:
+      secretName: "storage-account-secret"
+      key: "container_name"
+
+command:
+  - "sh"
+  - "-c"
+  - |
+      # train
+      export MODEL_FILE="/tmp/mnist_model.h5"
+      export MODE="train"
+      
+      ls
+      
+      python /app/main_env.py
+
+      # upload model
+      export MODE="upload-model"
+      export BLOB_NAME="mnist_model-$(date +'%Y%m%d%H%M%S').h5"
+
+      ls $MODEL_FILE
+      echo "Generated blob name: $BLOB_NAME"
+      echo "Azure Storage Connection string: $AZ_SA_CONNECTION_STRING"
+      echo "Azure Storage Container name: $AZ_SA_CONTAINER_NAME"
+
+      nslookup "$AZ_SA_CONTAINER_NAME.blob.core.windows.net"
+      
+      python /app/main_env.py
+
+resources:
+  limits:
+    gpu: "1"
