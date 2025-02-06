@@ -10,7 +10,7 @@ on:
         description: 'Environment on which to deploy. Dev, qas, staging, prod environments not considered'
       AKS_VM_SIZE:
         type: choice
-        options: [ 'Standard_B8ms', 'Standard_NC4as' ]
+        options: [ 'Standard_B8ms', 'Standard_NV4as_v4' ]
         default: Standard_B8ms
         description: 'AKS VM size. Search for Azure Bv1 sizes series VMs in a browser of choice'
       AKS_NODE_COUNT:

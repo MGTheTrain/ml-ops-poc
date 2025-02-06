@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Updated
 
 - Separated workflows for the automatic creation and destruction of cloud, helm or k8s resources
-- The available options have been updated and the `Standard_NC4as` AKS VM size is now selectable with 1 GPU accelerator. Unavailable sizes have been removed from the available locations.
+- The available options have been updated and the `Standard_NV4as_v4` AKS VM size is now selectable with 1 GPU accelerator. Unavailable sizes have been removed from the available locations.
 - Permitted to change the `AKS_NODE_COUNT` input in CD workflow deploying a k8s resource 
 - Renamed python entrypoint files in [Keras MNIST training example](./python/keras-mnist-training/)
 - Setup resource quotas for ML training and inference k8s Pods 
