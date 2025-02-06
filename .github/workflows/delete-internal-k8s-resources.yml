@@ -1,4 +1,4 @@
-name: Manage internal k8s resources (e.g. application secrets or reverse proxy ingresses)
+name: Delete k8s resources (e.g. application secrets or reverse proxy ingresses)
 
 on:
   workflow_dispatch:
