@@ -1,4 +1,3 @@
-import os
 import numpy as np
 from tensorflow.keras.models import load_model
 from .data_loader import load_data
@@ -18,5 +17,6 @@ class InferenceService:
         self.model = load_model(model_file)
 
     def predict(self, data: np.ndarray) -> np.ndarray:
+        data = np.array(data).reshape(-1, 28, 28) 
         predictions = self.model.predict(data)
         return np.argmax(predictions, axis=1)

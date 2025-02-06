@@ -2,9 +2,9 @@ import os
 import uvicorn
 import numpy as np
 from fastapi import FastAPI
-from src.utils import AzureBlobConnector
-from src.inference import InferenceService
 from pydantic import BaseModel
+from src.inference import InferenceService
+from src.utils import AzureBlobConnector
 
 class InferenceRequest(BaseModel):
     data: list
@@ -44,7 +44,7 @@ def setup_fastapi(app, inference_service):
     """Set up FastAPI routes and prediction endpoint."""
     @app.post("/predict", response_model=InferenceResponse)
     async def predict(request: InferenceRequest):
-        data = np.array(request.data).reshape(1, -1) 
+        data = np.array(request.data).reshape(-1, 28, 28) 
         predictions = inference_service.predict(data)
         return InferenceResponse(predictions=predictions.tolist())
 
