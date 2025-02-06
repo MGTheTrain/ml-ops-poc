@@ -32,7 +32,7 @@ command:
       
       ls
       
-      python /app/model_operations_env.py
+      python /app/main_env.py
 
       # upload model
       export MODE="upload-model"
@@ -45,4 +45,12 @@ command:
 
       nslookup "$AZ_SA_CONTAINER_NAME.blob.core.windows.net"
       
-      python /app/model_operations_env.py
+      python /app/main_env.py
+
+resources:
+  requests:
+    cpu: "2" # 2 CPU Core
+    memory: "4Gi"
+  limits:
+    cpu: "4" # 4 CPU Core
+    memory: "8Gi"

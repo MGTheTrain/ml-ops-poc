@@ -17,7 +17,17 @@ spec:
             - name: tensorflow
               image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
               imagePullPolicy: {{ .Values.image.pullPolicy }}
-              command: {{ .Values.command | toYaml | nindent 16 }}
+              command: {{ .Values.command | toYaml | nindent 16 }} 
+              resources:
+                requests:
+                  cpu: {{ .Values.resources.requests.cpu }}
+                  memory: {{ .Values.resources.requests.memory }}
+                limits:
+                  cpu: {{ .Values.resources.limits.cpu }}
+                  memory: {{ .Values.resources.limits.memory }}
+              # comment below lines out in case you need GPU acceleration when training
+              #   limits:
+              #     nvidia.com/gpu: 1
               env:
                 {{- range .Values.env }}
                 - name: {{ .name }}

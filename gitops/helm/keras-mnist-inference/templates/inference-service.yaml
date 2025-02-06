@@ -8,11 +8,13 @@ spec:
   predictor:
     resources:
       requests:
-        cpu: "500m"  
-        memory: "1Gi"
+        cpu: {{ .Values.resources.requests.cpu }}
+        memory: {{ .Values.resources.requests.memory }}
       limits:
-        cpu: "1"      
-        memory: "2Gi"
+        cpu: {{ .Values.resources.limits.cpu }}
+        memory: {{ .Values.resources.limits.memory }}
+        # comment below lines out in case you need GPU acceleration when training
+        # nvidia.com/gpu: 1
     model:
       modelFormat:
         name: {{ .Values.inferenceService.modelFormat.name }}
