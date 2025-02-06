@@ -53,7 +53,7 @@ jobs:
           -backend-config="resource_group_name=mopoctb-sbx-rg001" \
           -backend-config="container_name=mopoctbsbxsac001" \
           -backend-config="key=${{ inputs.ENVIRONMENT }}/helm-external/terraform.tfstate"
-        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}/helm-external
+        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}/}/${{ inputs.RESOURCE_INSTANCE_NUMBER }}/helm-external
 
       - name: Uninstall helm charts
         run: terraform destroy --auto-approve

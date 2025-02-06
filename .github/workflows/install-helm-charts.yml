@@ -90,7 +90,7 @@ jobs:
           -backend-config="storage_account_name=mopoctbsbxsa001" \
           -backend-config="resource_group_name=mopoctb-sbx-rg001" \
           -backend-config="container_name=mopoctbsbxsac001" \
-          -backend-config="key=${{ inputs.ENVIRONMENT }}/helm-external/terraform.tfstate"
+          -backend-config="key=${{ inputs.ENVIRONMENT }}/helm-external/${{ inputs.RESOURCE_INSTANCE_NUMBER }}/terraform.tfstate"
         working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}/helm-external
 
       - name: Install helm charts

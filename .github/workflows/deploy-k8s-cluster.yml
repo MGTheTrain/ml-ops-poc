@@ -21,7 +21,7 @@ on:
         description: '3-digit number considered when naming resources'
       LOCATION:
         type: choice
-        options: [ 'West Europe', 'Switzerland', 'North Europe' ]
+        options: [ 'West Europe', 'Switzerland North', 'North Europe' ]
         default: West Europe
         description: 'The region where cloud resources will be deployed'
 

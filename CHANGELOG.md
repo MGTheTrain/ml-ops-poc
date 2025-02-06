@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Permitted to change the `AKS_NODE_COUNT` input in CD workflow deploying a k8s resource 
 - Renamed python entrypoint files in [Keras MNIST training example](./python/keras-mnist-training/)
 - Setup resource quotas for ML training and inference k8s Pods 
+- Ensured the proper folder structure naming with instance number values for persisting tf state files
 
 ## [0.5.0] - 05-02-2025
 
