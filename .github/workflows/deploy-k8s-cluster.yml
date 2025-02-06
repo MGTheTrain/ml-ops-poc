@@ -13,6 +13,9 @@ on:
         options: [ 'Standard_B8ms', 'Standard_NC4as' ]
         default: Standard_B8ms
         description: 'AKS VM size. Search for Azure Bv1 sizes series VMs in a browser of choice'
+      AKS_NODE_COUNT:
+        default: '1'
+        description: 'AKS node count. Should be >= 1'
       RESOURCE_INSTANCE_NUMBER:
         default: '001'
         description: '3-digit number considered when naming resources'
@@ -57,3 +60,4 @@ jobs:
           TF_VAR_aks_vm_size: ${{ inputs.AKS_VM_SIZE }}
           TF_VAR_resource_instance_number: ${{ inputs.RESOURCE_INSTANCE_NUMBER }}
           TF_VAR_location: ${{ inputs.LOCATION }}
+          TF_VAR_aks_node_count: ${{ inputs.AKS_NODE_COUNT }}
