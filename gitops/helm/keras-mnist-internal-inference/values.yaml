@@ -1,0 +1,88 @@
+# Default values for keras-mnist-internal-inference.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: mopocacrsbxsa001.azurecr.io/keras-mnist-training
+  pullPolicy: Always
+  tag: "0.1.0"
+
+imagePullSecrets:
+  - name: "acr-secret"
+nameOverride: ""
+fullnameOverride: ""
+
+env:
+  - name: AZ_SA_CONNECTION_STRING
+    secretKeyRef:
+      secretName: "storage-account-secret"
+      key: "connection_string"
+  - name: AZ_SA_CONTAINER_NAME
+    secretKeyRef:
+      secretName: "storage-account-secret"
+      key: "container_name"
+  - name: BLOB_NAME
+    secretKeyRef:
+      secretName: "blob-secret"
+      key: "blob_name"
+
+command:
+  - "sh"
+  - "-c"
+  - |
+      echo "Generated blob name: $BLOB_NAME"
+      echo "Azure Storage Connection string: $AZ_SA_CONNECTION_STRING"
+      echo "Azure Storage Container name: $AZ_SA_CONTAINER_NAME"
+      mkdir -vp /app/models/ 
+      export MODEL_FILE="/app/models/mnist_model.h5"
+      python /app/main_inference_service.py
+
+
+serviceAccount:
+  create: true
+  automount: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+
+resources: {}
+
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+
+volumes: []
+
+volumeMounts: []
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

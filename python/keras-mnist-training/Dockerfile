@@ -4,6 +4,8 @@ WORKDIR /app
 
 COPY main_cli.py /app/
 COPY main_env.py /app/
+COPY main_inference_service.py /app/
+COPY main_inference_client.py /app/
 COPY src /app/src
 COPY requirements.txt /app/
 

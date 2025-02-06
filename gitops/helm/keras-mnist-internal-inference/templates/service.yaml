@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "keras-mnist-internal-inference.fullname" . }}
+  labels:
+    {{- include "keras-mnist-internal-inference.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "keras-mnist-internal-inference.selectorLabels" . | nindent 4 }}

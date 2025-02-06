@@ -35,8 +35,9 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 - [x] Dockerizing Python (PyTorch or TensorFlow) applications for ML training and inference
 - [x] CI pipeline deploying an ACR
 - [x] CI pipeline containerizing and pushing Python TensorFlow or PyTorch applications for training to a deployed ACR
-- [x] Helm charts with K8s manifests for containerized Python TensorFlow/PyTorch ML jobs using the [Training Operator for CRDs](https://github.com/kubeflow/training-operator) and GitOps via ArgoCD
+- [x] Helm charts with K8s manifests for containerized Python TensorFlow/PyTorch ML jobs using the [Training Operator for CRDs](https://github.com/kubeflow/training-operator) and GitOps trough ArgoCD
 - [x] Installation of the [Training Operator for CRDs](https://github.com/kubeflow/training-operator) and applying sample [TFJob and PyTorchJob](https://www.kubeflow.org/docs/components/training/overview/) k8s manifest
+- [x] Internal inference service and client along with Dockerization and Helm chart integration of the service application
 - [x] Enable GPU accelerated ML trainning and inference k8s pods. Add corresponding helm charts. Checkout [Use GPUs for compute-intensive workloads on Azure Kubernetes Service (AKS)](https://learn.microsoft.com/en-us/azure/aks/gpu-cluster?tabs=add-ubuntu-gpu-node-pool). "For AKS node pools, we recommend a minimum size of `Standard_NC6s_v3`"
 
 ## Getting started
@@ -178,7 +179,7 @@ Set up an authorized Azure Service Principal:
 az ad sp create-for-rbac --name model-store-sp --role "Storage Blob Data Owner" --scopes /subscriptions/<your subscription id>/resourceGroups/<your resource group name>/providers/Microsoft.Storage/storageAccounts/<your storage account name>
 ```
 
-Edit the secrets `stringData` values file:
+Edit the secrets `stringData` values file and run:
 
 ```sh
 kubectl apply -n internal-apps -f - <<EOF
@@ -227,6 +228,45 @@ Due to AKS node resource constraints experiments related to InferenceServices tr
 The Inference Service pulls the `tensorflow/serving` docker image, which could lead to allocation issues due to its size of 1 to 1.5 GB.
 
 ![aborted due to vm scaling constraints part 3](./images/aborted-due-to-vm-scaling-constraints-pt-3.jpg)
+
+#### Internal inference service
+
+Create Blob secret:
+
+```sh
+kubectl create secret generic blob-secret --from-literal=blob_name=<mnist_model-20250206190322.h5> -n internal-apps
+```
+
+Register and synchronize the ArgoCD application:
+
+```sh
+# Port forward in terminal process A
+kubectl port-forward -n external-services svc/argocd-server 8080:443
+
+# In terminal process B - Login
+argocd login localhost:8080
+# Prompted to provide username and password
+
+# e.g. for keras-mnist-internal-inference chart
+argocd app create keras-mnist-internal-inference \
+  --repo https://github.com/MGTheTrain/ml-ops-poc.git \
+  --path gitops/argocd/keras-mnist-internal-inference \ 
+  --dest-server https://kubernetes.default.svc \
+  --dest-namespace internal-apps \
+  --revision main \
+  --server localhost:8080
+
+# In terminal process B - Sync Application
+argocd app sync keras-mnist-inference
+```
+
+Resulting inference service logs should resemble:
+
+![internal inference service logs](./images/internal-inference-service-logs.jpg)
+
+once the client has submitted a `/predict` request to the inference service:
+
+![internal inference client logs](./images/internal-inference-client-logs.jpg)
 
 ### mlflow
 
