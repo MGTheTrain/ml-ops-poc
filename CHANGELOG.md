@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- [x] Enabled GPU accelerated ML trainning and inference k8s pods. Added corresponding helm charts
+
 ### Updated
 
 - Separated workflows for the automatic creation and destruction of cloud, helm or k8s resources
