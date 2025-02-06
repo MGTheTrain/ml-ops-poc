@@ -220,9 +220,13 @@ argocd app sync keras-mnist-inference
 
 Due to AKS node resource constraints experiments related to InferenceServices trough KServe have been aborted:
 
-![aborted due to resource constraints](./images/aborted-due-to-resource-constraints.jpg)
+![aborted due to vm scaling constraints](./images/aborted-due-to-vm-scaling-constraints.jpg)
 
-![aborted due to vm size constraints](./images/aborted-due-to-vm-size-constraints.jpg)
+![aborted due to vm scaling constraints part 2](./images/aborted-due-to-vm-scaling-constraints-pt-2.jpg)
+
+The Inference Service pulls the `tensorflow/serving` docker image, which could lead to allocation issues due to its size of 1 to 1.5 GB.
+
+![aborted due to vm scaling constraints part 3](./images/aborted-due-to-vm-scaling-constraints-pt-3.jpg)
 
 ### mlflow
 
