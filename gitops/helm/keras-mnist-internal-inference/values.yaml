@@ -7,7 +7,6 @@ replicaCount: 1
 image:
   repository: mlpocacrsbxsa001.azurecr.io/keras-mnist-training
   pullPolicy: Always
-  # Overrides the image tag whose default is the chart appVersion.
   tag: "0.1.0"
 
 imagePullSecrets:
@@ -15,30 +14,43 @@ imagePullSecrets:
 nameOverride: ""
 fullnameOverride: ""
 
+env:
+  - name: AZ_SA_CONNECTION_STRING
+    secretKeyRef:
+      secretName: "storage-account-secret"
+      key: "connection_string"
+  - name: AZ_SA_CONTAINER_NAME
+    secretKeyRef:
+      secretName: "storage-account-secret"
+      key: "container_name"
+  - name: BLOB_NAME
+    secretKeyRef:
+      secretName: "blob-secret"
+      key: "blob_name"
+
+command:
+  - "sh"
+  - "-c"
+  - |
+      echo "Generated blob name: $BLOB_NAME"
+      echo "Azure Storage Connection string: $AZ_SA_CONNECTION_STRING"
+      echo "Azure Storage Container name: $AZ_SA_CONTAINER_NAME"
+
+      python /app/main_inference_service.py
+
+
 serviceAccount:
-  # Specifies whether a service account should be created
   create: true
-  # Automatically mount a ServiceAccount's API credentials?
   automount: true
-  # Annotations to add to the service account
   annotations: {}
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
   name: ""
 
 podAnnotations: {}
 podLabels: {}
 
 podSecurityContext: {}
-  # fsGroup: 2000
 
 securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
 
 service:
   type: ClusterIP
@@ -48,49 +60,25 @@ ingress:
   enabled: false
   className: ""
   annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
   hosts:
     - host: chart-example.local
       paths:
         - path: /
           pathType: ImplementationSpecific
   tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
 
 resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+
 
 autoscaling:
   enabled: false
   minReplicas: 1
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
 
-# Additional volumes on the output Deployment definition.
 volumes: []
-# - name: foo
-#   secret:
-#     secretName: mysecret
-#     optional: false
 
-# Additional volumeMounts on the output Deployment definition.
 volumeMounts: []
-# - name: foo
-#   mountPath: "/etc/foo"
-#   readOnly: true
 
 nodeSelector: {}
 
