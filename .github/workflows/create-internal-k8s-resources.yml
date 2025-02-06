@@ -1,4 +1,4 @@
-name: Deploy internal k8s resources (e.g. application secrets or reverse proxy ingresses)
+name: Create internal k8s resources (e.g. application secrets or reverse proxy ingresses)
 
 on:
   workflow_dispatch:
@@ -28,7 +28,7 @@ on:
         description: '3-digit number considered when naming resources'
 
 jobs:
-  deploy-k8s-resources:
+  create-k8s-resources:
     runs-on: ubuntu-latest
     environment: ${{ inputs.ENVIRONMENT }}
     env:

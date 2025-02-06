@@ -14,7 +14,7 @@ on:
 
 jobs:
 
-  destroy-k8s-resources:
+  delete-k8s-resources:
     runs-on: ubuntu-latest
     environment: ${{ inputs.ENVIRONMENT }}
     env:
