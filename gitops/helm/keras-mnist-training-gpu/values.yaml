@@ -48,9 +48,5 @@ command:
       python /app/main_env.py
 
 resources:
-  requests:
-    cpu: "2" # 2 CPU Core
-    memory: "4Gi"
   limits:
-    cpu: "4" # 4 CPU Core
-    memory: "8Gi"
+    gpu: "1"

@@ -14,9 +14,5 @@ inferenceService:
   storageUri: "https://mopoctbsbxsa001.blob.core.windows.net/mopoctbsbxsac001/mnist_model-20250205192848.h5"
 
 resources:
-  requests:
-    cpu: "500m" # 0.5 CPU Core
-    memory: "1Gi"
   limits:
-    cpu: "1" # 1 CPU Core
-    memory: "2Gi"
+    gpu: "1"

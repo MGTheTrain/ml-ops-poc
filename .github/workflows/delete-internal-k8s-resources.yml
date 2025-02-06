@@ -1,0 +1,61 @@
+name: Delete k8s resources (e.g. application secrets or reverse proxy ingresses)
+
+on:
+  workflow_dispatch:
+    inputs:
+      ENVIRONMENT:
+        type: choice
+        options: [ 'sbx' ]
+        default: sbx
+        description: 'Environment on which to deploy. Dev, qas, staging, prod environments not considered'
+      RESOURCE_INSTANCE_NUMBER:
+        default: '001'
+        description: '3-digit number considered when naming resources'
+
+jobs:
+
+  delete-k8s-resources:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.ENVIRONMENT }}
+    env:
+      ARM_SUBSCRIPTION_ID: '${{ secrets.ARM_SUBSCRIPTION_ID }}'
+      ARM_TENANT_ID: '${{ secrets.ARM_TENANT_ID }}'
+      ARM_CLIENT_ID: '${{ secrets.ARM_CLIENT_ID }}'
+      ARM_CLIENT_SECRET: '${{ secrets.ARM_CLIENT_SECRET }}'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3  
+
+      - name: Download the ~/.kube/config
+        shell: bash
+        run: |
+          terraform init \
+          -backend-config="subscription_id=${{ env.ARM_SUBSCRIPTION_ID }}" \
+          -backend-config="storage_account_name=mopoctbsbxsa001" \
+          -backend-config="resource_group_name=mopoctb-sbx-rg001" \
+          -backend-config="container_name=mopoctbsbxsac001" \
+          -backend-config="key=${{ inputs.ENVIRONMENT }}/cloud-infra/${{ inputs.RESOURCE_INSTANCE_NUMBER }}/terraform.tfstate"
+
+          terraform output aks_kube_config_list | awk '/^  apiVersion:/,/^  EOT,$/' | sed 's/^  //' > ./config
+          mkdir -vp ~/.kube
+          head -n -3 ./config > ~/.kube/config
+          cat ~/.kube/config
+        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}/cloud-infra
+
+      - name: Terraform Init # requires a Storage Account backend deployed trough storage-account-backend-deploy workflow step
+        run: |
+          terraform init \
+          -backend-config="subscription_id=${{ env.ARM_SUBSCRIPTION_ID }}" \
+          -backend-config="storage_account_name=mopoctbsbxsa001" \
+          -backend-config="resource_group_name=mopoctb-sbx-rg001" \
+          -backend-config="container_name=mopoctbsbxsac001" \
+          -backend-config="key=${{ inputs.ENVIRONMENT }}/k8s-internal/${{ inputs.RESOURCE_INSTANCE_NUMBER }}/terraform.tfstate"
+        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}/k8s-internal
+
+      - name: Destroy application k8s resources
+        run: terraform destroy --auto-approve
+        continue-on-error: false
+        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}/k8s-internal

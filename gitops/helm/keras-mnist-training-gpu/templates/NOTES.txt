@@ -1,0 +1,10 @@
+1. Your Keras MNIST training job has been created successfully.
+
+2. To check the status of the job, you can run:
+   kubectl get tfjobs -n {{ .Release.Namespace }}
+
+3. To view the logs of the job's worker pods:
+   kubectl logs -f -n {{ .Release.Namespace }} -l "app.kubernetes.io/name={{ include "keras-mnist-training.name" . }},app.kubernetes.io/instance={{ .Release.Name }}" -c tensorflow
+
+4. To delete the job, run:
+   kubectl delete tfjob {{ include "keras-mnist-training.fullname" . }} -n {{ .Release.Namespace }}

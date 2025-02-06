@@ -37,8 +37,8 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 - [x] CI pipeline containerizing and pushing Python TensorFlow or PyTorch applications for training to a deployed ACR
 - [x] Helm charts with K8s manifests for containerized Python TensorFlow/PyTorch ML jobs using the [Training Operator for CRDs](https://github.com/kubeflow/training-operator) and GitOps trough ArgoCD
 - [x] Installation of the [Training Operator for CRDs](https://github.com/kubeflow/training-operator) and applying sample [TFJob and PyTorchJob](https://www.kubeflow.org/docs/components/training/overview/) k8s manifest
-- [ ] CI pipeline containerizing and pushing Python TensorFlow inference service to a deployed ACR
 - [ ] Helm charts with K8s manifests for containerized internal Python TensorFlow inference services considering GitOps trough ArgoCD
+- [x] Enable GPU accelerated ML trainning and inference k8s pods. Add corresponding helm charts. Checkout [Use GPUs for compute-intensive workloads on Azure Kubernetes Service (AKS)](https://learn.microsoft.com/en-us/azure/aks/gpu-cluster?tabs=add-ubuntu-gpu-node-pool). "For AKS node pools, we recommend a minimum size of `Standard_NC6s_v3`"
 
 ## Getting started
 
@@ -53,9 +53,9 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 
 ### Deploy an AKS cluster, install the kubeflow or mlflow components or setup kubernetes resources for applications
 
-0. Deploy an AKS trough the [manage-k8s-cluster workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/manage-k8s-cluster.yml)
-1. **Optional:** Install external helm charts (e.g. ml-ops tools) into the deployed kubernetes cluster trough [manage-helm-charts workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/manage-helm-charts.yml)
-2. **Optional:** Deploy kubernetes resources for application (secrets or reverse-proxy ingress) trough [manage-internal-k8s-resources workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/manage-internal-k8s-resources.yml)
+0. Deploy an AKS trough the [deploy-k8s-cluster workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/deploy-k8s-cluster.yml)
+1. **Optional:** Install external helm charts (e.g. ml-ops tools) into the deployed kubernetes cluster trough [install-helm-charts workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/install-helm-charts.yml)
+2. **Optional:** Deploy kubernetes resources for application (secrets or reverse-proxy ingress) trough [create-internal-k8s-resources workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/create-internal-k8s-resources.yml)
 
 **NOTE:** 
 - Set all the required Github secrets for aboves workflows
@@ -67,8 +67,6 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 To access the kubeflow dashboard following the installation of kustomize and kubeflow components, execute the following command:
 
 ```sh
-kubectl get pods -A
-kubectl port-forward -n <namespace>  <pod-name> <local-port>:<server-port>
 kubectl port-forward svc/istio-ingressgateway -n istio-system 8080:80
 ```
 
@@ -223,9 +221,13 @@ argocd app sync keras-mnist-inference
 
 Due to AKS node resource constraints experiments related to InferenceServices trough KServe have been aborted:
 
-![aborted due to resource constraints](./images/aborted-due-to-resource-constraints.jpg)
+![aborted due to vm scaling constraints](./images/aborted-due-to-vm-scaling-constraints.jpg)
 
-![aborted due to vm size constraints](./images/aborted-due-to-vm-size-constraints.jpg)
+![aborted due to vm scaling constraints part 2](./images/aborted-due-to-vm-scaling-constraints-pt-2.jpg)
+
+The Inference Service pulls the `tensorflow/serving` docker image, which could lead to allocation issues due to its size of 1 to 1.5 GB.
+
+![aborted due to vm scaling constraints part 3](./images/aborted-due-to-vm-scaling-constraints-pt-3.jpg)
 
 ### mlflow
 
@@ -241,6 +243,6 @@ and visit in a browser of choice localhost:5000.
 
 ### Destroy the AKS cluster, uninstall helm charts or remove kubernetes resources for applications
 
-0. **Optional:** Uninstall only ml tools of an existing kubernetes cluster trough [manage-helm-charts workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/manage-helm-charts.yml)
-1. **Optional:** Destroy kubernetes resources for application (secrets or reverse-proxy ingress) trough [manage-internal-k8s-resources workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/manage-internal-k8s-resources.yml)
-2. Destroy an AKS trough the [manage-k8s-cluster workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/manage-k8s-cluster.yml)
+0. **Optional:** Uninstall only ml tools of an existing kubernetes cluster trough [uninstall-helm-charts workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/uninstall-helm-charts.yml)
+1. **Optional:** Destroy kubernetes resources for application (secrets or reverse-proxy ingress) trough [delete-internal-k8s-resources workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/delete-internal-k8s-resources.yml)
+2. Destroy an AKS trough the [destroy-k8s-cluster workflow](https://github.com/MGTheTrain/ml-ops-poc/actions/workflows/destroy-k8s-cluster.yml)
