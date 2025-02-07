@@ -1,4 +1,4 @@
-# Keras training app with mnist dataset
+# Tensorflow Keras training with MNIST dataset and model inference
 
 ### Folder structure
 

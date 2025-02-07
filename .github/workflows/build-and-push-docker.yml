@@ -10,7 +10,7 @@ on:
           description: 'Environment on which to deploy. Dev, qas, staging, prod environments not considered'
       DOCKER_IMAGE_NAME:
         required: true
-        default: "keras-mnist-training"
+        default: "keras-mnist"
         description: "The docker image name"
       DOCKER_IMAGE_TAG:
         required: true
@@ -18,7 +18,7 @@ on:
         description: "The docker image tag"
       DOCKER_FILE_PATH:
         required: true
-        default: "./python/keras-mnist-training"
+        default: "./python/keras-mnist"
         description: "Path to the docker file"
       ACR_LOGIN_SERVER:
         description: 'Azure Container Registry login server'

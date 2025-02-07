@@ -1,7 +1,7 @@
 apiVersion: "kubeflow.org/v1"
 kind: TFJob
 metadata:
-  name: {{ include "keras-mnist-training.fullname" . }}
+  name: {{ include "keras-mnist.fullname" . }}
 spec:
   tfReplicaSpecs:
     Worker:

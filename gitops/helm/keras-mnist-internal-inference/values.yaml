@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: mopocacrsbxsa001.azurecr.io/keras-mnist-training
+  repository: mopocacrsbxsa001.azurecr.io/keras-mnist
   pullPolicy: Always
   tag: "0.1.0"
 

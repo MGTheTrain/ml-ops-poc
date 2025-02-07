@@ -1,4 +1,4 @@
-# Pytorch transformer training with ... dataset
+# Pytorch transformer training with ... dataset and model inference
 
 ### Folder structure
 
