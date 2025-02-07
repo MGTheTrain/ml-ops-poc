@@ -1,4 +1,4 @@
-# Pytorch YOLOV4-tiny training with COCO dataset
+# Pytorch YOLOV4-tiny training with COCO dataset and model inference
 
 ### Folder structure
 

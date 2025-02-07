@@ -4,7 +4,7 @@
    kubectl get tfjobs -n {{ .Release.Namespace }}
 
 3. To view the logs of the job's worker pods:
-   kubectl logs -f -n {{ .Release.Namespace }} -l "app.kubernetes.io/name={{ include "keras-mnist-training.name" . }},app.kubernetes.io/instance={{ .Release.Name }}" -c tensorflow
+   kubectl logs -f -n {{ .Release.Namespace }} -l "app.kubernetes.io/name={{ include "keras-mnist.name" . }},app.kubernetes.io/instance={{ .Release.Name }}" -c tensorflow
 
 4. To delete the job, run:
-   kubectl delete tfjob {{ include "keras-mnist-training.fullname" . }} -n {{ .Release.Namespace }}
+   kubectl delete tfjob {{ include "keras-mnist.fullname" . }} -n {{ .Release.Namespace }}

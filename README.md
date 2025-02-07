@@ -126,7 +126,7 @@ kubectl create -f https://raw.githubusercontent.com/kubeflow/training-operator/m
 ![training operator simple tf job](./images/training-operator-simple-tf-job.jpg)
 
 You can also register and sync ArgoCD applications referencing Helm charts to enable GitOps. For more details check out the [gitops-poc repository](https://github.com/MGTheTrain/gitops-poc).
-Essential commands for the [Keras MNIST training example](./python/keras-mnist-training/) are:
+Essential commands for the [Keras MNIST training example](./python/keras-mnist/) are:
 
 ```sh
 # Port forward in terminal process A
@@ -138,19 +138,19 @@ kubectl port-forward -n external-services svc/argocd-server 8080:443
 argocd login localhost:8080
 # Prompted to provide username and password
 
-# e.g. for keras-mnist-training chart
-argocd app create keras-mnist-training \
+# e.g. for keras-mnist chart
+argocd app create keras-mnist \
   --repo https://github.com/MGTheTrain/ml-ops-poc.git \
-  --path gitops/argocd/keras-mnist-training \ 
+  --path gitops/argocd/keras-mnist \ 
   --dest-server https://kubernetes.default.svc \
   --dest-namespace internal-apps \
   --revision main \
   --server localhost:8080
 
 # In terminal process B - Sync Application
-argocd app sync keras-mnist-training
+argocd app sync keras-mnist
 # In terminal process B - Monitor Application Status
-argocd app get keras-mnist-training
+argocd app get keras-mnist
 ```
 
 The ArgoCD applications that have been registered and synchronized should resemble the following:
@@ -160,14 +160,14 @@ The ArgoCD applications that have been registered and synchronized should resemb
 ![MNIST keras training argocd app](./images/mnist-keras-training-argocd-app.jpg)
 
 Training job logs resemble:
-![Training Operator Keras MNIST Training tf job logs](./images/training-operator-keras-mnist-training-tf-job-logs.jpg)
-![Training Operator Keras MNIST Training tf job logs pt 2](./images/training-operator-keras-mnist-training-tf-job-logs-pt-2.jpg)
+![Training Operator Keras MNIST Training tf job logs](./images/training-operator-keras-mnist-tf-job-logs.jpg)
+![Training Operator Keras MNIST Training tf job logs pt 2](./images/training-operator-keras-mnist-tf-job-logs-pt-2.jpg)
 
 The training job considers the upload of the trained model to an Azure Storage Account Container as the final step:
-![Training Operator Keras MNIST Training tf job uploaded model in Azure Storage Account](./images/training-operator-keras-mnist-training-tf-job-uploaded-model-in-azure-storage-account.jpg)
+![Training Operator Keras MNIST Training tf job uploaded model in Azure Storage Account](./images/training-operator-keras-mnist-tf-job-uploaded-model-in-azure-storage-account.jpg)
 
 Training job status resemble:
-![Training Operator Keras MNIST Training tf job status](./images/training-operator-keras-mnist-training-tf-job-status.jpg)
+![Training Operator Keras MNIST Training tf job status](./images/training-operator-keras-mnist-tf-job-status.jpg)
 
 #### KServe InferenceService
 

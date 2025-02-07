@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Updated
+
+- Renamed [python subfolders](./python/)
+
 ## [0.6.0] - 06-02-2025
 
 ### Added
