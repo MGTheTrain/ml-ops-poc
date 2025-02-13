@@ -1,0 +1,152 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.build/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Documentation builds
+docs/_build/
+docs/_doxygen/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.env.local
+.env.*.bak
+venv/
+ENV/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# Cython debug symbols
+cython_debug/
+
+# Data directories
+data/raw/
+data/processed/
+data/interim/
+data/external/
+
+# Model directories
+models/saved_models/
+models/trained_models/
+
+# DVC specific files
+*.dvc
+.cache/
+
+# Experiments directories
+experiments/.dvc/
+experiments/.dvcignore
+experiments/.gitignore
+
+# Logs
+*.log
+*.log.*
+
+# Miscellaneous
+*.swp
+*.swo
+*~
+.idea/
+.project
+*.sublime-project
+*.sublime-workspace
+/.vscode/
+/.env
+/.venv
+**/ENV/
+**/env/
+**/venv/
+
+# Python-specific
+*.pyo
+*.pyd
+*.pyd.*
+*.pdb
+
+# Data versioning control directories (e.g., DVC)
+.data.dvc/
+
+# Jekyll
+_site/
+.sass-cache
+.jekyll-cache
+.jekyll-metadata
+
+# Mac OS
+.DS_Store

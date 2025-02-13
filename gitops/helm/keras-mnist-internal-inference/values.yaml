@@ -36,7 +36,7 @@ command:
       echo "Azure Storage Connection string: $AZ_SA_CONNECTION_STRING"
       echo "Azure Storage Container name: $AZ_SA_CONTAINER_NAME"
       mkdir -vp /app/models/ 
-      export MODEL_FILE="/app/models/mnist_model.h5"
+      export MODEL_PATH="/app/models/mnist_model.h5"
       python /app/main_inference_service.py
 
 

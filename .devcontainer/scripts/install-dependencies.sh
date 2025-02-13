@@ -21,3 +21,6 @@ tar -zxvf helm-v3.14.3-linux-amd64.tar.gz
 rm helm-v3.14.3-linux-amd64.tar.gz
 mv linux-amd64/helm /usr/local/bin/helm
 rm -rf linux-amd64
+
+# pip
+pip install black flake8 pytest pytest-cov pytest-xdist
