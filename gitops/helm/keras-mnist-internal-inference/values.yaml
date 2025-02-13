@@ -37,7 +37,7 @@ command:
       echo "Azure Storage Container name: $AZ_SA_CONTAINER_NAME"
       mkdir -vp /app/models/ 
       export MODEL_PATH="/app/models/mnist_model.h5"
-      python /app/main_inference_service.py
+      python /app/src/main_inference_service.py
 
 
 serviceAccount:
