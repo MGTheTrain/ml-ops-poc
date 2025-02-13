@@ -27,25 +27,25 @@ command:
   - "-c"
   - |
       # train
-      export MODEL_FILE="/tmp/mnist_model.h5"
+      export MODEL_PATH="/tmp/mnist_model.h5"
       export MODE="train"
       
       ls
       
-      python /app/main_env.py
+      python /app/src/main.py
 
       # upload model
       export MODE="upload-model"
       export BLOB_NAME="mnist_model-$(date +'%Y%m%d%H%M%S').h5"
 
-      ls $MODEL_FILE
+      ls $MODEL_PATH
       echo "Generated blob name: $BLOB_NAME"
       echo "Azure Storage Connection string: $AZ_SA_CONNECTION_STRING"
       echo "Azure Storage Container name: $AZ_SA_CONTAINER_NAME"
 
       nslookup "$AZ_SA_CONTAINER_NAME.blob.core.windows.net"
       
-      python /app/main_env.py
+      python /app/src/main.py
 
 resources:
   requests:
