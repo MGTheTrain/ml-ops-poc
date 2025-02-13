@@ -141,7 +141,7 @@ argocd login localhost:8080
 # e.g. for keras-mnist chart
 argocd app create keras-mnist \
   --repo https://github.com/MGTheTrain/ml-ops-poc.git \
-  --path gitops/argocd/keras-mnist \ 
+  --path gitops/argocd/keras-mnist-training \ 
   --dest-server https://kubernetes.default.svc \
   --dest-namespace internal-apps \
   --revision main \
