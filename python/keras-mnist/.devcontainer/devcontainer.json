@@ -1,0 +1,12 @@
+{
+    "name": "Python and Ruby Tools",
+    // More information on VS Code Remote / GitHub Codespaces Development docker images can be found 
+    // @ https://hub.docker.com/_/microsoft-vscode-devcontainers
+    "image": "mcr.microsoft.com/devcontainers/ruby:3-bullseye",
+    // More information on features can be found @ https://containers.dev/features
+    "features": {
+      "ghcr.io/devcontainers/features/python:1": {}
+    },
+    "postCreateCommand": "gem install jekyll bundler just-the-docs && pip install black flake8 pytest pytest-cov pytest-xdist"
+  }
+  

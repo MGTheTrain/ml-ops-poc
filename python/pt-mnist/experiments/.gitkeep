@@ -1,0 +1,33 @@
+# NOTE: Requires dvc tool. Directory for storing experiment configurations, results, and logs
+
+In belows commands, DVC is used to track changes to data and model files. 
+DVC adds data and model files to the DVC repository, and Git is used to version control the DVC metafiles (*.dvc). 
+DVC push pushes the tracked files to the remote storage, enabling versioning and sharing of data and models across collaborators.
+```sh
+#!/bin/bash
+
+# Initialize DVC
+dvc init
+
+# Add Data to DVC
+dvc add data/raw_dataset.csv
+
+# Commit Data to DVC Repository
+git add data/raw_dataset.csv.dvc
+git commit -m "Add raw dataset to DVC"
+
+# Track Changes to Data
+dvc add data/processed_dataset.csv
+git add data/processed_dataset.csv.dvc
+git commit -m "Add processed dataset to DVC"
+
+# Add Model to DVC
+dvc add models/trained_model.h5
+
+# Commit Model to DVC Repository
+git add models/trained_model.h5.dvc
+git commit -m "Add trained model to DVC"
+
+# Version Control with DVC
+dvc push
+```
