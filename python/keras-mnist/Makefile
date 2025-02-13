@@ -3,15 +3,14 @@ PYTHON = python3
 PIP = pip3
 
 # Directories
-DOCS_DIR = docs
 TEST_DIR = tests
 SRC_DIR = src
 
 # Commands
-.PHONY: all setup test test-individual clean train infer docs format-and-lint help
+.PHONY: all setup test test-individual clean train infer upload-model download-model run-inference-servie run-inference-client format-and-lint help
 
 # Default target
-all: setup docs
+all: setup
 
 # Setup the environment
 setup:
@@ -30,13 +29,10 @@ test-individual:
 
 # Clean up generated files
 clean:
-	rm -rf $(DOCS_DIR)/_build
 	find . -type d -name '*.pyc' -exec rm -rf {} +
 	find . -type d -name '__pycache__' -exec rm -rf {} +
 	find . -type d -name '.pytest_cache' -exec rm -rf {} +
 	rm -rf .coverage coverage.xml 
-	rm -rf ${DOCS_DIR}/keras-mnist/_site
-	rm -rf ${DOCS_DIR}/keras-mnist/.jekyll-cache
 	echo "Manually clean contents in data and models dir"  
 
 # Model training
@@ -63,10 +59,6 @@ run-inference-servie:
 run-inference-client:
 	cd $(SRC_DIR) && $(PYTHON) main_inference_client.py
 
-# Build and serve documentation
-docs:
-	cd docs/keras-mnist && jekyll serve && echo "Visit in a browser of choice localhost:4000"
-
 # Format and lint code
 format-and-lint:
 	cd scripts && ./format_and_lint.sh
@@ -82,6 +74,10 @@ help:
 	@echo "clean:                Clean up generated files and caches."
 	@echo "train:                Train the model by running the training script. You can pass additional arguments like '--epochs 10'."
 	@echo "infer:                Run inference by executing the inference script. Pass inference-specific arguments."
+	@echo "upload-model:         Upload the trained model to a specified destination."
+	@echo "download-model:       Download the trained model from a specified source."
+	@echo "run-inference-servie: Start the inference service."
+	@echo "run-inference-client: Run the inference client to send requests to the service."
 	@echo "docs:                 Build and serve the documentation with Jekyll."
 	@echo "format-and-lint:      Run formatting and linting scripts."
 	@echo "help:                 Display this help message."

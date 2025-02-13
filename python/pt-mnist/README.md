@@ -80,7 +80,6 @@ project_root/
 ├── README.md               # Project README file
 ├── Dockerfile              # Enables training in an isolated docker container
 ├── Makefile                # Entrypoint enabling useful commands
-├── docs                    # Project documentation
 ├── scripts                 # Helper scripts
 └── main.py                 # Entry point script for executing model training or inference
 ```
@@ -125,12 +124,6 @@ To run an individual test:
 
 ```sh
 make test-individual filename=test_model.py
-```
-
-### Generating project documentation
-
-```sh
-make docs
 ```
 
 ### Auto-format and lint python files

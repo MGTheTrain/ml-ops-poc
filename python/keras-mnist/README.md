@@ -135,17 +135,17 @@ make infer
 
 ### Upload model to Azure Storage Account
 
-Run:
+Consider CLI args:
 
 ```sh
-python cli.py upload-model --model_file <model file path, e.g. models/mnist_model.h5> --connection_string <your connection_string> --container_name <your container_name> --blob_name <your blob_name>
+python cli.py upload-model --model_path <model file path, e.g. models/mnist_model.h5> --connection_string <your connection_string> --container_name <your container_name> --blob_name <your blob_name>
 ```
 
-or use env vars and run on Unix:
+or env vars:
 
 ```sh
 export MODE="upload-model"
-export MODEL_FILE="models/mnist_model.h5"
+export MODEL_PATH="models/mnist_model.h5"
 export AZURE_CONNECTION_STRING="<your AZURE_CONNECTION_STRING>"
 export AZURE_CONTAINER_NAME="<your AZURE_CONTAINER_NAME>"
 export AZURE_BLOB_NAME="<your AZURE_BLOB_NAME>"
@@ -154,17 +154,17 @@ python model_operations_env.py
 
 ### Download model from Azure Storage Account
 
-Run:
+Consider CLI args:
 
 ```sh
-python cli.py --mode download-model --model_file <model file path, e.g. models/mnist_model.h5> --connection_string <your connection_string> --container_name <your container_name> --blob_name <your blob_name>
+python cli.py --mode download-model --model_path <model file path, e.g. models/mnist_model.h5> --connection_string <your connection_string> --container_name <your container_name> --blob_name <your blob_name>
 ```
 
-or use env vars and run on Unix:
+or env vars:
 
 ```sh
 export MODE="download-model"
-export MODEL_FILE="models/mnist_model.h5"
+export MODEL_PATH="models/mnist_model.h5"
 export AZURE_CONNECTION_STRING="<your AZURE_CONNECTION_STRING>"
 export AZURE_CONTAINER_NAME="<your AZURE_CONTAINER_NAME>"
 export AZURE_BLOB_NAME="<your AZURE_BLOB_NAME>"
@@ -183,12 +183,6 @@ To run an individual test:
 
 ```sh
 make test-individual filename=test_model.py
-```
-
-### Generating project documentation
-
-```sh
-make docs
 ```
 
 ### Auto-format and lint python files
