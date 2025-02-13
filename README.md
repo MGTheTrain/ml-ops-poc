@@ -111,16 +111,16 @@ Execute a [Jupyter notebook](./notebooks/) to either train the model or perform 
 After successful installation of the Kubeflow Training Operator, apply some sample k8s ML training jobs, e.g. [for PyTorch](https://www.kubeflow.org/docs/components/training/user-guides/pytorch/) and [for Tensorflow](https://www.kubeflow.org/docs/components/training/user-guides/tensorflow/).
 
 ```sh
-# Pytorch (https://github.com/kubeflow/training-operator/blob/master/examples/pytorch/simple.yaml)
-kubectl create -f https://raw.githubusercontent.com/kubeflow/training-operator/master/examples/pytorch/simple.yaml
+# Pytorch (https://github.com/kubeflow/training-operator/blob/release-1.9/examples/pytorch/simple.yaml)
+kubectl create -f https://raw.githubusercontent.com/kubeflow/training-operator/release-1.9/examples/pytorch/simple.yaml
 ```
 
 ![training operator simple pytorch job](./images/training-operator-simple-pytorch-job.jpg)
 ![training operator simple pytorch job pt 2](./images/training-operator-simple-pytorch-job-pt-2.jpg)
 
 ```sh
-# Tensorflow (https://github.com/kubeflow/training-operator/blob/master/examples/tensorflow/simple.yaml)
-kubectl create -f https://raw.githubusercontent.com/kubeflow/training-operator/master/examples/tensorflow/simple.yaml
+# Tensorflow (https://github.com/kubeflow/training-operator/blob/release-1.9/examples/tensorflow/simple.yaml)
+kubectl create -f https://raw.githubusercontent.com/kubeflow/training-operator/release-1.9/examples/tensorflow/simple.yaml
 ```
 
 ![training operator simple tf job](./images/training-operator-simple-tf-job.jpg)
