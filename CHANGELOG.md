@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.0] - 13-02-2025
+
 ### Updated
 
 - Renamed [python subfolders](./python/) and utilized [cookiecutter Python templates](https://github.com/MGTheTrain/python-machine-learning-starter) for `keras-mnist` and `pt-mnist` sub-projects
