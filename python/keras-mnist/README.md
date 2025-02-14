@@ -138,7 +138,7 @@ make infer
 Consider CLI args:
 
 ```sh
-python cli.py upload-model --model_path <model file path, e.g. models/mnist_model.h5> --connection_string <your connection_string> --container_name <your container_name> --blob_name <your blob_name>
+make upload-model ARGS="--model_path models/mnist_model.h5" --azure_connection_string <your azure connection string> --azure_container_name <your azure container name> --azure_blob_name <your azure blob name>
 ```
 
 or env vars:
@@ -149,7 +149,7 @@ export MODEL_PATH="models/mnist_model.h5"
 export AZURE_CONNECTION_STRING="<your AZURE_CONNECTION_STRING>"
 export AZURE_CONTAINER_NAME="<your AZURE_CONTAINER_NAME>"
 export AZURE_BLOB_NAME="<your AZURE_BLOB_NAME>"
-python model_operations_env.py
+make upload-model
 ```
 
 ### Download model from Azure Storage Account
@@ -157,7 +157,7 @@ python model_operations_env.py
 Consider CLI args:
 
 ```sh
-python cli.py --mode download-model --model_path <model file path, e.g. models/mnist_model.h5> --connection_string <your connection_string> --container_name <your container_name> --blob_name <your blob_name>
+make download-model ARGS="--model_path models/mnist_model.h5" --azure_connection_string <your azure connection string> --azure_container_name <your azure container name> --azure_blob_name <your azure blob name>
 ```
 
 or env vars:
@@ -168,7 +168,41 @@ export MODEL_PATH="models/mnist_model.h5"
 export AZURE_CONNECTION_STRING="<your AZURE_CONNECTION_STRING>"
 export AZURE_CONTAINER_NAME="<your AZURE_CONTAINER_NAME>"
 export AZURE_BLOB_NAME="<your AZURE_BLOB_NAME>"
-python model_operations_env.py
+make download-model
+```
+
+### Run inference service
+
+Run:
+
+```sh
+make run-inference-servie
+```
+
+or consider env vars (refer to [main_inference_service.py](./src/main_inference_service.py)):
+
+```sh
+export MODEL_PATH="<your MODEL_PATH>"
+export AZ_SA_CONNECTION_STRING="<your AZ_SA_CONNECTION_STRING>"
+export AZ_SA_CONTAINER_NAME="<your AZ_SA_CONTAINER_NAME>"
+export BLOB_NAME="<your BLOB_NAME>"
+export PORT="<your PORT>"
+make run-inference-servie
+```
+
+### Run inference client
+
+Run:
+
+```sh
+make run-inference-client
+```
+
+or consider env vars (refer to [main_inference_client.py](./src/main_inference_client.py)):
+
+```sh
+export INFERENCE_SERVICE_URL="<your INFERENCE_SERVICE_URL>"
+make run-inference-client
 ```
 
 ### Run pytests
