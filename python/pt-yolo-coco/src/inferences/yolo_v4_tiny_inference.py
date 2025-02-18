@@ -1,6 +1,6 @@
 import torch
-from src.models.yolo_v4_tiny import YOLOv4Tiny
-from src.inferences.inference_interface import InferenceInterface
+from models.yolo_v4_tiny import YOLOv4Tiny
+from inferences.inference_interface import InferenceInterface
 from PIL import Image
 from torchvision import transforms
 

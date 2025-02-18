@@ -1,7 +1,7 @@
 import argparse
 import os
-from training.mnist_training import MNISTTraining
-from inferences.mnist_inference import MNISTInference
+from training.coco_training import COCOTraining
+from inferences.yolo_v4_tiny_inference import YOLOv4Tiny
 
 def parse_cli_args() -> argparse.Namespace:
     """
@@ -19,12 +19,12 @@ def parse_cli_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--model_path",
-        default="../models/mnist_model.h5",
+        default="../models/tiny_yolo_v4_model.pth",
         help="Set the model path in which to store after training or load the model for inference",
     )
     parser.add_argument(
         "--data_set_path",
-        default="",
+        default="../data",
         help="Set the data set path which to load for training",
     )
     
@@ -53,11 +53,11 @@ def main():
     args = set_from_env(args)
 
     if args.mode == "train":
-        mnist_training = MNISTTraining()
-        mnist_training.train(model_path=args.model_path, data_set_path=args.data_set_path)
+        coco_training = COCOTraining()
+        coco_training.train(model_path=args.model_path, data_set_path=args.data_set_path)
     elif args.mode == "inference":
-        mnist_inference = MNISTInference()
-        mnist_inference.infer(model_path=args.model_path)
+        yolo_v4_tiny_inference = YOLOv4Tiny()
+        yolo_v4_tiny_inference.infer(model_path=args.model_path)
 
 if __name__ == "__main__":
     main()

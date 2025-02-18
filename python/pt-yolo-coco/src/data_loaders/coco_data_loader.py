@@ -6,7 +6,7 @@ from torch.utils.data import DataLoader
 from torchvision import transforms
 from torchvision.datasets import CocoDetection
 from typing import Tuple
-from src.data_loaders.data_loader_interface import DataLoaderInterface
+from data_loaders.data_loader_interface import DataLoaderInterface
 
 
 class COCODataLoader(DataLoaderInterface):

@@ -1,5 +1,5 @@
 import torch.nn as nn
-from src.models.model_interface import ModelInterface
+from models.model_interface import ModelInterface
 
 # Refer to: https://github.com/MGTheTrain/python-yolo-training-with-jupyter-notebooks/blob/main/data-custom/yolov4-tiny-custom.cfg
 
