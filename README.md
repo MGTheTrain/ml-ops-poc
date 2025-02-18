@@ -30,7 +30,7 @@ Repository showcasing ML Ops practices with kubeflow and mlflow
 - [x] Added `devcontainer.json` with necessary tooling for local development
 - [x] Python (PyTorch or TensorFlow) application for ML training and inference purposes and Jupyter notebooks
     - [x] Simple feedforward neural network with MNIST dataset to map input images to their corresponding digit classes 
-    - [x] CNN architecture training and inference considering COCO dataset for image classification AI applications (**NOTE:** Compute and storage intensive. Read `Download the COCO dataset images` comments on preferred hardware specs)
+    - [x] CNN architecture training and inference considering COCO dataset for image classification AI applications (**NOTE:** Compute and storage intensive)
     - [ ] Transformer architecture training considering pre-trained models for chatbot AI applications
 - [x] Dockerizing Python (PyTorch or TensorFlow) applications for ML training and inference
 - [x] CI pipeline deploying an ACR

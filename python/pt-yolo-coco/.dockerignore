@@ -100,14 +100,13 @@ data/raw/
 data/processed/
 data/interim/
 data/external/
-data/*
 
 # Model directories
 models/saved_models/
 models/trained_models/
-models/*
 
 # DVC specific files
+*.dvc
 .cache/
 
 # Experiments directories
