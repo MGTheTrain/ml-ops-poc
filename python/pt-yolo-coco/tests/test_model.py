@@ -1,6 +1,6 @@
 import unittest
 import torch
-from src.models.yolo_v4_tiny import YOLOv4Tiny
+from models.yolo_v4_tiny import YOLOv4Tiny
 
 
 class TestYOLOv4Tiny(unittest.TestCase):

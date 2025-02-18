@@ -3,7 +3,7 @@ import torch
 import tempfile
 import os
 from unittest.mock import patch, MagicMock
-from src.data_loaders.coco_data_loader import COCODataLoader
+from data_loaders.coco_data_loader import COCODataLoader
 
 
 class TestCOCOLoadData(unittest.TestCase):
