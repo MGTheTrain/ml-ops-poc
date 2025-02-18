@@ -7,7 +7,9 @@ from pydantic import BaseModel
 from inferences.mnist_inference import MNISTInference
 from inferences.mnist_onnx_runtime_inference import MNISTONNXRuntimeInference
 from utils.azure_blob_conector import AzureBlobConnector
+import logging
 
+logging.basicConfig(level=logging.INFO)
 
 class InferenceRequest(BaseModel):
     data: list
@@ -51,8 +53,10 @@ def download_model(
 def get_inference_service(model_path: str) -> object:
     """Select the appropriate inference service based on model type."""
     if ".h5" in model_path:
+        logging.info("Detected a Keras model (.h5). Returning MNISTInference service.")
         return MNISTInference()  # For Keras model
     elif ".onnx" in model_path:
+        logging.info("Detected an ONNX model (.onnx). Returning MNISTONNXRuntimeInference service.")
         return MNISTONNXRuntimeInference()  # For ONNX model
     else:
         raise ValueError("Unsupported model format. Please provide a valid .h5 or .onnx model.")
