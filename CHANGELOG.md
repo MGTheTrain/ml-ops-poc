@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fixed signatures of abstract methods
 
+### Added
+
+- Added the `ONNXExporter` and `MNISTONNXRuntimeInference` components in the `keras-mnist` sub-project to demonstrate the export of `.onnx` files and inference using `.onnx` models
+
 ## [0.8.0] - 18-02-2025
 
 ### Updated
