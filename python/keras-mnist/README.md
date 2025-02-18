@@ -114,6 +114,14 @@ export MODEL_PATH="models/mnist_model.h5"
 make train
 ```
 
+### Export ONNX files from Keras models
+
+Run:
+
+```sh
+make exp-onnx ARGS="--model_path ../models/mnist_model.h5"
+```
+
 ### Model inference
 
 Consider CLI args:
@@ -123,6 +131,9 @@ make infer
 make infer INFER_ARGS="--model_path models/mnist_model.h5"
 # in case additional input arguments are required
 # make infer INFER_ARGS="<adjust and potentially consider additional input args, e.g. --epochs 10 --batch_size 32>"
+
+# or model inference with .onnx files
+make infer INFER_ARGS="--model_path models/mnist_model.onnx"
 ```
 
 or env vars:
@@ -176,18 +187,18 @@ make download-model
 Run:
 
 ```sh
-make run-inference-servie
+make run-inference-service
 ```
 
 or consider env vars (refer to [main_inference_service.py](./src/main_inference_service.py)):
 
 ```sh
-export MODEL_PATH="<your MODEL_PATH>"
-export AZ_SA_CONNECTION_STRING="<your AZ_SA_CONNECTION_STRING>"
-export AZ_SA_CONTAINER_NAME="<your AZ_SA_CONTAINER_NAME>"
-export BLOB_NAME="<your BLOB_NAME>"
+export MODEL_PATH="<your MODEL_PATH>" # only .h5 or .onnx files considered
+export AZ_SA_CONNECTION_STRING="<your AZ_SA_CONNECTION_STRING>" # set in case your model resides in an Azure Blob storage
+export AZ_SA_CONTAINER_NAME="<your AZ_SA_CONTAINER_NAME>" # set in case your model resides in an Azure Blob storage
+export BLOB_NAME="<your BLOB_NAME>" # set in case your model resides in an Azure Blob storage
 export PORT="<your PORT>"
-make run-inference-servie
+make run-inference-service
 ```
 
 ### Run inference client
