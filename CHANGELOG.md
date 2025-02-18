@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Updated
+
+- Utilized [cookiecutter Python templates](https://github.com/MGTheTrain/python-machine-learning-starter) for `pt-yolo-coco` sub-project
+- Only kept `.gitkeep` file within the renamed `pt-transformer-common-crawl` sub-project
+
 ## [0.7.0] - 13-02-2025
 
 ### Updated
