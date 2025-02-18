@@ -30,7 +30,7 @@ class MNISTONNXRuntimeInference(InferenceInterface):
 
         # Prepare the input data for prediction (ensure the correct shape and dtype)
         input_name = session.get_inputs()[0].name
-        data = np.array(data).reshape(-1, 28, 28).astype(np.float32)
+        data = np.array(data).reshape(-1, 28, 28, 1).astype(np.float32)
 
         # Run inference and return predicted labels
         predictions = session.run(None, {input_name: data})
