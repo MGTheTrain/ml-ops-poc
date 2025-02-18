@@ -1,5 +1,5 @@
 import unittest
-from src.data_loaders.mnist_data_loader import MNISTDataLoader
+from data_loaders.mnist_data_loader import MNISTDataLoader
 
 
 class TestLoadData(unittest.TestCase):

@@ -1,9 +1,9 @@
 import torch
 import torch.optim as optim
 import torch.nn as nn
-from src.data_loaders.coco_data_loader import COCODataLoader 
-from src.models.yolo_v4_tiny import YOLOv4Tiny 
-from src.training.training_interface import TrainingInterface
+from data_loaders.coco_data_loader import COCODataLoader 
+from models.yolo_v4_tiny import YOLOv4Tiny 
+from training.training_interface import TrainingInterface
 
 class COCOTraining(TrainingInterface):
     def train(self, model_path: str = "../models/yolov4tiny_model.pth", data_set_path: str = "") -> None:

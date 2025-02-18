@@ -1,5 +1,5 @@
 import torch
-from src.models.simple_nn import SimpleNN
+from models.simple_nn import SimpleNN
 
 
 def test_build():
