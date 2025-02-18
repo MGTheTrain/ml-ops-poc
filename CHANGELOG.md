@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.0] - 18-02-2025
+
 ### Updated
 
 - Utilized [cookiecutter Python templates](https://github.com/MGTheTrain/python-machine-learning-starter) for `pt-yolo-coco` sub-project
