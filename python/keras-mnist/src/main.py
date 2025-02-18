@@ -3,6 +3,7 @@ import os
 from training.mnist_training import MNISTTraining
 from inferences.mnist_inference import MNISTInference
 from utils.azure_blob_conector import AzureBlobConnector
+from utils.onnx_exporter import ONNXExporter
 
 
 def parse_cli_args() -> argparse.Namespace:
@@ -14,8 +15,8 @@ def parse_cli_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Train or perform inference")
     parser.add_argument(
         "--mode",
-        choices=["train", "inference", "upload-model", "download-model"],
-        help="Select 'train' to train the model, 'inference' to perform inference, 'upload-model' to upload trained models and 'download-model' to download trained models",
+        choices=["train", "inference", "upload-model", "download-model", "export-onnx"],
+        help="Select 'train' to train the model, 'inference' to perform inference, 'upload-model' to upload trained models, 'download-model' to download trained models and 'export-onnx' for exprting onnx files",
     )
     parser.add_argument(
         "--model_path",
@@ -94,7 +95,9 @@ def main():
             container_name=args.az_sa_container_name,
             blob_name=args.blob_name,
         )
-
+    elif args.mode == "export-onnx":
+        onnx_exporter = ONNXExporter()
+        onnx_exporter.export(args.model_path)
 
 if __name__ == "__main__":
     main()

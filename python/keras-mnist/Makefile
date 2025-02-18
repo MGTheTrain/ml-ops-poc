@@ -39,6 +39,10 @@ clean:
 train:
 	cd $(SRC_DIR) && $(PYTHON) main.py --mode train $(ARGS)
 
+# Export ONNX file
+exp-onnx:
+	cd $(SRC_DIR) && $(PYTHON) main.py --mode export-onnx $(ARGS)
+
 # Model inference
 infer:
 	cd $(SRC_DIR) && $(PYTHON) main.py --mode inference $(ARGS)
@@ -73,6 +77,7 @@ help:
 	@echo "test-individual:      Run a single test file (provide 'filename=test_file.py')."
 	@echo "clean:                Clean up generated files and caches."
 	@echo "train:                Train the model by running the training script. You can pass additional arguments like '--epochs 10'."
+	@echo "exp-onnx:             Takes the path to the Keras model, loads the model and then converts it to ONNX. The ONNX file is saved with the same name as the Keras model, but with a .onnx extension."
 	@echo "infer:                Run inference by executing the inference script. Pass inference-specific arguments."
 	@echo "upload-model:         Upload the trained model to a specified destination."
 	@echo "download-model:       Download the trained model from a specified source."
