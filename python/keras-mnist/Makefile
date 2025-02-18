@@ -7,7 +7,7 @@ TEST_DIR = tests
 SRC_DIR = src
 
 # Commands
-.PHONY: all setup test test-individual clean train infer upload-model download-model run-inference-servie run-inference-client format-and-lint help
+.PHONY: all setup test test-individual clean train infer upload-model download-model run-inference-service run-inference-client format-and-lint help
 
 # Default target
 all: setup
@@ -56,7 +56,7 @@ download-model:
 	cd $(SRC_DIR) && $(PYTHON) main.py --mode download-model $(ARGS)
 
 # Run inference service
-run-inference-servie:
+run-inference-service:
 	cd $(SRC_DIR) && $(PYTHON) main_inference_service.py
 
 # Run inference client 
@@ -81,7 +81,7 @@ help:
 	@echo "infer:                Run inference by executing the inference script. Pass inference-specific arguments."
 	@echo "upload-model:         Upload the trained model to a specified destination."
 	@echo "download-model:       Download the trained model from a specified source."
-	@echo "run-inference-servie: Start the inference service."
+	@echo "run-inference-service: Start the inference service."
 	@echo "run-inference-client: Run the inference client to send requests to the service."
 	@echo "docs:                 Build and serve the documentation with Jekyll."
 	@echo "format-and-lint:      Run formatting and linting scripts."
