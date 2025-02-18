@@ -2,7 +2,9 @@ import argparse
 import os
 from training.mnist_training import MNISTTraining
 from inferences.mnist_inference import MNISTInference
+from inferences.mnist_onnx_runtime_inference import MNISTONNXRuntimeInference
 from utils.azure_blob_conector import AzureBlobConnector
+from utils.onnx_exporter import ONNXExporter
 
 
 def parse_cli_args() -> argparse.Namespace:
@@ -14,8 +16,8 @@ def parse_cli_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Train or perform inference")
     parser.add_argument(
         "--mode",
-        choices=["train", "inference", "upload-model", "download-model"],
-        help="Select 'train' to train the model, 'inference' to perform inference, 'upload-model' to upload trained models and 'download-model' to download trained models",
+        choices=["train", "inference", "upload-model", "download-model", "export-onnx"],
+        help="Select 'train' to train the model, 'inference' to perform inference, 'upload-model' to upload trained models, 'download-model' to download trained models and 'export-onnx' for exprting onnx files",
     )
     parser.add_argument(
         "--model_path",
@@ -78,8 +80,13 @@ def main():
             model_path=args.model_path, data_set_path=args.data_set_path
         )
     elif args.mode == "inference":
-        mnist_inference = MNISTInference()
-        mnist_inference.infer(model_path=args.model_path)
+        if ".h5" in args.model_path:
+            mnist_inference = MNISTInference()
+            mnist_inference.infer(model_path=args.model_path)
+        elif ".onnx" in args.model_path:
+            mnist_inference = MNISTONNXRuntimeInference()
+            mnist_inference.infer(model_path=args.model_path)
+
     elif args.mode == "upload-model":
         az_blob_connector = AzureBlobConnector(args.az_sa_connection_string)
         az_blob_connector.upload(
@@ -94,7 +101,9 @@ def main():
             container_name=args.az_sa_container_name,
             blob_name=args.blob_name,
         )
-
+    elif args.mode == "export-onnx":
+        onnx_exporter = ONNXExporter()
+        onnx_exporter.export(args.model_path)
 
 if __name__ == "__main__":
     main()
