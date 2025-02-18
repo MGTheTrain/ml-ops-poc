@@ -2,6 +2,7 @@ import argparse
 import os
 from training.mnist_training import MNISTTraining
 from inferences.mnist_inference import MNISTInference
+from inferences.mnist_onnx_runtime_inference import MNISTONNXRuntimeInference
 from utils.azure_blob_conector import AzureBlobConnector
 from utils.onnx_exporter import ONNXExporter
 
@@ -79,8 +80,13 @@ def main():
             model_path=args.model_path, data_set_path=args.data_set_path
         )
     elif args.mode == "inference":
-        mnist_inference = MNISTInference()
-        mnist_inference.infer(model_path=args.model_path)
+        if ".h5" in args.model_path:
+            mnist_inference = MNISTInference()
+            mnist_inference.infer(model_path=args.model_path)
+        elif ".onnx" in args.model_path:
+            mnist_inference = MNISTONNXRuntimeInference()
+            mnist_inference.infer(model_path=args.model_path)
+
     elif args.mode == "upload-model":
         az_blob_connector = AzureBlobConnector(args.az_sa_connection_string)
         az_blob_connector.upload(
